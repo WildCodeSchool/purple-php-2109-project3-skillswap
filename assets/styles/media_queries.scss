@@ -1,0 +1,38 @@
+@media (min-width: 800px ) {
+
+    .imgHome {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        border-radius: 30px;
+    }
+}
+
+@media (min-width: 1050px){
+
+    body{
+        align-items: center;
+    }
+
+    .sectionHome{
+        max-width: 1500px;
+    }
+
+    .mainHome{
+        flex-direction: row;
+    }
+
+    .imgHome {
+        margin: 15px;
+    }
+
+    .divHome{
+        display: flex;
+        align-items: center;
+    }
+
+    .pHome{
+        max-width: 500px;
+    }
+}

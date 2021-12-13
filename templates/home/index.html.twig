@@ -7,38 +7,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-<style>
-    .pink-stripe {
-        height: 50vh;
-        width: 100%;
-        display: flex;
-        font-family: 'Varela Round', sans-serif;
-        font-size: 3rem;
-        align-items: center;
-        justify-content: center;
-    }
 
-    .white-stripe {
-        background-color: white;
-        width: 100vw;
-        height: 50vh;
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
 {% endblock %}
 
 {% block body %}
-<div class="pink-stripe">
-    <h1>
-        Let's start coding &#129304;
-    </h1>
-</div>
-<div class="white-stripe ">
-    <img src="https://medinsoft.com/wp-content/uploads/2020/01/LOGO_WILDCODESCHOOL1000-1024x1024.png"
-        style="height:100%">
-</div>
+<section class="sectionHome">
+    <h1 class="titleHome">Skill Swap l'entre aide entre entrepreneurs</h1>
+    <main class="mainHome">
+        <img class="imgHome" src="{{ asset('build/images/homeGif.gif') }}" alt="">
+        <div class="divHome">
+            <p class="pHome">Presentation du site :
+                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+                Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla
+                ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.Le Lorem Ipsum est simplement du faux texte
+                employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis
+                les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.
+            </p>
+        </div>
+    </main>
+</section>
 {% endblock %}

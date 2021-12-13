@@ -1,7 +1,36 @@
 @import 'variables.scss';
 
+
 body {
     margin:0;
-    background-color: $wild-color;
-    color: $light;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
 }
+
+.sectionHome{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.mainHome{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.imgHome{
+    max-width: 800px;
+}
+
+.pHome{
+    text-align: justify;
+    margin: 15px;
+}
+
+
+@import 'media_queries.scss';
