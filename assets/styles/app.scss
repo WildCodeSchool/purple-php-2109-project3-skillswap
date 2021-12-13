@@ -1,6 +1,5 @@
 @import 'variables.scss';
 
-
 body {
     margin:0;
     min-width: 350px;
@@ -10,27 +9,11 @@ body {
     height: 100vh;
 }
 
-.sectionHome{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+@media (min-width: 1050px) {
+
+    body {
+        align-items: center;
+    }
 }
 
-.mainHome{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    
-}
-
-.imgHome{
-    max-width: 800px;
-}
-
-.pHome{
-    text-align: justify;
-    margin: 15px;
-}
-
-
-@import 'media_queries.scss';
+@import '_home.scss';
