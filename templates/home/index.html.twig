@@ -1,27 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
-
-{% block stylesheets %}
-{{ parent() }}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-
-{% endblock %}
-
 {% block body %}
+
 <section class="sectionHome">
-    <h1 class="titleHome">Skill Swap l'entre aide entre entrepreneurs</h1>
+    <h1 class="titleHome">Skill Swap for Entrepreneurs</h1>
     <main class="mainHome">
         <img class="imgHome" src="{{ asset('build/images/homeGif.gif') }}" alt="">
         <div class="divHome">
-            <p class="pHome">Presentation du site :
-                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-                Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla
-                ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.Le Lorem Ipsum est simplement du faux texte
-                employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis
-                les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.
+            <p class="pHome">
+                Welcome to "Skill Swap", the platform for exchanging talent without monetary exchange.
+                To find the missing skills to support your business launch. To surround yourself with the right people.
+                To give yourself every chance of success. To expand the world of possibilities. Let's facilitate
+                collective success in a dynamic of virtuous exchange!
             </p>
         </div>
     </main>

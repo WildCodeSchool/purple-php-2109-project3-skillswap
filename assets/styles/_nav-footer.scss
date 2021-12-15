@@ -1,0 +1,54 @@
+header{
+    width: 100%;
+}
+
+footer a, footer p {
+    text-decoration:none;
+    color: $light;
+    margin: 10px;
+    font-weight: bold;
+}
+
+footer a:hover, .navbar a:hover {
+    color: $dark;
+}
+
+.navbar {
+    background-image: url('../images/fond_header.png');
+    background-size: cover;
+}
+
+.navbar a {
+    color: $light;
+    font-size: 1.25rem;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+.navbar img {
+    width: 150px;
+}
+
+footer {
+    width: 100%;
+    background-image: url('../images/fond_footer.png');
+    background-size: cover;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+@media (min-width: $width-desktop) {
+
+    header, footer {
+        max-width: $width-max;
+    }
+}
+
+@media (min-width: $width-max) {
+
+    header nav, footer {
+        border-radius: 20px;
+    } 
+}

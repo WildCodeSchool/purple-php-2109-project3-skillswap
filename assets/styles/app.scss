@@ -1,19 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
 @import 'variables.scss';
-
-body {
-    margin:0;
-    min-width: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-}
-
-@media (min-width: 1050px) {
-
-    body {
-        align-items: center;
-    }
-}
-
+@import '_body';
+@import '_nav-footer.scss';
 @import '_home.scss';

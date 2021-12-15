@@ -2,25 +2,31 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin: 5vmin 0 5vmin 0;
+}
+
+.titleHome{
+    color: $dark;
 }
 
 .mainHome {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
+    margin-top: 15px;
 }
 
 .imgHome {
-    max-width: 800px;
+    max-width: $width-tablet;
 }
 
 .pHome {
     text-align: justify;
     margin: 15px;
+    color: $dark;
 }
 
-@media (min-width: 800px) {
+@media (min-width: $width-tablet) {
 
     .imgHome {
         text-align: center;
@@ -31,14 +37,15 @@
     }
 }
 
-@media (min-width: 1050px) {
+@media (min-width: $width-desktop) {
 
     body {
         align-items: center;
     }
 
     .sectionHome {
-        max-width: 1500px;
+        max-width: $width-max;
+        margin-bottom: 100px;
     }
 
     .mainHome {
@@ -57,4 +64,5 @@
     .pHome {
         max-width: 500px;
     }
+
 }
