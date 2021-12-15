@@ -1,7 +1,44 @@
+@import "~bootstrap/scss/bootstrap";
+
 @import 'variables.scss';
 
 body {
     margin:0;
-    background-color: $wild-color;
-    color: $light;
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+footer a, footer p {
+    text-decoration:none;
+    color: white;
+    margin: 10px;
+}
+
+footer a:hover, .navbar a:hover {
+    color: black; 
+}
+
+.navbar {
+    background-image: url('../images/fond_header.png');
+    background-size: cover;
+}
+
+.navbar a {
+    color:white;
+    font-size: 1.25rem;
+    margin-left: 30px;
+}
+
+.navbar img {
+    width: 130px;
+}
+
+footer {
+    background-image: url('../images/fond_footer.png');
+    background-size: cover;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
 }
