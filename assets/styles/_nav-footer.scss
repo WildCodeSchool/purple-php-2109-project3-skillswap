@@ -3,10 +3,11 @@ header{
 }
 
 nav h1 {
-    color: red;
-    font-size: 8vmin;
+    font-family: Swap;
+    color: $dark;
+    font-size: 6vmin;
     font-weight: bold;
-    -webkit-text-stroke: $light 2px;
+    margin-left: 30px;
 }
 
 .navbar li a {
@@ -14,20 +15,18 @@ nav h1 {
     font-size: 20px;
     margin-left: 30px;
     font-weight: bold;
-    -webkit-text-stroke: $dark 1px;
-}
 
+}
 
 .navbar li a:hover {
     text-decoration: underline;
     color: $light;
-    -webkit-text-stroke: $dark 1px;
-    text-decoration-color:red;
+    text-decoration-color: $bgnav2;
 }
 
 .navbar {
-    background-image: url('../images/fond_header2.jpg');
-    background-size: cover;
+    background: linear-gradient(-90deg, transparent, $bgnav2);
+
 }
 
 .navbar img {
@@ -36,8 +35,7 @@ nav h1 {
 
 footer {
     width: 100%;
-    background-color: #ebeee8;
-    background-size: cover;
+    background: linear-gradient(-90deg, transparent, $bgnav2);
     display:flex;
     justify-content: space-around;
     align-items: center;
@@ -50,36 +48,21 @@ footer span {
 
 footer a, footer p {
     text-decoration:none;
-    color: $dark;
+    color: $light;
     margin: 10px;
     font-weight: bold;
 }
 
 footer a:hover {
     text-decoration: underline;
-    color: $dark;
-    -webkit-text-stroke: $light 1px;
-    text-decoration-color:red;
-}
-
-@media (min-width: $width-tablet) {
-
-    .navbar li a, .navbar li a:hover {
-        color: $dark;
-        -webkit-text-stroke: $light 1px;
-    }
- 
+    color: $light;
+    text-decoration-color: $bgnav2;
 }
 
 @media (min-width: $width-desktop) {
 
     header, footer {
         max-width: $width-max;
-    }
-
-    .navbar li a, .navbar li a:hover {
-        color: $dark;
-        -webkit-text-stroke: $light 1px;
     }
 }
 
