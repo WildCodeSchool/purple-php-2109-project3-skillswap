@@ -1,0 +1,91 @@
+header{
+    width: 100%;
+}
+
+nav h1 {
+    color: red;
+    font-size: 8vmin;
+    font-weight: bold;
+    -webkit-text-stroke: $light 2px;
+}
+
+.navbar li a {
+    color: $light;
+    font-size: 20px;
+    margin-left: 30px;
+    font-weight: bold;
+    -webkit-text-stroke: $dark 1px;
+}
+
+
+.navbar li a:hover {
+    text-decoration: underline;
+    color: $light;
+    -webkit-text-stroke: $dark 1px;
+    text-decoration-color:red;
+}
+
+.navbar {
+    background-image: url('../images/fond_header2.jpg');
+    background-size: cover;
+}
+
+.navbar img {
+    width: 150px;
+}
+
+footer {
+    width: 100%;
+    background-color: #ebeee8;
+    background-size: cover;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+footer span {
+    color: red;
+}
+
+footer a, footer p {
+    text-decoration:none;
+    color: $dark;
+    margin: 10px;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: $dark;
+    -webkit-text-stroke: $light 1px;
+    text-decoration-color:red;
+}
+
+@media (min-width: $width-tablet) {
+
+    .navbar li a, .navbar li a:hover {
+        color: $dark;
+        -webkit-text-stroke: $light 1px;
+    }
+ 
+}
+
+@media (min-width: $width-desktop) {
+
+    header, footer {
+        max-width: $width-max;
+    }
+
+    .navbar li a, .navbar li a:hover {
+        color: $dark;
+        -webkit-text-stroke: $light 1px;
+    }
+}
+
+@media (min-width: $width-max) {
+
+    header nav, footer {
+        border-radius: 20px;
+    } 
+}

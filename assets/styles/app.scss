@@ -1,7 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
 @import 'variables.scss';
-
-body {
-    margin:0;
-    background-color: $wild-color;
-    color: $light;
-}
+@import '_body';
+@import '_nav-footer.scss';
+@import '_home.scss';
