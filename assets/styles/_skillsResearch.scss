@@ -1,0 +1,43 @@
+.sectionResearch h1{
+    text-align: center;
+}
+
+.formResearch{
+    text-align: center;
+}
+
+.positionFormResearch{
+    padding: 10px;
+    margin: 1% 2%;
+}
+
+.positionSkillResearch{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.positionSkillResearch input{
+    margin-right: 5px;
+}
+
+.submitResearch{
+    justify-content: center;
+    height: 27px;
+    width: 115px;
+    left: 130px;
+    top: 568px;
+    border-radius: 50px;
+
+}
+
+@media (min-width: $width-desktop) {
+    
+    .positionSkillResearch{
+        display: inline;
+    }
+
+    .positionSkillResearch input{
+        margin-right: 0px;
+    }
+}

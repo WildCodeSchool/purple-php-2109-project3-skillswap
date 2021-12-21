@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Skills research{% endblock %}
+
+{% block body %}
+<section class="sectionResearch">
+    <h1>Les Skills</h1><br>
+    <form class="formResearch" action="">
+        {% for category in categories %}
+        <div class='positionFormResearch'>
+            <h2>{{ category.name }}</h2>
+            <hr>
+            {% for skill in category.skills %}
+            <div class='positionSkillResearch'>
+                <input type="radio" id="{{ skill.name }}" name="skill" value="{{ skill.name }}">
+                <label for="{{ skill.name }}">{{ skill.name }}</label>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <input class="submitResearch" type="submit" value="Rechercher">
+    </form>
+</section>
+{% endblock %}

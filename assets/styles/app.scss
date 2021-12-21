@@ -1,7 +1,13 @@
+@import '~bootstrap/scss/bootstrap';
 @import 'variables.scss';
+@import '_skillsResearch.scss';
 
 body {
-    margin:0;
-    background-color: $wild-color;
-    color: $light;
+    margin: 0;
+    min-width: 350px;
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
 }
