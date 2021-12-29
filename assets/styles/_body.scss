@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    min-width: $width-min;
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    background-color: $dark;
+}
+
+@media (min-width: $width-desktop) {
+
+    body {
+        align-items: center;
+    }
+}

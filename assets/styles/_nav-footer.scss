@@ -1,0 +1,74 @@
+header{
+    width: 100%;
+}
+
+nav h1 {
+    font-family: Swap;
+    color: $dark;
+    font-size: 6vmin;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.navbar li a {
+    color: $light;
+    font-size: 20px;
+    margin-left: 30px;
+    font-weight: bold;
+
+}
+
+.navbar li a:hover {
+    text-decoration: underline;
+    color: $light;
+    text-decoration-color: $bgnav2;
+}
+
+.navbar {
+    background: linear-gradient(-90deg, transparent, $bgnav2);
+
+}
+
+.navbar img {
+    width: 150px;
+}
+
+footer {
+    width: 100%;
+    background: linear-gradient(-90deg, transparent, $bgnav2);
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+footer span {
+    color: red;
+}
+
+footer a, footer p {
+    text-decoration:none;
+    color: $light;
+    margin: 10px;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: $light;
+    text-decoration-color: $bgnav2;
+}
+
+@media (min-width: $width-desktop) {
+
+    header, footer {
+        max-width: $width-max;
+    }
+}
+
+@media (min-width: $width-max) {
+
+    header nav, footer {
+        border-radius: 20px;
+    } 
+}

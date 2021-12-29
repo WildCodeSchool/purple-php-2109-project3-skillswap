@@ -11,119 +11,110 @@ class SkillsFixtures extends Fixture
     public const SKILLS = [
         [
             'name' => 'Achat',
-            'category' => 'category_0',
+            'category' => 'Commerce et logistique',
         ],[
             'name' => 'Import-Export',
-            'category' => 'category_0',
+            'category' => 'Commerce et logistique',
         ],[
             'name' => 'Stratégie commerciale',
-            'category' => 'category_0',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Vente',
-            'category' => 'category_0',
+            'category' => 'Commerce et logistique',
         ],[
             'name' => 'Community Manager',
-            'category' => 'category_1',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Conception Rédaction',
-            'category' => 'category_1',
+            'category' => 'Autres',
         ],[
             'name' => 'Evénementiel',
-            'category' => 'category_1',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Graphisme',
-            'category' => 'category_1',
-        ],[
-            'name' => 'Relation presse',
-            'category' => 'category_1',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Relations publiques',
-            'category' => 'category_1',
+            'category' => 'Autres',
         ],[
             'name' => 'Comptabilité',
-            'category' => 'category_2',
-        ],[
-            'name' => 'Expert comptabilité',
-            'category' => 'category_2',
+            'category' => 'Droit et finance',
         ],[
             'name' => 'Architecte d \'intérieur',
-            'category' => 'category_3',
+            'category' => 'Autres',
         ],[
             'name' => 'Designer produit',
-            'category' => 'category_3',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Contrôle des finances',
-            'category' => 'category_5',
+            'category' => 'Droit et finance',
         ],[
             'name' => 'Crowdfunding',
-            'category' => 'category_5',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Contrôle de gestion ',
-            'category' => 'category_6',
+            'category' => 'Administratif',
         ],[
-            'name' => 'Création de sites internet',
-            'category' => 'category_8',
+            'name' => 'R&D',
+            'category' => 'Autres',
         ],[
-            'name' => 'Développement / Coding',
-            'category' => 'category_8',
+            'name' => 'Développement web',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Gestion de projet informatique',
-            'category' => 'category_8',
-        ],[
-            'name' => 'Développement produit',
-            'category' => 'category_7',
+            'category' => 'Administratif',
         ],[
             'name' => 'Conseil jurudique',
-            'category' => 'category_4',
+            'category' => 'Droit et finance',
         ],[
             'name' => 'Fiscalité',
-            'category' => 'category_4',
+            'category' => 'Droit et finance',
         ],[
             'name' => 'Service d\'avocat',
-            'category' => 'category_4',
+            'category' => 'Droit et finance',
         ],[
             'name' => 'Droit des sociétés',
-            'category' => 'category_4',
+            'category' => 'Droit et finance',
+        ],[
+            'name' => 'Contrat de travail',
+            'category' => 'Droit et finance',
         ],[
             'name' => 'Analyse de data',
-            'category' => 'category_9',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Pricing',
-            'category' => 'category_9',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Marketing digital',
-            'category' => 'category_9',
+            'category' => 'Marketing et numérique',
         ],[
             'name' => 'Marketing produit',
-            'category' => 'category_9',
+            'category' => 'Marketing et numérique',
         ],[
-            'name' => 'Paie / Contrat de travail',
-            'category' => 'category_11',
+            'name' => 'Paie',
+            'category' => 'Administratif',
         ],[
             'name' => 'Formation',
-            'category' => 'category_11',
+            'category' => 'Administratif',
         ],[
             'name' => 'Recrutement',
-            'category' => 'category_11',
+            'category' => 'Administratif',
         ],[
             'name' => 'Stratégie RH',
-            'category' => 'category_11',
+            'category' => 'Administratif',
         ],[
             'name' => 'Secrétariat',
-            'category' => 'category_12',
+            'category' => 'Administratif',
         ],[
             'name' => 'Photographie',
-            'category' => 'category_10',
+            'category' => 'Autres',
         ],[
             'name' => 'Affrêteur',
-            'category' => 'category_13',
+            'category' => 'Commerce et logistique',
         ],[
             'name' => 'Conditionnement',
-            'category' => 'category_13',
-        ],[
-            'name' => 'Logistique',
-            'category' => 'category_13',
-        ]
+            'category' => 'Commerce et logistique',
+        ],
     ];
 
     public function load(ObjectManager $manager): void
@@ -131,17 +122,10 @@ class SkillsFixtures extends Fixture
         foreach (self::SKILLS as $key => $skills) {
             $skill = new Skills();
             $skill->setName($skills['name']);
-            $skill->setCategory($this->getReference($skills['category']));
+            $skill->setCategory($skills['category']);
             $manager->persist($skill);
             $this->addReference('skill_' . $key, $skill);
         }
-
         $manager->flush();
-    }
-    public function getDependencies()
-    {
-        return [
-          CategoryFixtures::class,
-        ];
     }
 }
