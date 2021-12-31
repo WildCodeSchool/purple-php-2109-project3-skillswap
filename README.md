@@ -2,9 +2,11 @@
 
 ## Presentation
 
-**  Skill Swap aims to be a platform for exchanging talent and skills without monetary exchange. Its goal is to put two people in touch with each other, the first one needing a service and the second one being able to provide this service.
-Each person registers on the site, ticks off the skills he knows and makes himself available to help those already registered. The latter select the skill that corresponds to their need and then select a profile that has this skill and is available. A request for help is sent to the said person who accepts or refuses this exchange. The requester is notified of the answer by email, if it is favorable he has accepted to a dialog box that connects the two interlocutors.
-At the end the applicant of the service puts an end to the discussion and can thus leave a comment to the person who made him service, this comment can be moderated by the owner of the profile on which it is left.
+**  Skill Swap aims to be a platform for exchanging talents and skills without any funding. Its goal is to put two people in touch with each other, the first one needing a service and the second one being able to provide it.
+Each one registers on the site, selects the skills he masters and makes himself available to help those already registered.
+The one who needs help selects a skill and is immediately offered all the profiles of swappers who master it.
+Once he's chosen a profile, a request for help is sent, and the target profile can accept or refuses it. . The requester is notified of the answer by email. If it's favorable, a swap (i.e. a discussion between two swappers can begin).
+At the end, the applicant of the service puts an end to the discussion and can thus leave a comment to the person who made him service. This comment can be moderated by the owner of the profile on which it is left.
 
 **  The site is developed in symfony 5.3 with some additional libraries (webpack, fixtures) and tools to validate the code standards.
 GrumPHP, as a pre-commit hook, will launch 2 tools when git commit is launched:
