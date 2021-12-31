@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Swapper{% endblock %}
+
+{% block body %}
+    <h1>Edit Swapper</h1>
+
+    {{ include('swapper/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('swapper_index') }}">back to list</a>
+
+    {{ include('swapper/_delete_form.html.twig') }}
+{% endblock %}

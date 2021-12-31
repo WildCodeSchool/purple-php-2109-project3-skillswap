@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Swapper{% endblock %}
+
+{% block body %}
+    <h1>Create new Swapper</h1>
+
+    {{ include('swapper/_form.html.twig') }}
+
+    <a href="{{ path('swapper_index') }}">back to list</a>
+{% endblock %}

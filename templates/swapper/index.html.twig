@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Swappers{% endblock %}
+
+{% block body %}
+    <br><h1>Voici tous les swappers compétents en : XXX</h1>
+
+    <div class="container">
+    {% for swapper in swappers %}
+       
+    <div class="card mb-3">
+        <h3 class="card-header">{{swapper.prenom}} {{swapper.nom}}</h3>
+        <div class="photo">
+            <img class="swapper-image" src="{{swapper.photo}}" alt="{{swapper.prenom}} {{swapper.nom}}">
+        </div>
+      
+        <div class="card-body">
+            <p class="card-text">{{swapper.presentation}}</p>
+            <button type="button" class="btn btn-success">Lancer un SWAP</button>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+    </div>
+
+    {% endfor %}
+    </div> 
+
+    
+{% endblock %}

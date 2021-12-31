@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Swapper{% endblock %}
+
+{% block body %}
+    <h1>Swapper</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ swapper.id }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ swapper.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ swapper.nom }}</td>
+            </tr>
+            <tr>
+                <th>Presentation</th>
+                <td>{{ swapper.presentation }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ swapper.photo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('swapper_index') }}">back to list</a>
+
+    <a href="{{ path('swapper_edit', {'id': swapper.id}) }}">edit</a>
+
+    {{ include('swapper/_delete_form.html.twig') }}
+{% endblock %}
