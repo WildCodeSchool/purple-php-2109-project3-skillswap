@@ -102,7 +102,6 @@ class SkillsController extends AbstractController
             $entityManager->flush();
             /** @phpstan-ignore-next-line */
         }
-
         return $this->redirectToRoute('skills_index', [], Response::HTTP_SEE_OTHER);
     }
 }
