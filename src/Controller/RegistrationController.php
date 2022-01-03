@@ -41,6 +41,7 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $plainPassword = $form->get('plainPassword')->getData();
             $email = $user->getEmail();
+            // verification due to phpStan check
             if (is_string($plainPassword) && null !== $email) {
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
                 $entityManager->persist($user);
