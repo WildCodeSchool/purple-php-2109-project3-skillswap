@@ -11,109 +11,109 @@ class SkillsFixtures extends Fixture
     public const SKILLS = [
         [
             'name' => 'Achat',
-            'category' => 'Commerce et logistique',
+            'category' => Skills::CATEGORIES[2],
         ],[
             'name' => 'Import-Export',
-            'category' => 'Commerce et logistique',
+            'category' => Skills::CATEGORIES[2],
         ],[
             'name' => 'Stratégie commerciale',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Vente',
-            'category' => 'Commerce et logistique',
+            'category' => Skills::CATEGORIES[2],
         ],[
             'name' => 'Community Manager',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Conception Rédaction',
-            'category' => 'Autres',
+            'category' => Skills::CATEGORIES[4],
         ],[
             'name' => 'Evénementiel',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Graphisme',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Relations publiques',
-            'category' => 'Autres',
+            'category' => Skills::CATEGORIES[4],
         ],[
             'name' => 'Comptabilité',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Architecte d \'intérieur',
-            'category' => 'Autres',
+            'category' => Skills::CATEGORIES[4],
         ],[
             'name' => 'Designer produit',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Contrôle des finances',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Crowdfunding',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Contrôle de gestion ',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'R&D',
-            'category' => 'Autres',
+            'category' => Skills::CATEGORIES[4],
         ],[
             'name' => 'Développement web',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Gestion de projet informatique',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'Conseil jurudique',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Fiscalité',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Service d\'avocat',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Droit des sociétés',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Contrat de travail',
-            'category' => 'Droit et finance',
+            'category' => Skills::CATEGORIES[0],
         ],[
             'name' => 'Analyse de data',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Pricing',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Marketing digital',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Marketing produit',
-            'category' => 'Marketing et numérique',
+            'category' => Skills::CATEGORIES[1],
         ],[
             'name' => 'Paie',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'Formation',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'Recrutement',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'Stratégie RH',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'Secrétariat',
-            'category' => 'Administratif',
+            'category' => Skills::CATEGORIES[3],
         ],[
             'name' => 'Photographie',
-            'category' => 'Autres',
+            'category' => Skills::CATEGORIES[4],
         ],[
             'name' => 'Affrêteur',
-            'category' => 'Commerce et logistique',
+            'category' => Skills::CATEGORIES[2],
         ],[
             'name' => 'Conditionnement',
-            'category' => 'Commerce et logistique',
+            'category' => Skills::CATEGORIES[2],
         ],
     ];
 

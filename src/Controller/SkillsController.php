@@ -16,15 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SkillsController extends AbstractController
 {
-
-    public const CATEGORIES = [
-        'Droit et finance',
-        'Marketing et numérique',
-        'Commerce et logistique',
-        'Administratif',
-        'Autres',
-    ];
-
     /**
      * @Route("/research", name="skills_research", methods={"GET"})
      */
@@ -33,7 +24,7 @@ class SkillsController extends AbstractController
 
         return $this->render('skills/research.html.twig', [
             'skills' => $skillsRepository->findBy([], ['category' => 'ASC']),
-            'categories' => self::CATEGORIES,
+            'categories' => Skills::CATEGORIES,
         ]);
     }
 

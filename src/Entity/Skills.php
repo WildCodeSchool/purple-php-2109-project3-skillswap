@@ -10,6 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Skills
 {
+    public const CATEGORIES = [
+        'Droit et finance',
+        'Marketing et numérique',
+        'Commerce et logistique',
+        'Administratif',
+        'Autres',
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
