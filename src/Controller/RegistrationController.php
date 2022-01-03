@@ -39,28 +39,23 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
+            $plainPassword = $form->get('plainPassword')->getData();
+            $email = $user->getEmail();
+            if (is_string($plainPassword) && null !== $email) {
+                $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // generate a signed url and email it to the user
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
                     $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation(
-                'app_verify_email',
-                $user,
-                (new TemplatedEmail())
-                    ->from(new Address('swap.wild@gmail.com', 'Skill Swap Bot'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
-
+                    (new TemplatedEmail())
+                        ->from(new Address('swap.wild@gmail.com', 'Skill Swap Bot'))
+                        ->to($email)
+                        ->subject('Please Confirm your Email')
+                        ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
+            }
             return $this->redirectToRoute('home');
         }
 
