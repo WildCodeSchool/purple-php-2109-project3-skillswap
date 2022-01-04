@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Formulaire de contact</h1>
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="contact_form">
+    {{ form_label(form.firstname, 'prénom :', {'label_attr': {'class': 'contact_label'}}) }}
+    {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
+</div>
+<div class="contact_form">
+    {{ form_label(form.email, 'email :', {'label_attr': {'class': 'contact_label'}}) }}
+    {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
+</div>
+<div class="contact_form">
+    {{ form_label(form.text, 'texte :', {'label_attr': {'class': 'contact_label'}}) }}
+    {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
+</div>
+<input type="submit" value="Envoyer votre demande" />
+{{ form_end(form) }}
+{% endblock %}
