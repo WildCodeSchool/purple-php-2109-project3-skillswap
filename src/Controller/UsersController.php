@@ -69,7 +69,6 @@ class UsersController extends AbstractController
         Users $user,
         EntityManagerInterface $entityManager
     ): Response {
-
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
 
@@ -112,7 +111,7 @@ class UsersController extends AbstractController
     public function delete(Request $request, Users $user, EntityManagerInterface $entityManager): Response
     {
         if (is_string($request->request->get('_token'))) {
-            if  ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $entityManager->remove($user);
                 $entityManager->flush();
             }
