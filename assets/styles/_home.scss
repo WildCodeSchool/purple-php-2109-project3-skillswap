@@ -1,12 +1,17 @@
-.sectionHome {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 5vmin 0 5vmin 0;
+*{
+    color: $light;
 }
 
-.titleHome{
+section {
+    display: flex;
+    flex-direction: column;
+    margin: 5vmin 0 5vmin 0;
+    height: 100%;
+}
+
+h1{
     color: $light;
+    margin-left: 40px;
 }
 
 .mainHome {
@@ -43,9 +48,12 @@
         align-items: center;
     }
 
-    .sectionHome {
+    section {
+        margin-top: 20px;
+        width: 100%;
         max-width: $width-max;
         margin-bottom: 100px;
+      
     }
 
     .mainHome {
