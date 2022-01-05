@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
 <section class="sectionHome">
-    <h1 class="titleHome">Des Swaps pour les entrepreneurs</h1>
+    {% if is_granted("ROLE_USER") %}
+         <h1 class="titleHome">Bienvenue {{ app.user.firstname }}</h1>
+    {% else %}
+        <h1 class="titleHome">Des Swaps pour les entrepreneurs</h1>
+    {% endif %}
     <main class="mainHome">
         <img class="imgHome" src="{{ asset('build/images/home.png') }}" alt="">
         <div class="divHome">

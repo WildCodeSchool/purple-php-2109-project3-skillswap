@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <h1>Users</h1>
+
+    <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Linkedin</th>
+                <td>{{ user.linkedin }}</td>
+            </tr>
+            <tr>
+                <th>Website</th>
+                <td>{{ user.website }}</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>{{ user.company }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ user.description }}</td>
+            </tr>
+            <tr>
+                <th>Available</th>
+                <td>{{ user.available ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('users_edit', {'id': app.user.id}) }}">Modifier le profil</a>
+
+{% endblock %}
