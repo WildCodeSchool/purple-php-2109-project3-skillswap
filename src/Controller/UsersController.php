@@ -20,16 +20,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/", name="users_index", methods={"GET"})
-     */
-    public function index(UsersRepository $usersRepository): Response
-    {
-        return $this->render('users/index.html.twig', [
-            'users' => $usersRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="users_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -52,32 +42,32 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="users_show", methods={"GET"})
+     * @Route("/profile", name="users_profile")
      */
-    public function show(Users $user): Response
+    public function profile(): Response
     {
-        return $this->render('users/show.html.twig', [
-            'user' => $user,
+        return $this->render('users/profile.html.twig', [
+            'user' => $this->getUser(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="users_edit", methods={"GET", "POST"})
+     * @Route("/edit", name="users_edit_profile")
+     * @IsGranted("ROLE_USER")
      */
     public function edit(
         Request $request,
-        Users $user,
         EntityManagerInterface $entityManager
     ): Response {
+        $user = $this->getUser();
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             // verification upload picture
             $picture = $form->get('picture')->getData();
 
             // this condition is needed because the 'picuture' field is not required
-            if ($picture instanceof UploadedFile) {
+            if ($picture instanceof UploadedFile && $user instanceof Users) {
                 $newFilename = 'avatar' . '-' . $user->getId() . '.' . $picture->guessExtension();
                 // Move the file to the directory where brochures are stored
                 if (is_string($this->getParameter('pictures_directory'))) {
@@ -88,35 +78,35 @@ class UsersController extends AbstractController
                         );
                     } catch (FileException $e) {
                         // ... handle exception if something happens during file upload
+                        return $this->render('errors/error500.html.twig');
                     }
                 }
                 // instead of its contents
                 $user->setPicture($newFilename);
             }
-
             $entityManager->flush();
-
-            return $this->redirectToRoute('users_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('users_profile', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('users/edit.html.twig', [
+        return $this->renderForm('users/edit_profile.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="users_delete", methods={"POST"})
+     * @Route("/", name="users_delete")
+     * @IsGranted("ROLE_USER")
      */
-    public function delete(Request $request, Users $user, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if (is_string($request->request->get('_token'))) {
+        $user = $this->getUser();
+        if (is_string($request->request->get('_token')) && $user instanceof Users) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $entityManager->remove($user);
                 $entityManager->flush();
             }
         }
-
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
     }
 }

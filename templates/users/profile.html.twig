@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
-    <h1>Users</h1>
+    <h1>Profil</h1>
 
     <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
 
@@ -45,6 +45,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('users_edit', {'id': app.user.id}) }}">Modifier le profil</a>
+    <a href="{{ path('users_edit_profile') }}">Modifier le profil</a>
 
 {% endblock %}
