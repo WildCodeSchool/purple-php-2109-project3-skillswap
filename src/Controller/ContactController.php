@@ -16,9 +16,6 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class ContactController extends AbstractController
 {
-
-    public const MAILER = 'swap.wild@gmail.com';
-
     /**
      * @Route("/", name="")
      */
@@ -28,8 +25,8 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $email = (new Email())
-                ->from(self::MAILER)
-                ->to(self::MAILER)
+                ->from($this->getParameter('mailer_from'))
+                ->to($this->getParameter('mailer_from'))
                 ->subject("Demande d'informations.")
                 ->html($this->renderView("contact/send.html.twig", [
                     'user' => $form->getData(),
