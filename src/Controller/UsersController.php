@@ -44,6 +44,7 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/profile", name="users_profile")
+     * @IsGranted("ROLE_USER")
      */
     public function profile(): Response
     {
