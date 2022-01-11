@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -19,12 +20,6 @@ class CommentType extends AbstractType
             ->add('message', TextareaType::class)
             ->add('date')
             ->add('recipient', EntityType::class, [
-                'class' => Users::class,
-                'choice_label' => 'firstName',
-                'multiple' => false,
-                'expanded' => false,
-            ])
-            ->add('sender', EntityType::class, [
                 'class' => Users::class,
                 'choice_label' => 'firstName',
                 'multiple' => false,

@@ -23,6 +23,9 @@ class CommentController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+                $currentUser = $this->getUser();
+                // @phpstan-ignore-next-line
+                $comment->setSender($currentUser);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($comment);
                 $entityManager->flush();
