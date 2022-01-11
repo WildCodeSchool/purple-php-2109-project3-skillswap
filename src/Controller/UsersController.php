@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
-use App\Form\UsersType;
-use App\Repository\UsersRepository;
+use App\Entity\User;
+use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -21,36 +21,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/new", name="users_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('users_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('users/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    /**
      * @Route("/profile", name="users_profile")
      * @IsGranted("ROLE_USER")
      */
     public function profile(): Response
     {
-        return $this->render('users/profile.html.twig', [
-            'user' => $this->getUser(),
-        ]);
+        return $this->render('users/profile.html.twig');
     }
 
     /**
@@ -62,14 +38,14 @@ class UsersController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
         $user = $this->getUser();
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // verification upload picture
             $picture = $form->get('picture')->getData();
 
             // this condition is needed because the 'picuture' field is not required
-            if ($picture instanceof UploadedFile && $user instanceof Users) {
+            if ($picture instanceof UploadedFile && $user instanceof User) {
                 $newFilename = 'avatar' . '-' . $user->getId() . '.' . $picture->guessExtension();
                 // Move the file to the directory where brochures are stored
                 if (is_string($this->getParameter('pictures_directory'))) {
@@ -91,7 +67,6 @@ class UsersController extends AbstractController
         }
 
         return $this->renderForm('users/edit_profile.html.twig', [
-            'user' => $user,
             'form' => $form,
         ]);
     }
@@ -103,7 +78,7 @@ class UsersController extends AbstractController
     public function delete(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        if (is_string($request->request->get('_token')) && $user instanceof Users) {
+        if (is_string($request->request->get('_token')) && $user instanceof User) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $entityManager->remove($user);
                 $entityManager->flush();
