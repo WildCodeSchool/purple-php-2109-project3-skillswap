@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Users;
 use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/comment", name="comment")
+ * @Route("/comment", name="comment_")
  */
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/", name="")
+     * @Route("/{id} ", name="form")
      */
-    public function index(Request $request): Response
+    public function index(Users $recipient, Request $request): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -26,6 +27,7 @@ class CommentController extends AbstractController
                 $currentUser = $this->getUser();
                 // @phpstan-ignore-next-line
                 $comment->setSender($currentUser);
+                $comment->setRecipient($recipient);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($comment);
                 $entityManager->flush();
@@ -37,7 +39,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/valid", name="_valid")
+     * @Route("/valid", name="valid")
      */
     public function valid(Request $request): Response
     {

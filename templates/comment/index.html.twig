@@ -7,10 +7,6 @@
 {{ form_start(form) }}
 {{ form_errors(form) }}
 <div class="contact_form">
-    {{ form_label(form.recipient, 'destinataire :', {'label_attr': {'class': 'contact_label'}}) }}
-    {{ form_widget(form.recipient, {'attr': {'class': 'contact_widget'}}) }}
-</div>
-<div class="contact_form">
     {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
     {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
 </div>

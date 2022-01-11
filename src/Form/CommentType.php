@@ -18,13 +18,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('message', TextareaType::class)
-            ->add('date')
-            ->add('recipient', EntityType::class, [
-                'class' => Users::class,
-                'choice_label' => 'firstName',
-                'multiple' => false,
-                'expanded' => false,
-            ]);
+            ->add('date');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
