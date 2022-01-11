@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Skills;
-use App\Form\SkillsType;
-use App\Repository\SkillsRepository;
+use App\Entity\Skill;
+use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,19 +18,19 @@ class SkillsController extends AbstractController
     /**
      * @Route("/research", name="skills_research", methods={"GET"})
      */
-    public function research(SkillsRepository $skillsRepository): Response
+    public function research(SkillRepository $skillsRepository): Response
     {
 
         return $this->render('skills/research.html.twig', [
             'skills' => $skillsRepository->findBy([], ['category' => 'ASC']),
-            'categories' => Skills::CATEGORIES,
+            'categories' => Skill::CATEGORIES,
         ]);
     }
 
     /**
      * @Route("/{id}", name="skills_show", methods={"GET"})
      */
-    public function show(Skills $skill): Response
+    public function show(Skill $skill): Response
     {
         return $this->render('skills/show.html.twig', [
             'skill' => $skill,

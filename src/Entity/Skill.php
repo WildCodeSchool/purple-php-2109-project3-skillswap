@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\SkillsRepository;
+use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SkillsRepository::class)
  */
-class Skills
+class Skill
 {
     public const CATEGORIES = [
         'Droit et finance',
