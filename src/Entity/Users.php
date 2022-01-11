@@ -90,12 +90,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Recipient", orphanRemoval=true)
      */
-    private ArrayCollection $receivedComments;
+    private Collection $receivedComments;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Sender", orphanRemoval=true)
      */
-    private ArrayCollection $sentComments;
+    private Collection $sentComments;
 
     public function __construct()
     {

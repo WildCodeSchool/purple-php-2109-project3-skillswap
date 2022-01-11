@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+use App\Entity\Users;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +18,18 @@ class CommentType extends AbstractType
         $builder
             ->add('message', TextareaType::class)
             ->add('date')
-            ->add('recipient', TextType::class)
-            ->add('sender', TextType::class);
+            ->add('recipient', EntityType::class, [
+                'class' => Users::class,
+                'choice_label' => 'firstName',
+                'multiple' => false,
+                'expanded' => false,
+            ])
+            ->add('sender', EntityType::class, [
+                'class' => Users::class,
+                'choice_label' => 'firstName',
+                'multiple' => false,
+                'expanded' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -23,9 +23,10 @@ class CommentController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /* if (is_string($form->get('sender')->getData()) && (is_string($this->get('recipient')))) { */
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($comment);
+                $entityManager->flush();
                 return $this->redirectToRoute("comment_valid");
-            /*} */
         }
         return $this->render("comment/index.html.twig", [
             "form" => $form->createView(),
