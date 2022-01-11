@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -84,6 +86,22 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Recipient", orphanRemoval=true)
+     */
+    private ArrayCollection $receivedComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Sender", orphanRemoval=true)
+     */
+    private ArrayCollection $sentComments;
+
+    public function __construct()
+    {
+        $this->receivedComments = new ArrayCollection();
+        $this->sentComments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -278,6 +296,66 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getreceivedComments(): Collection
+    {
+        return $this->receivedComments;
+    }
+
+    public function addReceivedComment(Comment $receivedComment): self
+    {
+        if (!$this->receivedComments->contains($receivedComment)) {
+            $this->receivedComments[] = $receivedComment;
+            $receivedComment->setRecipient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedComment(Comment $receivedComment): self
+    {
+        if ($this->receivedComments->removeElement($receivedComment)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedComment->getRecipient() === $this) {
+                $receivedComment->setRecipient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getsentComments(): Collection
+    {
+        return $this->sentComments;
+    }
+
+    public function addSentComment(Comment $sentComment): self
+    {
+        if (!$this->sentComments->contains($sentComment)) {
+            $this->sentComments[] = $sentComment;
+            $sentComment->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSentComment(Comment $sentComment): self
+    {
+        if ($this->sentComments->removeElement($sentComment)) {
+            // set the owning side to null (unless already changed)
+            if ($sentComment->getSender() === $this) {
+                $sentComment->setSender(null);
+            }
+        }
 
         return $this;
     }
