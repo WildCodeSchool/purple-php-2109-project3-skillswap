@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'envoi de commentaire{% endblock %}
+
+{% block body %}
+<h1>Formulaire d'envoi de commentaire</h1>
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="contact_form">
+    {{ form_label(form.recipient, 'destinataire :', {'label_attr': {'class': 'contact_label'}}) }}
+    {{ form_widget(form.recipient, {'attr': {'class': 'contact_widget'}}) }}
+</div>
+<div class="contact_form">
+    {{ form_label(form.sender, 'expéditeur :', {'label_attr': {'class': 'contact_label'}}) }}
+    {{ form_widget(form.sender, {'attr': {'class': 'contact_widget'}}) }}
+</div>
+<div class="contact_form">
+    {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
+    {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
+</div>
+<input type="submit" value="Envoyer votre commentaire" />
+{{ form_end(form) }}
+{% endblock %}
