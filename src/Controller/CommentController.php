@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
 use App\Entity\Users;
+use App\Entity\Comment;
 use App\Form\CommentType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -16,22 +18,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/{id} ", name="form")
+     * @Route("/{id} ", name="form", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
-    public function index(Users $recipient, Request $request): Response
-    {
+    public function index(
+        Users $recipient,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-                $currentUser = $this->getUser();
-                // @phpstan-ignore-next-line
+            $currentUser = $this->getUser();
+            if ($currentUser instanceof Users) {
                 $comment->setSender($currentUser);
                 $comment->setRecipient($recipient);
-                $entityManager = $this->getDoctrine()->getManager();
+                $comment->setDate(new DateTime());
                 $entityManager->persist($comment);
                 $entityManager->flush();
                 return $this->redirectToRoute("comment_valid");
+            }
         }
         return $this->render("comment/index.html.twig", [
             "form" => $form->createView(),

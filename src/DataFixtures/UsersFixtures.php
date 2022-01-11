@@ -9,11 +9,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 class UsersFixtures extends Fixture
 {
     public const USERS = [
-        ['Olivier', 'oli.g@gmail.com', '1234'],
-        ['Cécile', 'cec.do@gmail.com', '1234'],
-        ['Benjamin', 'benj.b@gmail.com', '1234'],
-        ['Bruno', 'bru.f@gmail.com', '1234'],
-        ['Sébastien', 'seb.v@gmail.com', '1234'],
+        ['Olivier', 'oli.g@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
+        ['Cécile', 'cec.do@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
+        ['Benjamin', 'benj.b@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
+        ['Bruno', 'bru.f@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
+        ['Sébastien', 'seb.v@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
     ];
 
     public function load(ObjectManager $manager): void
