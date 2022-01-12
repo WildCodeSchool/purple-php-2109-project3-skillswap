@@ -18,7 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/users")
  */
-class UsersController extends AbstractController
+class UserController extends AbstractController
 {
     /**
      * @Route("/profile", name="users_profile")
