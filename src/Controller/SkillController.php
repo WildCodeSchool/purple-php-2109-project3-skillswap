@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/skills"), name"skills_"
+ * @Route("/skills", name="skills_")
  */
 class SkillController extends AbstractController
 {

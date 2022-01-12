@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -16,12 +17,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/users")
+ * @Route("/users", name="users_")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profile", name="users_profile")
+     * @Route("/profile", name="profile")
      * @IsGranted("ROLE_USER")
      */
     public function profile(): Response
@@ -30,7 +31,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit", name="users_edit_profile")
+     * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
     public function edit(
@@ -72,7 +73,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/", name="users_delete")
+     * @Route("/", name="delete")
      * @IsGranted("ROLE_USER")
      */
     public function delete(Request $request, EntityManagerInterface $entityManager): Response
@@ -85,5 +86,23 @@ class UserController extends AbstractController
             }
         }
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/availability", name="availability")
+     * @IsGranted("ROLE_USER")
+     */
+    public function availability(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            if ($user->getAvailable()) {
+                $user->setAvailable(false);
+            } else {
+                $user->setAvailable(true);
+            }
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('users_profile');
     }
 }
