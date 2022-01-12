@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * back to the home page view of the site
      * @Route("/", name="home")
      */
     public function index(): Response
@@ -16,7 +17,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 
-     /**
+    /**
+     * back to the CGU view of the site
      * @Route("/cgu", name="cgu")
      */
     public function cgu(): Response
