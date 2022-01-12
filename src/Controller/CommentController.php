@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +21,7 @@ class CommentController extends AbstractController
      * @Route("/{id} ", name="form", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function index(
-        Users $recipient,
+        User $recipient,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
@@ -30,7 +30,7 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            if ($currentUser instanceof Users) {
+            if ($currentUser instanceof User) {
                 $comment->setSender($currentUser);
                 $comment->setRecipient($recipient);
                 $comment->setDate(new DateTime());

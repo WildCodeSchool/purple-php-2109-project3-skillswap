@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Users;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -25,16 +25,16 @@ class Comment
     private string $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="receivedComments")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedComments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Users $recipient;
+    private ?User $recipient;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="sentComments")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sentComments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Users $sender;
+    private ?User $sender;
 
     /**
      * @ORM\Column(type="datetime")
@@ -58,24 +58,24 @@ class Comment
         return $this;
     }
 
-    public function getRecipient(): ?Users
+    public function getRecipient(): ?User
     {
         return $this->recipient;
     }
 
-    public function setRecipient(?Users $recipient): self
+    public function setRecipient(?User $recipient): self
     {
         $this->recipient = $recipient;
 
         return $this;
     }
 
-    public function getSender(): ?Users
+    public function getSender(): ?User
     {
         return $this->sender;
     }
 
-    public function setSender(?Users $sender): self
+    public function setSender(?User $sender): self
     {
         $this->sender = $sender;
 

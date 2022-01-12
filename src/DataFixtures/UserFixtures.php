@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Users;
+use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class UsersFixtures extends Fixture
+class UserFixtures extends Fixture
 {
     public const USERS = [
         ['Olivier', 'oli.g@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
@@ -19,12 +19,11 @@ class UsersFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         foreach (self::USERS as $user) {
-            $users = new Users();
+            $users = new User();
             $users->setFirstname($user[0]);
             $users->setEmail($user[1]);
             $users->setPassword($user[2]);
             $manager->persist($users);
-            /*$this->addReference('user_' . $key, $users);*/
         }
         $manager->flush();
     }

@@ -1,15 +1,15 @@
 security:
     enable_authenticator_manager: true
     password_hashers:
-        App\Entity\Users:
+        App\Entity\User:
             algorithm: auto
 
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # https://symfony.com/doc/current/security.html#where-do-User-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\Users
+                class: App\Entity\User
                 property: email
     firewalls:
         dev:
