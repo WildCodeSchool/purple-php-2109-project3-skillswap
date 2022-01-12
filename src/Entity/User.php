@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Entity\Skills;
+use App\Entity\Skill;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,10 +13,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Users implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -89,14 +89,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skills::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user")
      * @Assert\Count(min = 0, max = 5)
      */
-    private Collection $skills;
+    private Collection $skill;
 
     public function __construct()
     {
-        $this->skills = new ArrayCollection();
+        $this->skill = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -297,25 +297,25 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Skills[]
+     * @return Collection|Skill[]
      */
-    public function getSkills(): Collection
+    public function getSkill(): Collection
     {
-        return $this->skills;
+        return $this->skill;
     }
 
-    public function addSkill(Skills $skill): self
+    public function addSkill(Skill $skill): self
     {
-        if (!$this->skills->contains($skill)) {
-            $this->skills[] = $skill;
+        if (!$this->skill->contains($skill)) {
+            $this->skill[] = $skill;
         }
 
         return $this;
     }
 
-    public function removeSkill(Skills $skill): self
+    public function removeSkill(Skill $skill): self
     {
-        $this->skills->removeElement($skill);
+        $this->skill->removeElement($skill);
 
         return $this;
     }

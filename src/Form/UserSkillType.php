@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Users;
-use App\Entity\Skills;
+use App\Entity\User;
+use App\Entity\Skill;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,13 +17,13 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UsersSkillsType extends AbstractType
+class UserSkillType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           ->add('skills', EntityType::class, [
-                'class' => Skills::class,
+           ->add('skill', EntityType::class, [
+                'class' => Skill::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
@@ -35,7 +35,7 @@ class UsersSkillsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Users::class,
+            'data_class' => User::class,
         ]);
     }
 }

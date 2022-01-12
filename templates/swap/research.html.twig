@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SwapController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+{% for user in skill.user %}
+    <div class="card" style="width: 18rem;">
+        <img src="/upload/avatars/homme1.jpg" class="card-img-top" alt="photo de {{ user.firstname }}">
+        <div class="card-body">
+            <h5 class="swap_h5 card-title">{{ user.firstname }}</h5>
+            <hr>
+            <div class="p_contain">
+                <p class="swap_p card-text">J'ai 32 ans. Je suis entrepreneur depuis 10 ans dans le secteur
+                 commercial et spécialisé dans les achats. J'aime bien faire du vélo et manger des pâtes au
+                  beurre...Quand j'étais petit, je jouais aux légos avec mon copain Olivier</p>
+            </div>
+            <br>
+            <div class="container">
+                <a href="" class="swap_btn btn btn-primary">En savoir plus...</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
