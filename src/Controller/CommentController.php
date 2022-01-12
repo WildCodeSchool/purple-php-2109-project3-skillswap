@@ -18,6 +18,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentController extends AbstractController
 {
     /**
+     * This is the form that lets a user send a comment after a swap.
+     * The user who gets the comment is fetched from the url.
      * @Route("/{id} ", name="form", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function index(
@@ -45,6 +47,7 @@ class CommentController extends AbstractController
     }
 
     /**
+     * If the form sent is valid, we send the user to this page to inform them it is valid.
      * @Route("/valid", name="valid")
      */
     public function valid(Request $request): Response

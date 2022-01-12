@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class UserFixtures extends Fixture
 {
+    // The password for those account is "aaaaaa".
     public const USERS = [
         ['Olivier', 'oli.g@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
         ['Cécile', 'cec.do@gmail.com', '$2y$13$nz8WHMPl5ft66EbWhPWPyuau4g2YbMXxQtsje2S.ktslaJn/gAYCq'],
