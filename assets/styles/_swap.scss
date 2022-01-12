@@ -9,33 +9,41 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 .card:hover {
     border: 5px solid #fd3205;
 }
+
 .card-img-top {
     border-top-left-radius: 0.8em;
     max-height: 200px;
-    width: auto;
 }
+
 .container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
+
 hr {
     color: $light2;
 }
+
 .p_contain {
     height: 80px;
     overflow: auto;
 }
+
 .swap_btn:hover {
     background-color: #fd3205;
+    border: 3px solid #EEEEEE;
 }
+
 .swap_h5 {
     color: $light2;
     text-align: center;
 }
+
 .swap_p{
     color: $light2;
     text-align: justify;
