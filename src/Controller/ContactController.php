@@ -18,9 +18,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     /**
-     * Recovery of the "ContactType" form to send the view.
-     * Checks the validity of the form sent and returns to a
-     * page confirming the sending
+     * Recovery of the "ContactType" form to make the view.
+     * Checks the validity of the sent form and redirects to a
+     * page to confirm it was sent.
      * @Route("/", name="")
      */
     public function index(Request $request, MailerInterface $mailer): Response
@@ -47,7 +47,7 @@ class ContactController extends AbstractController
     }
 
     /**
-     * confirmation page
+     * The view of the confirmation page.
      * @Route("/valid", name="_valid")
      */
     public function valid(Request $request): Response

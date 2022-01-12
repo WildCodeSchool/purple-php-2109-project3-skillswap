@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * back to the home page view of the site
+     * The view of the homepage.
      * @Route("/", name="home")
      */
     public function index(): Response
@@ -18,7 +18,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * back to the CGU view of the site
+     * The view of our terms and condition.
      * @Route("/cgu", name="cgu")
      */
     public function cgu(): Response

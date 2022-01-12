@@ -26,10 +26,10 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * generates the view with the form "RegistrationFormType"
+     * Generates the view with the form "RegistrationFormType"
      * for the registration of a new user. Checks the validity
-     * of the form, sends back to the "home" route (no home of the site)
-     * if the form is validated and prepare to send a confirmation email.
+     * of the form, sends back to the "home" route
+     * if the form is valid and sends a confirmation email.
      * @Route("/register", name="app_register")
      */
     public function register(
