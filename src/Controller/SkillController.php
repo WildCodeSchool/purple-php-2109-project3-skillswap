@@ -26,14 +26,4 @@ class SkillController extends AbstractController
             'categories' => Skill::CATEGORIES,
         ]);
     }
-
-    /**
-     * @Route("/{id}", name="skills_show", methods={"GET"})
-     */
-    public function show(Skill $skill): Response
-    {
-        return $this->render('skills/show.html.twig', [
-            'skill' => $skill,
-        ]);
-    }
 }
