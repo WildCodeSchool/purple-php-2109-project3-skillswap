@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Entity\Users;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\SkillsRepository;
+use App\Repository\SkillRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass=SkillsRepository::class)
+ * @ORM\Entity(repositoryClass=SkillRepository::class)
  */
-class Skills
+class Skill
 {
     public const CATEGORIES = [
         'Droit et finance',
@@ -39,13 +39,13 @@ class Skills
     private string $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="skills")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="skill")
      */
-    private Collection $users;
+    private Collection $user;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,26 +78,26 @@ class Skills
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
-    public function getUsers(): Collection
+    public function getUser(): Collection
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
             $user->addSkill($this);
         }
 
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->user->removeElement($user)) {
             $user->removeSkill($this);
         }
 

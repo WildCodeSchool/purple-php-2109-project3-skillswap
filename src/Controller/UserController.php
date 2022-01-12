@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
-use App\Form\UsersSkillsType;
+use App\Entity\User;
+use App\Form\UserSkillType;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-class UsersController extends AbstractController
+class UserController extends AbstractController
 {
    /**
      * @Route("/profile", name="users_profile")
@@ -25,10 +25,10 @@ class UsersController extends AbstractController
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(UsersSkillsType::class, $user);
+        $form = $this->createForm(UserSkillType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user instanceof Users) {
+            if ($user instanceof User) {
                 $entityManager->persist($user);
                 $entityManager->flush();
                 return $this->redirectToRoute('users_profile');
