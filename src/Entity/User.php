@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -84,6 +86,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Swap::class, mappedBy="asker", orphanRemoval=true)
+     */
+    private Collection $askedSwaps;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Swap::class, mappedBy="helper", orphanRemoval=true)
+     */
+    private Collection $helpedSwaps;
+
+    public function __construct()
+    {
+        $this->askedSwaps = new ArrayCollection();
+        $this->helpedSwaps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -278,6 +296,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Swap[]
+     */
+    public function getAskedSwaps(): Collection
+    {
+        return $this->askedSwaps;
+    }
+
+    public function addAskedSwap(Swap $askedSwap): self
+    {
+        if (!$this->askedSwaps->contains($askedSwap)) {
+            $this->askedSwaps[] = $askedSwap;
+            $askedSwap->setAsker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAskedSwap(Swap $askedSwap): self
+    {
+        if ($this->askedSwaps->removeElement($askedSwap)) {
+            // set the owning side to null (unless already changed)
+            if ($askedSwap->getAsker() === $this) {
+                $askedSwap->setAsker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Swap[]
+     */
+    public function getHelpedSwaps(): Collection
+    {
+        return $this->helpedSwaps;
+    }
+
+    public function addHelpedSwap(Swap $helpedSwap): self
+    {
+        if (!$this->helpedSwaps->contains($helpedSwap)) {
+            $this->helpedSwaps[] = $helpedSwap;
+            $helpedSwap->setHelper($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHelpedSwap(Swap $helpedSwap): self
+    {
+        if ($this->helpedSwaps->removeElement($helpedSwap)) {
+            // set the owning side to null (unless already changed)
+            if ($helpedSwap->getHelper() === $this) {
+                $helpedSwap->setHelper(null);
+            }
+        }
 
         return $this;
     }
