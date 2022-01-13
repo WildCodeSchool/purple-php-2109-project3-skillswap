@@ -18,11 +18,11 @@ class SkillController extends AbstractController
     /**
      * @Route("/research", name="research", methods={"GET"})
      */
-    public function research(SkillRepository $skillsRepository): Response
+    public function research(SkillRepository $skillRepository): Response
     {
 
         return $this->render('skills/research.html.twig', [
-            'skills' => $skillsRepository->findBy([], ['category' => 'ASC']),
+            'skills' => $skillRepository->findBy([], ['category' => 'ASC']),
             'categories' => Skill::CATEGORIES,
         ]);
     }
