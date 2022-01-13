@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<section class="sectionHome">
+<section>
     {% if is_granted("ROLE_USER") %}
-         <h1 class="titleHome">Bienvenue {{ app.user.firstname }}</h1>
+        <h1 class="titleHome">Bienvenue {{ app.user.firstname }}</h1>
     {% else %}
         <h1 class="titleHome">Pour les entrepreneurs</h1>
     {% endif %}

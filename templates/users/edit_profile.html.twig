@@ -3,11 +3,11 @@
 {% block title %}Edit Users{% endblock %}
 
 {% block body %}
+<section>
     <h1>Edit Users</h1>
     <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
-
     {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
     <a href="{{ path('users_profile') }}">Revenir au profil</a>
-
     {{ include('users/_delete_form.html.twig') }}
+</section>
 {% endblock %}
