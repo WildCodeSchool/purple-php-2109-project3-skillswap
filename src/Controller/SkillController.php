@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Skill;
+use App\Form\SkillType;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,6 @@ class SkillController extends AbstractController
      */
     public function research(SkillRepository $skillRepository): Response
     {
-
         return $this->render('skills/research.html.twig', [
             'skills' => $skillRepository->findBy([], ['category' => 'ASC']),
             'categories' => Skill::CATEGORIES,

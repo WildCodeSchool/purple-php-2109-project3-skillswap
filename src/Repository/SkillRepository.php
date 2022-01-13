@@ -20,7 +20,7 @@ class SkillRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Skill[] Returns an array of Skill objects
+    //  * @return Skill[] Returns an array of Skills objects
     //  */
     /*
     public function findByExampleField($value)
