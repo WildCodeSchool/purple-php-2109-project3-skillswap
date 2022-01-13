@@ -54,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $picture;
+    private ?string $picture = "defaultUserPicture.png";
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
