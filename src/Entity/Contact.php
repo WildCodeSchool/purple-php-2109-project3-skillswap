@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * entity created to manage the validity of the contact form.
+ */
 class Contact
 {
 

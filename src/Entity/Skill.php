@@ -6,6 +6,7 @@ use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * entity to create a skill
  * @ORM\Entity(repositoryClass=SkillRepository::class)
  */
 class Skill
