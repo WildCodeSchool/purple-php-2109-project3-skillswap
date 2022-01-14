@@ -99,12 +99,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private Collection $sentComments;
 
-    /**  
+    /**
      * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user")
      * @Assert\Count(min = 0, max = 5)
      */
     private Collection $skill;
-  
+ 
     public function __construct()
     {
         $this->receivedComments = new ArrayCollection();
