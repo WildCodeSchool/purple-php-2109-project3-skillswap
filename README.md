@@ -22,7 +22,6 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 
 1. Check composer is installed
 2. Check yarn & node are installed
-3. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
 
 ### Install
 
@@ -30,10 +29,11 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev` to build assets
-5. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env` file.
-6. Change the environment variable `DATABASE_URL` in the `.env` file.
-7. Run the command `symfony console d:m:m`
-8. Run the command `symfony console d:f:l`
+5. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
+6. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env` file.
+7. Change the environment variable `DATABASE_URL` in the `.env` file.
+8. Run the command `symfony console d:m:m`
+9. Run the command `symfony console d:f:l`
 
 ### Working
 
