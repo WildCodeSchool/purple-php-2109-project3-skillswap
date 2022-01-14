@@ -49,7 +49,7 @@ class UserController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
