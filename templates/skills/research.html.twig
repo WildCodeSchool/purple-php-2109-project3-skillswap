@@ -20,7 +20,7 @@
                 <div class="accordion-body">
                     {% for skill in skill %}
                     {% if skill.category == categories.0 %}
-                    <p><a href="">{{ skill.name }}</a></p>
+                    <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -38,7 +38,7 @@
                 <div class="accordion-body">
                     {% for skill in skill %}
                     {% if skill.category == categories.1 %}
-                    <p><a href="">{{ skill.name }}</a></p>
+                    <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -56,7 +56,7 @@
                 <div class="accordion-body">
                     {% for skill in skill %}
                     {% if skill.category == categories.2 %}
-                    <p><a href="">{{ skill.name }}</a></p>
+                    <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -74,7 +74,7 @@
                 <div class="accordion-body">
                     {% for skill in skill %}
                     {% if skill.category == categories.3 %}
-                    <p><a href="">{{ skill.name }}</a></p>
+                    <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -92,7 +92,7 @@
                 <div class="accordion-body">
                     {% for skill in skill %}
                     {% if skill.category == categories.4 %}
-                    <p><a href="">{{ skill.name }}</a></p>
+                    <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
                     {% endfor %}
                 </div>

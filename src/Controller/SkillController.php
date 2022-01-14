@@ -12,14 +12,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/skills", name="skills_")
- */
+* @Route("/skills", name="skills_")
+*/
 class SkillController extends AbstractController
 {
-    /**
+     /**
      * Sends to the view the list of skills currently in the database in alphabetical
      * order and the categories in the class skill.
-     * @Route("/research", name="skills_research", methods={"GET"})
+     * @Route("/research", name="research", methods={"GET"})
      */
     public function research(SkillRepository $skillRepository): Response
     {

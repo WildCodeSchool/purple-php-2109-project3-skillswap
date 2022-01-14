@@ -7,8 +7,9 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 /**
- * list of skills
- */
+* list of skills
+*/
+
 class SkillFixtures extends Fixture
 {
     public const SKILLS = [

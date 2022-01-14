@@ -23,13 +23,13 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/users")
+ * @Route("/users", name="users_")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profile", name="users_profile")
-     */
+    * @Route("/profile", name="profile")
+    */
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -48,7 +48,7 @@ class UserController extends AbstractController
     }
 
      /**
-     * @Route("/edit", name="users_edit_profile")
+     * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
     public function edit(
@@ -90,7 +90,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/", name="users_delete")
+     * @Route("/delete", name="delete")
      * @IsGranted("ROLE_USER")
      */
     public function delete(Request $request, EntityManagerInterface $entityManager): Response
