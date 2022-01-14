@@ -32,6 +32,8 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev` to build assets
+5. Run the command `symfony console d:m:m`
+6. Run the command `symfony console d:f:l`
 
 ### Working
 
