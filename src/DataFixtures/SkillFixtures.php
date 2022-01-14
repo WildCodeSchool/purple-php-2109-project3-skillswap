@@ -9,7 +9,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 /**
 * list of skills
 */
-
 class SkillFixtures extends Fixture
 {
     public const SKILLS = [

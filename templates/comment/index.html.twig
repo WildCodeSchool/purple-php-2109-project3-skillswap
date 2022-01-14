@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'envoi de commentaire{% endblock %}
+
+{% block body %}
+
+{% set messages = app.flashes("success") %}
+
+{% if messages is empty %}
+    <h1>Formulaire d'envoi de commentaire</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="contact_form">
+        {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
+        {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
+    </div>
+    <input type="submit" value="Envoyer votre commentaire" />
+    {{ form_end(form) }}
+{% else %}
+    <div class="alert alert-success" role="alert">
+        <p>{{ messages.0 }}</p>
+        <a href="/">retour à la page d'accueil</a>
+    </div>
+{% endif %}
+{% endblock %}

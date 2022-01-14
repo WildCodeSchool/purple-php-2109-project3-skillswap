@@ -90,6 +90,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Recipient", orphanRemoval=true)
+     */
+    private Collection $receivedComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Sender", orphanRemoval=true)
+     */
+    private Collection $sentComments;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user")
      * @Assert\Count(min = 0, max = 5)
      */
@@ -97,6 +107,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->receivedComments = new ArrayCollection();
+        $this->sentComments = new ArrayCollection();
         $this->skill = new ArrayCollection();
     }
 
@@ -293,7 +305,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+        return $this;
+    }
 
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getreceivedComments(): Collection
+    {
+        return $this->receivedComments;
+    }
+
+    public function addReceivedComment(Comment $receivedComment): self
+    {
+        if (!$this->receivedComments->contains($receivedComment)) {
+            $this->receivedComments[] = $receivedComment;
+            $receivedComment->setRecipient($this);
+        }
         return $this;
     }
 
@@ -310,14 +338,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->skill->contains($skill)) {
             $this->skill[] = $skill;
         }
+        return $this;
+    }
 
+    public function removeReceivedComment(Comment $receivedComment): self
+    {
+        if ($this->receivedComments->removeElement($receivedComment)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedComment->getRecipient() === $this) {
+                $receivedComment->setRecipient(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getsentComments(): Collection
+    {
+        return $this->sentComments;
+    }
+
+    public function addSentComment(Comment $sentComment): self
+    {
+        if (!$this->sentComments->contains($sentComment)) {
+            $this->sentComments[] = $sentComment;
+            $sentComment->setSender($this);
+        }
+        return $this;
+    }
+
+    public function removeSentComment(Comment $sentComment): self
+    {
+        if ($this->sentComments->removeElement($sentComment)) {
+            // set the owning side to null (unless already changed)
+            if ($sentComment->getSender() === $this) {
+                $sentComment->setSender(null);
+            }
+        }
         return $this;
     }
 
     public function removeSkill(Skill $skill): self
     {
         $this->skill->removeElement($skill);
-
         return $this;
     }
 }
