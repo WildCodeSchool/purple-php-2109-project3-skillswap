@@ -2,19 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Skill;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * entity for creating a user
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- */
+*/
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -55,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $picture;
+    private ?string $picture = "defaultUserPicture.png";
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -97,10 +99,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private Collection $sentComments;
 
+    /**  
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user")
+     * @Assert\Count(min = 0, max = 5)
+     */
+    private Collection $skill;
+  
     public function __construct()
     {
         $this->receivedComments = new ArrayCollection();
         $this->sentComments = new ArrayCollection();
+        $this->skill = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -296,7 +305,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
         return $this;
     }
 
@@ -314,7 +322,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->receivedComments[] = $receivedComment;
             $receivedComment->setRecipient($this);
         }
+        return $this;
+    }
 
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkill(): Collection
+    {
+        return $this->skill;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skill->contains($skill)) {
+            $this->skill[] = $skill;
+        }
         return $this;
     }
 
@@ -326,7 +349,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $receivedComment->setRecipient(null);
             }
         }
-
         return $this;
     }
 
@@ -344,7 +366,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->sentComments[] = $sentComment;
             $sentComment->setSender($this);
         }
-
         return $this;
     }
 
@@ -356,7 +377,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $sentComment->setSender(null);
             }
         }
+        return $this;
+    }
 
+    public function removeSkill(Skill $skill): self
+    {
+        $this->skill->removeElement($skill);
         return $this;
     }
 }
