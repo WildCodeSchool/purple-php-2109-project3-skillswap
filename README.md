@@ -22,6 +22,9 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 
 1. Check composer is installed
 2. Check yarn & node are installed
+3. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
+4. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env` file.
+5. Change the environment variable `DATABASE_URL` in the `.env` file.
 
 ### Install
 
