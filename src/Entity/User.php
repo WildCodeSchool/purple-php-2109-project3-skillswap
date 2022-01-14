@@ -104,7 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Count(min = 0, max = 5)
      */
     private Collection $skill;
- 
+    
     public function __construct()
     {
         $this->receivedComments = new ArrayCollection();
