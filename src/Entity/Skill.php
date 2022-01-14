@@ -9,8 +9,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass=SkillRepository::class)
- */
+* entity to create a skill
+* @ORM\Entity(repositoryClass=SkillRepository::class)
+*/
 class Skill
 {
     public const CATEGORIES = [

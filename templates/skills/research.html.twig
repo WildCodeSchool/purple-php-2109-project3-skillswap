@@ -18,7 +18,7 @@
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    {% for skill in skills %}
+                    {% for skill in skill %}
                     {% if skill.category == categories.0 %}
                     <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
@@ -36,7 +36,7 @@
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    {% for skill in skills %}
+                    {% for skill in skill %}
                     {% if skill.category == categories.1 %}
                     <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
@@ -54,7 +54,7 @@
             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    {% for skill in skills %}
+                    {% for skill in skill %}
                     {% if skill.category == categories.2 %}
                     <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
@@ -72,7 +72,7 @@
             <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    {% for skill in skills %}
+                    {% for skill in skill %}
                     {% if skill.category == categories.3 %}
                     <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}
@@ -90,7 +90,7 @@
             <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    {% for skill in skills %}
+                    {% for skill in skill %}
                     {% if skill.category == categories.4 %}
                     <p><a href="{{ path("swap_research", {id: skill.id}) }}">{{ skill.name }}</a></p>
                     {% endif %}

@@ -6,6 +6,11 @@ use App\Entity\Skill;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
+
+/**
+* list of skills
+*/
+
 class SkillFixtures extends Fixture
 {
     public const SKILLS = [
@@ -98,6 +103,9 @@ class SkillFixtures extends Fixture
             'category' => Skill::CATEGORIES[3],
         ],[
             'name' => 'Recrutement',
+            'category' => Skill::CATEGORIES[3],
+        ],[
+            'name' => 'Stratégie RH',
             'category' => Skill::CATEGORIES[3],
         ],[
             'name' => 'Secrétariat',

@@ -12,6 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     /**
+     * Generates the view for user authentication for login.
      * @Route("/login", name="login")
      */
     public function index(AuthenticationUtils $authenticationUtils): Response
@@ -26,8 +27,9 @@ class LoginController extends AbstractController
     }
 
     /**
-    * @Route("/logout", name="logout", methods={"GET"})
-    */
+     * Generates the link for logging out a user.
+     * @Route("/logout", name="logout", methods={"GET"})
+     */
     public function logout(): void
     {
         // controller can be blank: it will never be called!
