@@ -3,6 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+<section>
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
@@ -25,4 +26,5 @@
 
         <input type="submit"  value="Enregistrer">
     {{ form_end(registrationForm) }}
+</section>
 {% endblock %}

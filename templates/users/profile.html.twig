@@ -3,6 +3,7 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
+<section>
 <h1>Profil</h1>
 
 <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
@@ -50,5 +51,5 @@
 </table>
 
 <a href="{{ path('users_edit_profile') }}">Modifier le profil</a>
-
+</section>
 {% endblock %}

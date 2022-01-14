@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\SkillRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SkillRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass=SkillRepository::class)
- */
+* entity to create a skill
+* @ORM\Entity(repositoryClass=SkillRepository::class)
+*/
 class Skill
 {
     public const CATEGORIES = [
@@ -35,6 +39,16 @@ class Skill
      */
     private string $category;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="skill")
+     */
+    private Collection $user;
+
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +74,33 @@ class Skill
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->addSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            $user->removeSkill($this);
+        }
 
         return $this;
     }

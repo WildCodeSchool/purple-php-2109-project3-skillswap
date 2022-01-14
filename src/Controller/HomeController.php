@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * The view of the homepage.
      * @Route("/", name="home")
      */
     public function index(): Response
@@ -17,7 +18,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 
-     /**
+    /**
+     * The view of our terms and condition.
      * @Route("/cgu", name="cgu")
      */
     public function cgu(): Response

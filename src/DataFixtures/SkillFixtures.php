@@ -6,7 +6,11 @@ use App\Entity\Skill;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class SkillsFixtures extends Fixture
+/**
+* list of skills
+*/
+
+class SkillFixtures extends Fixture
 {
     public const SKILLS = [
         [
