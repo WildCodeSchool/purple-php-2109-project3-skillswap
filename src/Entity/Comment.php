@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -21,6 +22,7 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Le commentaire ne doit pas être vide !")
      */
     private string $message;
 
