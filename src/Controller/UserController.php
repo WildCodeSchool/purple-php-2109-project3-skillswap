@@ -7,6 +7,7 @@ use App\Form\UserSkillType;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -28,8 +29,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class UserController extends AbstractController
 {
     /**
-    * @Route("/profile", name="profile")
-    */
+     * @Route("/profile", name="profile")
+     * @IsGranted("ROLE_USER")
+     */
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -47,7 +49,7 @@ class UserController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
@@ -103,5 +105,23 @@ class UserController extends AbstractController
             }
         }
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/availability", name="availability")
+     * @IsGranted("ROLE_USER")
+     */
+    public function availability(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            if ($user->getAvailable()) {
+                $user->setAvailable(false);
+            } else {
+                $user->setAvailable(true);
+            }
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('users_profile');
     }
 }
