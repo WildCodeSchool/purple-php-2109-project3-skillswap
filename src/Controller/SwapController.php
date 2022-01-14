@@ -22,4 +22,15 @@ class SwapController extends AbstractController
             'skill' => $skill
         ]);
     }
+
+    /** 
+     * @Route("/swapper/display/{id}", name="swapper_display")
+     */
+    public function display(int $id): Response
+    {
+        return $this->render('swapper/display.html.twig', [
+            "id" => $id
+        ]);
+    }
+
 }
