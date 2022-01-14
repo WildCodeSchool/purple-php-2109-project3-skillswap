@@ -4,51 +4,57 @@
 
 {% block body %}
 <section>
-    <h1>Profil</h1>
-    <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ app.user.email }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ app.user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ app.user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Linkedin</th>
-                <td>{{ app.user.linkedin }}</td>
-            </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ app.user.website }}</td>
-            </tr>
-            <tr>
-                <th>Company</th>
-                <td>{{ app.user.company }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ app.user.description }}</td>
-            </tr>
-            <tr>
-                <th>Available</th>
-                <td>{{ app.user.available ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<h1>Profil</h1>
+<img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
+{% if app.user.available %}
+<a href="{{ path('users_availability') }}"><button>Disponible</button></a>
+{% else %}
+<a href="{{ path('users_availability') }}"><button>Indisponible</button></a>
+{% endif %}
 
-    <a href="{{ path('users_edit_profile') }}">Modifier le profil</a>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Email</th>
+            <td>{{ app.user.email }}</td>
+        </tr>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ app.user.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ app.user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Linkedin</th>
+            <td>{{ app.user.linkedin }}</td>
+        </tr>
+        <tr>
+            <th>Website</th>
+            <td>{{ app.user.website }}</td>
+        </tr>
+        <tr>
+            <th>Company</th>
+            <td>{{ app.user.company }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ app.user.description }}</td>
+        </tr>
+        <tr>
+            <th>Available</th>
+            <td>{{ app.user.available ? 'Yes' : 'No' }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="{{ path('users_edit_profile') }}">Modifier le profil</a>
     <ul>
-        {% for skill in app.user.skill|slice(0, 5) %}
-        <li>{{ skill.name }}</li>
-        {% endfor %}
-        </ul>
-        {% include "users/_userSkillForm.html.twig" %}
+    {% for skill in app.user.skill|slice(0, 5) %}
+      <li>{{ skill.name }}</li>
+    {% endfor %}
+    </ul>
+    {% include "users/_userSkillForm.html.twig" %}
 </section>
 {% endblock %}
