@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Les utilisateurs:</h1>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Disponibilité</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.available %}
+                       Disponible
+                    {% else %}
+                        Indisponible
+                    {% endif %}
+                </td>
+                <td>
+                    <ul>
+                    {% for role in user.roles %}
+                        <li>{{ role }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <a href="{{ path('admin_user_show', {'id': user.id}) }}"><button>Détail</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

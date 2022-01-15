@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+<section>
+<h1>Utilistateur</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <img class='userPicture' src="/upload/avatars/{{ user.picture }}" alt="ne s'affiche pas">
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ user.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Linkedin</th>
+            <td>{{ user.linkedin }}</td>
+        </tr>
+        <tr>
+            <th>Website</th>
+            <td>{{ user.website }}</td>
+        </tr>
+        <tr>
+            <th>Company</th>
+            <td>{{ user.company }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ user.description }}</td>
+        </tr>
+        <tr>
+            {% if user.available %}
+               Disponible
+            {% else %}
+                Indisponible
+            {% endif %}
+        </tr>
+        <tr>
+            <ul>
+            {% for role in user.roles %}
+                <li>{{ role }}</li>
+            {% endfor %}
+            </ul>
+        </tr>
+    </tbody>
+</table>
+</section>
+{% endblock %}
