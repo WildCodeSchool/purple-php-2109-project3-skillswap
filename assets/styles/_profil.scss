@@ -3,3 +3,32 @@
     height: 200px;
     border-radius: 30px;
 }
+
+.profilTop {
+    display: flex;
+    margin: 20px 40px;
+
+}
+
+.profilRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 30px;
+}
+
+.profilRight .btn {
+    width: 120px;
+}
+
+.profilTable th {
+    width: 100px;
+}
+
+.description, .profilBottom, .profilTable {
+    margin: 20px 40px;
+}
+
+.profilBtnEdit{
+    text-align: center;
+}
