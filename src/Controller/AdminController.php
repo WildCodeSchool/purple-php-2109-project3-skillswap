@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Skill;
 use App\Form\SkillType;
+use App\Repository\UserRepository;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +48,7 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/user_show.html.twig', [
             'user' => $user,
-       ]);
+        ]);
     }
 
     /**
