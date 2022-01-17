@@ -132,7 +132,7 @@ class UserController extends AbstractController
      * @Route("/profile/admin", name="profile_admin")
      * @IsGranted("ROLE_USER")
      */
-    public function creatAdmin(UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function createAdmin(UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $roleAdmin = true;
         $users = $userRepository->findAll();
@@ -145,6 +145,7 @@ class UserController extends AbstractController
         if ($roleAdmin) {
             if ($this->getUser() instanceof User) {
                 $this->getUser()->setRoles(['ROLE_ADMIN']);
+                $entityManager->flush();
                 $this->addFlash('notice', 'Vous obtenez le role Admin');
                 return $this->redirectToRoute('users_profile');
             }
