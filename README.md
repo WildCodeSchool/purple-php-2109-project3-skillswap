@@ -76,7 +76,10 @@ Some files are used to manage automatic deployments (using tools as Caprover, Do
 * [ESLint](https://eslint.org/)
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
 
-
+## First Connection
+The person in charge of the administration of the site will have, after his registration and connection,
+to go on the following url: `/users/profile/admin` in order to receive the administrator rights. 
+They can then assign this role to the user they wish.
 
 ## Contributing
 
