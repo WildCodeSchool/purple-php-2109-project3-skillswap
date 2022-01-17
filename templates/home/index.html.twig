@@ -1,44 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
-
-{% block stylesheets %}
-{{ parent() }}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-<style>
-    .pink-stripe {
-        height: 50vh;
-        width: 100%;
-        display: flex;
-        font-family: 'Varela Round', sans-serif;
-        font-size: 3rem;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .white-stripe {
-        background-color: white;
-        width: 100vw;
-        height: 50vh;
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
-{% endblock %}
-
 {% block body %}
-<div class="pink-stripe">
-    <h1>
-        Let's start coding &#129304;
-    </h1>
-</div>
-<div class="white-stripe ">
-    <img src="https://medinsoft.com/wp-content/uploads/2020/01/LOGO_WILDCODESCHOOL1000-1024x1024.png"
-        style="height:100%">
-</div>
+<section>
+    {% if is_granted("ROLE_USER") %}
+        <h1 class="titleHome">Bienvenue {{ app.user.firstname }}</h1>
+    {% else %}
+        <h1 class="titleHome">Pour les entrepreneurs</h1>
+    {% endif %}
+    <main class="mainHome">
+        <img class="imgHome" src="{{ asset('build/images/home.png') }}" alt="">
+        <div class="divHome">
+            <p class="pHome">
+                Bienvenue sur « Skill Swap », la plateforme d’échange de talents sans échange monétaire. Pour trouver
+                des compétences en vue de son lancement d’entreprise. Pour bien s’entourer. Pour se donner toutes les
+                chances de réussite. Pour agrandir le monde des possibles. Facilitons la réussite collective dans une
+                dynamique d’échange vertueux !
+            </p>
+        </div>
+    </main>
+</section>
 {% endblock %}

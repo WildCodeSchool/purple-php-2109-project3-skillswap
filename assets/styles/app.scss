@@ -1,7 +1,9 @@
+@import '~bootstrap/scss/bootstrap';
 @import 'variables.scss';
-
-body {
-    margin:0;
-    background-color: $wild-color;
-    color: $light;
-}
+@import '_body';
+@import '_nav-footer.scss';
+@import '_home.scss';
+@import '_profil.scss';
+@import '_contact.scss';
+@import '_skillsResearch.scss';
+@import '_swap.scss';

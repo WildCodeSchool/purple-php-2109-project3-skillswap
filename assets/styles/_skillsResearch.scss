@@ -1,0 +1,23 @@
+.accordion-header button {
+    background-color: $light2;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 4px black;
+    font-weight: bold;
+}
+
+.accordion-header button:active, .accordion-header button:hover, .accordion-header button:focus, .accordion-header button:visited {
+    color: $bgnav2;
+    background-color: $light2;
+    border-color: $bgnav2;
+}
+
+.accordion-body a {
+    color: $light;
+    text-decoration: none;
+}
+
+.accordion-body a:hover{
+    text-decoration: underline;
+    color: $light;
+    text-decoration-color: $bgnav2;
+}

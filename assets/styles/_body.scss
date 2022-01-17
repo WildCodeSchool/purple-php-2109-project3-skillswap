@@ -1,0 +1,44 @@
+* {
+    color: $light;
+}
+
+body {
+    margin: 0;
+    min-width: $width-min;
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    background-color: $dark;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    margin: 5vmin 0 5vmin 0;
+    height: 100%;
+}
+
+h1{
+    color: $light;
+    margin-left: 40px;
+    font-size: 1.75rem;
+}
+
+a {
+    text-decoration: none;
+    color: $light;
+}
+
+@media (min-width: $width-desktop) {
+
+    body {
+        align-items: center;
+    }
+
+    section {
+        margin-top: 20px;
+        width: 100%;
+        max-width: $width-max;
+        margin-bottom: 100px;
+    }
+}

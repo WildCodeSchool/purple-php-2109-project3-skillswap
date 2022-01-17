@@ -1,2 +1,12 @@
-$wild-color: #ff6c71;
-$light: #fffbfb;
+@font-face { 
+    font-family: "Swap";
+    src: url('../fonts/Galgony.ttf');
+}
+$light: #333333;
+$dark: #ffffff;
+$light2: #ece1e1;
+$bgnav2:#fd3205;
+$width-min: 350px;
+$width-tablet: 768px;
+$width-desktop: 992px;
+$width-max: 1500px;

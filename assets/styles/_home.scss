@@ -1,0 +1,48 @@
+.mainHome {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.imgHome {
+    max-width: $width-tablet;
+}
+
+.pHome {
+    text-align: justify;
+    margin: 15px;
+    color: $light;
+}
+
+@media (min-width: $width-tablet) {
+
+    .imgHome {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        border-radius: 30px;
+    }
+}
+
+@media (min-width: $width-desktop) {
+
+    .mainHome {
+        flex-direction: row;
+    }
+
+    .imgHome {
+        margin: 15px;
+    }
+
+    .divHome {
+        display: flex;
+        align-items: center;
+    }
+
+    .pHome {
+        max-width: 500px;
+    }
+
+}

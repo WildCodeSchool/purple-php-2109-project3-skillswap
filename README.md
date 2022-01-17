@@ -1,25 +1,22 @@
-# Project 3 - Starter Kit - Symfony 5.*
+# Project - Skill Swap - Symfony 5.3
 
 ## Presentation
 
-This starter kit is here to easily start a repository for Wild Code School students.
+**  Skill Swap aims to be a platform for exchanging talents and skills without any funding. Its goal is to put two people in touch with each other, the first one needing a service and the second one being able to provide it.
+Each one registers on the site, selects the skills he masters and makes himself available to help those already registered.
+The one who needs help selects a skill and is immediately offered all the profiles of swappers who master it.
+Once he's chosen a profile, a request for help is sent, and the target profile can accept or refuses it. . The requester is notified of the answer by email. If it's favorable, a swap (i.e. a discussion between two swappers can begin).
+At the end, the applicant of the service puts an end to the discussion and can thus leave a comment to the person who made him service. This comment can be moderated by the owner of the profile on which it is left.
 
-It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
+**  The site is developed in symfony 5.3 with some additional libraries (webpack, fixtures) and tools to validate the code standards.
+GrumPHP, as a pre-commit hook, will launch 2 tools when git commit is launched:
+PHP_CodeSniffer to check PSR12.
+PHPStan focuses on finding errors in your code (without executing it).
+PHPmd checks if you are following PHP best practices.
+If the tests fail, the commit is cancelled and a warning message is displayed to the developer.
 
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
-  
-    * PHP_CodeSniffer to check PSR12 
-    * PHPStan focuses on finding errors in your code (without actually running it)
-    * PHPmd will check if you follow PHP best practices
-     
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
-
-* Github Action as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
-
-    * Tasks to check if vendor, .idea, env.local are not versionned,
-    * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
  
-## Getting Started for Students
+## Getting Started
 
 ### Prerequisites
 
@@ -32,6 +29,11 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev` to build assets
+5. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
+6. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env` file.
+7. Change the environment variable `DATABASE_URL` in the `.env` file.
+8. Run the command `symfony console d:m:m`
+9. Run the command `symfony console d:f:l`
 
 ### Working
 
@@ -85,7 +87,12 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-Wild Code School trainers team
+- Cécile Do Nascimento
+- Benjamin Babilliot
+- Olivier Gourdonneau
+- Sébastien Violante
+- Bruno Fernandes
+
 
 ## License
 

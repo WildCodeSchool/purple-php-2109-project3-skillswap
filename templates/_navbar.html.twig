@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light rounded-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <h1>Skill Swap</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav d-flex flex-column flex-lg-row align-items-end justify-content-end w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('skills_research') }}">Rechercher</a>
+        </li>
+        <li class="nav-item">
+          {% if is_granted("ROLE_USER") %}
+            <a class="nav-link" href="{{ path('users_profile') }}">Profil</a>
+          {% endif %}
+        </li>
+        <li class="nav-item">
+          {% if is_granted("ROLE_USER") %}
+          <a class="nav-link" href="#">Tableau de bord</a>
+          {% endif %}
+        </li>
+        <li class="nav-item">
+          {% if is_granted("ROLE_USER") %}
+          <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+          {% else %}
+          <a class="nav-link" href="{{ path('login') }}">Connexion</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
