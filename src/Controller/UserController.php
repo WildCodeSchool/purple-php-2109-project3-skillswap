@@ -124,4 +124,36 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('users_profile');
     }
+
+    /**
+     * A method of assigning the Admin Role once to a single administrator.
+     * This instruction is specified in the ReadMe to be used by the person who will
+     * administer the site at the time of installation. This method can only be accessed via the url.
+     * @Route("/profile/admin", name="profile_admin")
+     * @IsGranted("ROLE_USER")
+     */
+    public function createAdmin(UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    {
+        $roleAdmin = true;
+        $users = $userRepository->findAll();
+        foreach ($users as $user) {
+            $roles = $user->getRoles();
+            if (in_array('ROLE_ADMIN', $roles)) {
+                $roleAdmin = false;
+            }
+        }
+        if ($roleAdmin) {
+            if ($this->getUser() instanceof User) {
+                $this->getUser()->setRoles(['ROLE_ADMIN']);
+                $entityManager->flush();
+                $this->addFlash('notice', 'Vous obtenez le role Admin');
+                return $this->redirectToRoute('users_profile');
+            }
+        }
+        $this->addFlash(
+            'notice',
+            'Un utilisateur possede deja le Role Admin merci d\'utiliser le formaulaire de contact pour en savoir plus.'
+        );
+        return $this->redirectToRoute('users_profile');
+    }
 }
