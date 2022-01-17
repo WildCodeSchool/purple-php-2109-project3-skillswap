@@ -37,14 +37,14 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            if ($currentUser instanceof User) {
+            if ($currentUser instanceof User && is_int($recipient->getId())) {
                 $comment->setSender($currentUser);
                 $comment->setRecipient($recipient);
                 $comment->setDate(new DateTime());
                 $entityManager->persist($comment);
                 $entityManager->flush();
 
-                $averageRating = $commentRepository->averageRatings($recipient->getId())[0]["average"];
+                $averageRating = $commentRepository->averageRating($recipient->getId())[0]["average"];
                 $recipient->setNotation(floatval($averageRating));
                 $entityManager->flush();
                 $this->addFlash(
