@@ -1,8 +1,8 @@
 .card {
     border-top-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    background-color: #f8f6f5;
-    border: 5px solid #333333;
+    background-color: $light2;
+    border: 5px solid $light;
     min-height: 300px;
     margin: 1em;
     min-width: 300px ;
@@ -11,7 +11,7 @@
 }
 
 .card:hover {
-    border: 5px solid #fd3305e7;
+    border: 5px solid $bgnav2;
     box-shadow: 5px 3px 2px #e76f54;
 }
 
@@ -29,7 +29,7 @@
 }
 
 hr {
-    color: #333333;
+    color: $light;
 }
 
 .p_contain {
@@ -38,21 +38,21 @@ hr {
 }
 
 .swap_btn {
-    background-color:#333333;
+    background-color: $light;
 }
 
 .swap_btn:hover {
-    background-color: #fd3205;
-    border: 3px solid #EEEEEE;
+    background-color: $bgnav2;
+    border: 3px solid $light2;
 }
 
 .swap_h5 {
-    color: #333333;
+    color: $light;
     text-align: center;
 }
 
 .swap_p{
-    color: #333333;
+    color: $light;
     text-align: justify;
     font-size: 0.8em;
     margin-right: 1em;
@@ -73,8 +73,8 @@ hr {
 
 #pic {
     object-fit: cover;
-    width:230px;
-    height:260px;
+    width:250px;
+    height:250px;
 }
 
 .swapper_card {
@@ -117,7 +117,7 @@ hr {
 #pic2 {
     object-fit: cover;
     width:300px;
-    height: 400px;
+    height: 300px;
     margin-left: auto;
     margin-right: auto;
 }
