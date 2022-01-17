@@ -17,7 +17,7 @@
 .rating_widget:not(:checked)>label:before {
     content: '★';
 }
-    
+
 .rating_widget>input:checked~label {
     color: darkorange;
 }
