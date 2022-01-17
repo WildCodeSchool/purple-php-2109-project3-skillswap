@@ -1,0 +1,40 @@
+.rating:not(:checked)>input {
+    visibility: hidden;
+}
+
+.rating:not(:checked)>label {
+    float: right;
+    width: 1em;
+    padding: 0 .1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    line-height: 1.2;
+    color: lightgrey;
+}
+
+.rating:not(:checked)>label:before {
+    content: '★';
+}
+    
+.rating>input:checked~label {
+    color: darkorange;
+}
+
+.rating:not(:checked)>label:hover,
+.rating:not(:checked)>label:hover~label {
+    color: gold;
+}
+
+.rating>input:checked+label:hover,
+.rating>input:checked+label:hover~label,
+.rating>input:checked~label:hover,
+.rating>input:checked~label:hover~label,
+.rating>label:hover~input:checked~label {
+    color: goldenrod;
+}
+
+.rating>label:active {
+    position: relative;
+}

@@ -43,6 +43,16 @@ class Comment
      */
     private \DateTimeInterface $date;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "The notation must be between {{ min }} and {{ max }}.",
+     * )
+     */
+    private int $rating;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +102,18 @@ class Comment
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }

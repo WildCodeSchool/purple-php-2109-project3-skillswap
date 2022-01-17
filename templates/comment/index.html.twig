@@ -1,18 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formulaire d'envoi de commentaire{% endblock %}
+{% block title %}Formulaire de commentaire{% endblock %}
 
 {% block body %}
 
 {% set messages = app.flashes("success") %}
 
 {% if messages is empty %}
-    <h1>Formulaire d'envoi de commentaire</h1>
+    <h1>Formulaire de commentaire</h1>
     {{ form_start(form) }}
     {{ form_errors(form) }}
-    <div class="contact_form">
+    <div class="comment_form">
         {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
         {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
+        <fieldset class="rating">
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1">1 star</label>
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2">2 stars</label>
+            <input type="radio" id="star3" name="rating" value="3" checked/>
+            <label for="star3">3 stars</label>
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4">4 stars</label>
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5">5 stars</label>
+        </fieldset>
     </div>
     <input type="submit" value="Envoyer votre commentaire" />
     {{ form_end(form) }}

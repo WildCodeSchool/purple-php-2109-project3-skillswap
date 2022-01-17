@@ -14,14 +14,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/comment", name="comment_")
+ * @Route("/comment", name="comment")
  */
 class CommentController extends AbstractController
 {
     /**
      * This is the form that lets a user send a comment after a swap.
      * The user who gets the comment is fetched from the url.
-     * @Route("/{id} ", name="form", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @Route("/{id} ", name="", methods={"GET", "POST"}, requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
     public function index(
@@ -37,6 +37,8 @@ class CommentController extends AbstractController
             if ($currentUser instanceof User) {
                 $comment->setSender($currentUser);
                 $comment->setRecipient($recipient);
+                $data = $form->getData();
+                dd($data);
                 $comment->setDate(new DateTime());
                 $entityManager->persist($comment);
                 $entityManager->flush();
@@ -44,7 +46,7 @@ class CommentController extends AbstractController
                     "success",
                     "Votre commentaire a bien été envoyé."
                 );
-                return $this->redirectToRoute("comment_form", [
+                return $this->redirectToRoute("comment", [
                     "id" => $recipient->getId(),
                 ]);
             }

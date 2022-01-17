@@ -105,6 +105,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private Collection $skill;
 
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "The notation must be between {{ min }} and {{ max }}.",
+     * )
+     */
+    private float $notation;
+
     public function __construct()
     {
         $this->receivedComments = new ArrayCollection();
@@ -383,6 +393,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSkill(Skill $skill): self
     {
         $this->skill->removeElement($skill);
+        return $this;
+    }
+
+    public function getNotation(): ?int
+    {
+        return $this->notation;
+    }
+
+    public function setNotation(int $notation): self
+    {
+        $this->notation = $notation;
+
         return $this;
     }
 }
