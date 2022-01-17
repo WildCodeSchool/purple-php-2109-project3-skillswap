@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Tableau de bord</h1>
+    <hr>
+    <main class="dashboard">
+        <a href="#" class="card" style="width: 18rem;">
+            <img src="{{ asset('build/images/users.jpg') }}" class="card-img-top" alt="photo par défaut">
+            <div class="card-body">
+                <h5 class="swap_h5 card-title">Les utilisateurs</h5>
+                <hr>
+                <div class="p_contain">
+                    <p class="swap_p card-text">Liste des utilisateurs, leurs profiles, leurs roles, leurs commenatires...</p>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card" style="width: 18rem;">
+            <img src="{{ asset('build/images/skills.jpg') }}" class="card-img-top" alt="photo par défaut">
+            <div class="card-body">
+                <h5 class="swap_h5 card-title">Les compétences</h5>
+                <hr>
+                <div class="p_contain">
+                    <p class="swap_p card-text">Liste des compétences, modifier, supprimer, ajouter.</p>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card" style="width: 18rem;">
+            <img src="{{ asset('build/images/swap.jpg') }}" class="card-img-top" alt="photo par défaut">
+            <div class="card-body">
+                <h5 class="swap_h5 card-title">Les échanges</h5>
+                <hr>
+                <div class="p_contain">
+                    <p class="swap_p card-text">Liste des échange...</p>
+                </div>
+            </div>
+        </a>
+    </main>
+</section>
+{% endblock %}
