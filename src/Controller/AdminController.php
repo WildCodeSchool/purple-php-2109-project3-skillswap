@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Entity\Skill;
+use App\Form\SkillType;
+use App\Repository\SkillRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -43,6 +47,32 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/user_show.html.twig', [
             'user' => $user,
+       ]);
+    }
+
+    /**
+     * show, add and modify the list of skills
+     * @Route("/skill", name="skill")
+     */
+    public function showSkill(
+        Request $request,
+        SkillRepository $skillRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+
+        $skill = new Skill();
+        $form = $this->createForm(SkillType::class, $skill);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($skill);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_skill', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('admin/skill.html.twig', [
+            'skills' => $skillRepository->findBy([], ['name' => 'ASC']),
+            'form' => $form,
         ]);
     }
 }
