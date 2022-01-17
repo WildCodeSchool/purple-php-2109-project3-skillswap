@@ -396,12 +396,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNotation(): ?int
+    public function getNotation(): ?float
     {
         return $this->notation;
     }
 
-    public function setNotation(int $notation): self
+    public function setNotation(float $notation): self
     {
         $this->notation = $notation;
 
