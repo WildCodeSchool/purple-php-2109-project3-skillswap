@@ -7,6 +7,7 @@ use App\Form\UserSkillType;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -28,8 +29,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class UserController extends AbstractController
 {
     /**
-    * @Route("/profile", name="profile")
-    */
+     * @Route("/profile", name="profile")
+     * @IsGranted("ROLE_USER")
+     */
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -42,12 +44,12 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('users_profile');
             }
         }
-        return $this->renderForm('profil/index.html.twig', [
+        return $this->renderForm('users/profile.html.twig', [
               'form' => $form,
         ]);
     }
 
-     /**
+    /**
      * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
@@ -103,5 +105,55 @@ class UserController extends AbstractController
             }
         }
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/availability", name="availability")
+     * @IsGranted("ROLE_USER")
+     */
+    public function availability(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            if ($user->getAvailable()) {
+                $user->setAvailable(false);
+            } else {
+                $user->setAvailable(true);
+            }
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('users_profile');
+    }
+
+    /**
+     * A method of assigning the Admin Role once to a single administrator.
+     * This instruction is specified in the ReadMe to be used by the person who will
+     * administer the site at the time of installation. This method can only be accessed via the url.
+     * @Route("/profile/admin", name="profile_admin")
+     * @IsGranted("ROLE_USER")
+     */
+    public function createAdmin(UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    {
+        $roleAdmin = true;
+        $users = $userRepository->findAll();
+        foreach ($users as $user) {
+            $roles = $user->getRoles();
+            if (in_array('ROLE_ADMIN', $roles)) {
+                $roleAdmin = false;
+            }
+        }
+        if ($roleAdmin) {
+            if ($this->getUser() instanceof User) {
+                $this->getUser()->setRoles(['ROLE_ADMIN']);
+                $entityManager->flush();
+                $this->addFlash('notice', 'Vous obtenez le role Admin');
+                return $this->redirectToRoute('users_profile');
+            }
+        }
+        $this->addFlash(
+            'notice',
+            'Un utilisateur possede deja le Role Admin merci d\'utiliser le formaulaire de contact pour en savoir plus.'
+        );
+        return $this->redirectToRoute('users_profile');
     }
 }
