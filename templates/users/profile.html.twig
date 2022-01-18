@@ -4,62 +4,68 @@
 
 {% block body %}
 <section>
-    {% for message in app.flashes('notice') %}
+{% for message in app.flashes('notice') %}
     <div class="flash-notice">
         {{ message }}
     </div>
-    {% endfor %}
-    <h1>Profil</h1>
+{% endfor %}
+<h1>Profil</h1>
+<div class="profilTop">
     <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
-    {% if app.user.available %}
-    <a href="{{ path('users_availability') }}"><button>Disponible</button></a>
-    {% else %}
-    <a href="{{ path('users_availability') }}"><button>Indisponible</button></a>
-    {% endif %}
+    <div class="profilRight">
+        <p>start Rating moyenne</p>
+        {% if app.user.available %}
+        <a href="{{ path('users_availability') }}"><button type="button" class="btn btn-success">Disponible</button></a>
+        {% else %}
+        <a href="{{ path('users_availability') }}"><button type="button" class="btn btn-danger">Indisponible</button></a>
+        {% endif %}
+        <h5>{{ app.user.firstname }} {{ app.user.lastname }}</h5>
+    </div>
+</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ app.user.email }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ app.user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ app.user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Linkedin</th>
-                <td>{{ app.user.linkedin }}</td>
-            </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ app.user.website }}</td>
-            </tr>
-            <tr>
-                <th>Company</th>
-                <td>{{ app.user.company }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ app.user.description }}</td>
-            </tr>
-            <tr>
-                <th>Available</th>
-                <td>{{ app.user.available ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('users_edit_profile') }}">Modifier le profil</a>
-    <ul>
+<table class="profilTable">
+    <tbody>
+        <tr>
+            <th>Email :</th>
+            <td>{{ app.user.email }}</td>
+        </tr>
+        <tr>
+            <th>Linkedin :</th>
+            <td>{{ app.user.linkedin }}</td>
+        </tr>
+        <tr>
+            <th>Site Web :</th>
+            <td>{{ app.user.website }}</td>
+        </tr>
+        <tr>
+            <th>Société :</th>
+            <td>{{ app.user.company }}</td>
+        </tr>
+    </tbody>
+</table>
+<table class="description">
+    <thead>
+        <tr>
+            <th>Description :</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ app.user.description }}</td>
+        </tr>
+    </tbody>
+</table>
+<a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button" class="btn btn-outline-primary">Modifier votre profil</button></a>
+<hr>
+<div class="profilBottom">
+<h5>Vos Compétences :</h5>
+    <ul class="skillList">
     {% for skill in app.user.skill|slice(0, 5) %}
-    <li>{{ skill.name }}</li>
+        <li>{{ skill.name }}</li>
     {% endfor %}
     </ul>
     {% include "users/_userSkillForm.html.twig" %}
+</div>
 </section>
 {% endblock %}
