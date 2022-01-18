@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Skill;
-use App\Repository\UserRepository;
-use App\Repository\SkillRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SwapController extends AbstractController
 {
@@ -20,6 +19,19 @@ class SwapController extends AbstractController
     {
         return $this->render('swap/research.html.twig', [
             'skill' => $skill
+        ]);
+    }
+
+    /**
+     * @Route("/swapper/display/{skill_id}/{user_id}", name="swapper_display")
+     * @ParamConverter("skill",class="App\Entity\Skill", options = {"mapping": {"skill_id": "id"}})
+     * @ParamConverter("user",class="App\Entity\User", options = {"mapping": {"user_id": "id"}})
+     */
+    public function display(Skill $skill, User $user): Response
+    {
+        return $this->render('swapper/display.html.twig', [
+            'user' => $user,
+            'skill' => $skill,
         ]);
     }
 }
