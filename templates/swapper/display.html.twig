@@ -31,7 +31,7 @@
     </ul>
     <div class="swapper_btn_div card-body">
       <a href="{{ path("swap_research", {"id": skill.id}) }}"class="swapper_btn btn btn-secondary btn-lg">Retour à la liste</a>
-      <a href=""class="swapper_btn btn btn-primary btn-lg">Lancer un SWAP</a>
+      <a href="{{ path("swap_form", {"id": user.id}) }}"class="swapper_btn btn btn-primary btn-lg">Lancer un SWAP</a>
     </div>
     <div class="card-footer text-muted">
       Ce swapper a obtenu une note moyenne de :
