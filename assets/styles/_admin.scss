@@ -1,0 +1,14 @@
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+}
+
+.adminNav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.adminNav a button {
+    width: 150px;
+}

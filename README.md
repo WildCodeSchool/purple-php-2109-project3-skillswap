@@ -29,6 +29,11 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev` to build assets
+5. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
+6. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env` file.
+7. Change the environment variable `DATABASE_URL` in the `.env` file.
+8. Run the command `symfony console d:m:m`
+9. Run the command `symfony console d:f:l`
 
 ### Working
 
@@ -71,7 +76,10 @@ Some files are used to manage automatic deployments (using tools as Caprover, Do
 * [ESLint](https://eslint.org/)
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
 
-
+## First Connection
+The person in charge of the administration of the site will have, after his registration and connection,
+to go on the following url: `/users/profile/admin` in order to receive the administrator rights. 
+They can then assign this role to the user they wish.
 
 ## Contributing
 

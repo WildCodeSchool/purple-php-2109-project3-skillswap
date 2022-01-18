@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SwapController!{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="card mb-3">
+    <h3 class="card-header">{{ user.firstname }} {{ user.lastname }}</h3>
+    <div class="card-body">
+      <div id="up">
+        <img id="pic2" src="/upload/avatars/{{ user.picture }}" class="card-img-top" alt="photo de {{ user.firstname }}">
+        <div id="text">
+          <h5 class="card-title">A propos de ce swapper...</h5>
+          <p class="card-text"><em>{{ user.description }}</em></p>
+        </div>
+        <div id="other_skills">
+          <h5 class="card-title">Voici ses domaines de compétence :</h5>
+          <ul>
+            {% for skill in user.skill %}
+              <li>{{ skill.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Numéro d'identification société : {{ user.company }}</li>
+    <li class="list-group-item">Profil LinkdeIn : {{ user.linkedin }}</li>
+    <li class="list-group-item">Site Web : {{ user.website }}</li>
+    </ul>
+    <div class="swapper_btn_div card-body">
+      <a href="{{ path("swap_research", {"id": skill.id}) }}"class="swapper_btn btn btn-secondary btn-lg">Retour à la liste</a>
+      <a href=""class="swapper_btn btn btn-primary btn-lg">Lancer un SWAP</a>
+    </div>
+    <div class="card-footer text-muted">
+      Ce swapper a obtenu une note moyenne de :
+    </div>
+  </div>
+</div>
+{% endblock %}

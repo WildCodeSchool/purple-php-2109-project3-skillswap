@@ -26,6 +26,10 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * Generates the view with the form "RegistrationFormType"
+     * for the registration of a new user. Checks the validity
+     * of the form, sends back to the "home" route
+     * if the form is valid and sends a confirmation email.
      * @Route("/register", name="app_register")
      */
     public function register(
@@ -66,9 +70,11 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * sends a confirmation email to the user once the registration form is
+     * validated via the 'resgister' method.
      * @Route("/verify/email", name="app_verify_email")
      */
-    public function verifyUserEmail(Request $request, UserRepository $usersRepository): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {
         $id = $request->get('id');
 
@@ -76,7 +82,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        $user = $usersRepository->find($id);
+        $user = $userRepository->find($id);
 
         if (null === $user) {
             return $this->redirectToRoute('app_register');
