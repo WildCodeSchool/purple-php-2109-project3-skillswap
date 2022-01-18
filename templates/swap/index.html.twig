@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de demande de swap{% endblock %}
+
+{% block body %}
+
+{% set messages = app.flashes("success") %}
+
+{% if messages is empty %}
+    <h1>Formulaire de demande de swap</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="comment_form">
+        <p>
+        {{ form_label(form.skill, 'skill :', {'label_attr': {'class': 'skill_label'}}) }}
+        {{ form_widget(form.skill, {'attr': {'class': 'skill_widget'}}) }}
+        </p>
+        <p>
+        {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
+        {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
+        </p>
+    </div>
+    <input type="submit" value="Envoyer votre demande" />
+    {{ form_end(form) }}
+{% else %}
+    <div class="alert alert-success" role="alert">
+        <p>{{ messages.0 }}</p>
+        <a href="/">retour à la page d'accueil</a>
+    </div>
+{% endif %}
+{% endblock %}

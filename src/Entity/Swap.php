@@ -49,14 +49,14 @@ class Swap
     private string $message;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" = false})
      */
-    private bool $isAccepted;
+    private bool $isAccepted = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" = false})
      */
-    private bool $isDone;
+    private bool $isDone = false;
 
     public function getId(): ?int
     {
