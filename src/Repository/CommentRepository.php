@@ -18,4 +18,19 @@ class CommentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Comment::class);
     }
+
+    public function averageRating(int $id): array
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->select('AVG(c.rating) as average')
+            ->where('c.recipient = :id')
+            ->setParameter('id', $id)
+            ->groupBy('c.recipient')
+            ->getQuery();
+
+        if (!is_array($queryBuilder->getResult())) {
+            return([["average" => 3]]);
+        }
+        return $queryBuilder->getResult();
+    }
 }

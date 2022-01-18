@@ -12,39 +12,46 @@ use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\CommentRepository;
 
 /**
- * @Route("/comment", name="comment_")
+ * @Route("/comment", name="comment")
  */
 class CommentController extends AbstractController
 {
     /**
      * This is the form that lets a user send a comment after a swap.
      * The user who gets the comment is fetched from the url.
-     * @Route("/{id} ", name="form", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * After a comment is sent, the average star rating is recalculated.
+     * @Route("/{id} ", name="", methods={"GET", "POST"}, requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
     public function index(
         User $recipient,
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CommentRepository $commentRepository
     ): Response {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            if ($currentUser instanceof User) {
+            if ($currentUser instanceof User && is_int($recipient->getId())) {
                 $comment->setSender($currentUser);
                 $comment->setRecipient($recipient);
                 $comment->setDate(new DateTime());
                 $entityManager->persist($comment);
                 $entityManager->flush();
+
+                $averageRating = $commentRepository->averageRating($recipient->getId())[0]["average"];
+                $recipient->setNotation(floatval($averageRating));
+                $entityManager->flush();
                 $this->addFlash(
                     "success",
                     "Votre commentaire a bien été envoyé."
                 );
-                return $this->redirectToRoute("comment_form", [
+                return $this->redirectToRoute("comment", [
                     "id" => $recipient->getId(),
                 ]);
             }
