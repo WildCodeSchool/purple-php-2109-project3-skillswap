@@ -116,7 +116,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *      notInRangeMessage = "The notation must be between {{ min }} and {{ max }}.",
      * )
      */
-    private float $notation;
+    private float $notation = 3;
 
     public function __construct()
     {
