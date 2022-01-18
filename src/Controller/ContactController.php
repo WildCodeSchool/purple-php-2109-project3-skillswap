@@ -38,20 +38,15 @@ class ContactController extends AbstractController
                     'user' => $form->getData(),
                 ]));
                 $mailer->send($email);
-                return $this->redirectToRoute("contact_valid");
+                $this->addFlash(
+                    "success",
+                    "Votre demande a été bien envoyé"
+                );
+                return $this->redirectToRoute("contact");
             }
         }
         return $this->render("contact/index.html.twig", [
             "form" => $form->createView(),
         ]);
-    }
-
-    /**
-     * The view of the confirmation page.
-     * @Route("/valid", name="_valid")
-     */
-    public function valid(Request $request): Response
-    {
-        return $this->render("contact/valid.html.twig");
     }
 }
