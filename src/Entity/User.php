@@ -76,6 +76,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      max = 1000,
+     *      maxMessage = "Votre description ne doit pas depasser {{ limit }} caractères")
      */
     private ?string $description;
 
