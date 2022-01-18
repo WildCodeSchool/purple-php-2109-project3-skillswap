@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Les compétences :</h1>
+    <hr>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ skill.name }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ skill.category }}</td>
+            </tr>
+            <tr>
+                {{ include('admin/_delete_skill.html.twig') }}
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('admin/_formSkill.html.twig', {'button_label': 'Modifier'}) }}
+</section>
+{% endblock %} 

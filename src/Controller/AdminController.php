@@ -76,4 +76,41 @@ class AdminController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * @Route("/skill/{id}/edit", name="skill_edit")
+     */
+    public function edit(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(SkillType::class, $skill);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($skill);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_skill', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/skill_edit.html.twig', [
+            'skill' => $skill,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/skill/{id}/delete", name="skill_delete")
+     */
+    public function delete(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (is_string($request->request->get('_token')) && $user instanceof User) {
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($skill);
+                $entityManager->flush();
+            }
+        }
+
+        return $this->redirectToRoute('admin_skill', [], Response::HTTP_SEE_OTHER);
+    }
 }
