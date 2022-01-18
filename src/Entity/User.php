@@ -93,17 +93,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Recipient", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="recipient", orphanRemoval=true)
      */
     private Collection $receivedComments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Sender", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="sender", orphanRemoval=true)
      */
     private Collection $sentComments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user")
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user", orphanRemoval=false)
      * @Assert\Count(min = 0, max = 5)
      */
     private Collection $skill;
