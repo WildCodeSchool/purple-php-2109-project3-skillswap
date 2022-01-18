@@ -110,7 +110,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->sentComments = new ArrayCollection();
         $this->skill = new ArrayCollection();
     }
-  
+
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="recipient", orphanRemoval=true)
      */
