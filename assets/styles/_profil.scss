@@ -1,3 +1,9 @@
+.mainProfile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .userPicture{
     width: 200px;
     height: 200px;
@@ -6,30 +12,47 @@
 
 .profilTop {
     display: flex;
-    margin: 20px 40px;
+    margin: 20px 30px;
+    align-items: center;
 }
 
 .profilRight {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 30px;
+    margin-left: 20px;
+    height: 70%;
 }
 
 .profilRight .btn {
     width: 120px;
 }
 
-.profilTable th {
-    width: 100px;
+.profilTable li, .description li {
+    list-style-type: none;
 }
 
 .description, .profilBottom, .profilTable {
-    margin: 20px 40px;
+    margin: 10px 5px 10px 5px;
+}
+.description{
+    text-align: justify;
 }
 
 .profilBtnEdit {
     text-align: center;
+    margin-left: 30px;
+}
+
+.btnModifProfile {
+    color: $bgnav2;
+    border: $bgnav2 solid 1px;
+}
+
+.btnModifProfile:hover {
+    color: $dark;
+    background-color: $bgnav2;
+    border: $bgnav2 solid 1px;
 }
 
 .imgDeleteCom {
@@ -37,7 +60,8 @@
 }
 
 .comments{
-    margin-left: 40px;
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
 .toast {
@@ -45,5 +69,42 @@
 }
 
 .toast small {
-    margin-right: 10px;
+    margin-right: 25px;
+}
+
+@media (min-width: $width-tablet) {
+
+    .desktopProfile {
+        display: flex;
+    }
+
+    .profilTable {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .desktopLeft {
+        max-width: 75%;
+        max-height: 600px;
+    } 
+}
+
+@media (min-width: $width-desktop) {
+
+    .desktopMax {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .comments{
+        margin-top: -500px;
+     }
+
+     .comment {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
 }
