@@ -28,7 +28,7 @@
     width: 120px;
 }
 
-.profilTable li, .description li {
+.profilBottom li, .profilTable li, .description li {
     list-style-type: none;
 }
 
@@ -37,10 +37,15 @@
 }
 .description{
     text-align: justify;
+    margin-right: 30px;
 }
 
 .profilBtnEdit {
     text-align: center;
+    margin-left: 30px;
+}
+
+.profilBottom form, .profilBottom h5 {
     margin-left: 30px;
 }
 
@@ -87,19 +92,10 @@
     .desktopLeft {
         max-width: 75%;
         max-height: 600px;
-    } 
-}
-
-@media (min-width: $width-desktop) {
-
-    .desktopMax {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
     }
 
-    .comments{
-        margin-top: -500px;
+    .comments {
+        max-width: 720px;
      }
 
      .comment {
@@ -107,4 +103,11 @@
         flex-wrap: wrap;
         justify-content: space-around;
     }
+}
+
+@media (min-width: $width-desktop) {
+
+ 
+
+    
 }
