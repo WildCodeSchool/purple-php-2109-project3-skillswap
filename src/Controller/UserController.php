@@ -3,25 +3,26 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
+use App\Entity\Comment;
 use App\Form\UserSkillType;
 use App\Security\EmailVerifier;
+use Doctrine\ORM\EntityManager;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
-use App\Form\UserType;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\String\Slugger\SluggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/users", name="users_")
@@ -155,5 +156,20 @@ class UserController extends AbstractController
             'Un utilisateur possede deja le Role Admin merci d\'utiliser le formaulaire de contact pour en savoir plus.'
         );
         return $this->redirectToRoute('users_profile');
+    }
+
+    /**
+     * @Route("/comment/{id}/delete", name="comment_delete")
+     */
+    public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (is_string($request->request->get('_token')) && $user instanceof User) {
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($comment);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('users_profile', [], Response::HTTP_SEE_OTHER);
     }
 }
