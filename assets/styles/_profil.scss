@@ -69,6 +69,7 @@
         height: 1em;
         border: 1px $bgnav2 solid;
         box-shadow: none;
+        
         &:checked {
             background-color: $bgnav2;
         }
