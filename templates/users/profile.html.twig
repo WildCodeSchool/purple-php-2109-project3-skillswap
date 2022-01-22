@@ -3,7 +3,7 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-<section>
+<section class="profile">
     {% for message in app.flashes('notice') %}
     <div class="flash-notice">
         {{ message }}
@@ -40,14 +40,13 @@
 
             <a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button"
                     class="btnModifProfile btn btn-outline-danger rounded-pill">Modifier votre profil</button></a>
-            <hr>
         </div>
         <div class="profilBottom">
             <h5>Vos Compétences :</h5>
             <ul class="skillList">
-                {% for skill in app.user.skill|slice(0, 5) %}
+            {% for skill in app.user.skill|slice(0, 5) %}
                 <li>{{ skill.name }}</li>
-                {% endfor %}
+            {% endfor %}
             </ul>
             {% include "users/_userSkillForm.html.twig" %}
         </div>
