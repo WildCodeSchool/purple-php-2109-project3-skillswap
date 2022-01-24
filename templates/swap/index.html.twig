@@ -12,8 +12,7 @@
     {{ form_errors(form) }}
     <div class="comment_form">
         <p>
-        {{ form_label(form.skill, 'skill :', {'label_attr': {'class': 'skill_label'}}) }}
-        {{ form_widget(form.skill, {'attr': {'class': 'skill_widget'}}) }}
+        Skill : {{ skill.name }}
         </p>
         <p>
         {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}

@@ -44,10 +44,13 @@ class SwapController extends AbstractController
     }
 
     /**
-    * @Route("/{id} ", name="swap_form", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     * @Route("/ask/{skill_id}/{user_id} ", name="swap_form", methods={"GET", "POST"})
+     * @ParamConverter("skill",class="App\Entity\Skill", options = {"mapping": {"skill_id": "id"}})
+     * @ParamConverter("helper",class="App\Entity\User", options = {"mapping": {"user_id": "id"}})
     */
     public function index(
         User $helper,
+        Skill $skill,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
@@ -59,6 +62,7 @@ class SwapController extends AbstractController
             if ($currentUser instanceof User) {
                 $swap->setAsker($currentUser);
                 $swap->setHelper($helper);
+                $swap->setSkill($skill);
                 $swap->setDate(new DateTime());
                 $entityManager->persist($swap);
                 $entityManager->flush();
@@ -67,11 +71,14 @@ class SwapController extends AbstractController
                     "Votre demande de swap a bien été envoyé."
                 );
                 return $this->redirectToRoute("swap_form", [
-                    "id" => $helper->getId(),
+                    "user_id" => $helper->getId(),
+                    "skill_id" => $skill->getId(),
                 ]);
             }
         }
         return $this->render('swap/index.html.twig', [
+            "skill" => $skill,
+            "user" => $helper,
             "form" => $form->createView(),
         ]);
     }
