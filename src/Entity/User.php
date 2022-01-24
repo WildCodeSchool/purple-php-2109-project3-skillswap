@@ -16,6 +16,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * entity for creating a user
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
 */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -93,6 +96,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     /**
+     * @ORM\OneToMany(targetEntity=Swap::class, mappedBy="asker", orphanRemoval=true)
+     */
+    private Collection $askedSwaps;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Swap::class, mappedBy="helper", orphanRemoval=true)
+     */
+    private Collection $helpedSwaps;
+
+    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="recipient", orphanRemoval=true)
      */
     private Collection $receivedComments;
@@ -120,6 +133,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->askedSwaps = new ArrayCollection();
+        $this->helpedSwaps = new ArrayCollection();
         $this->receivedComments = new ArrayCollection();
         $this->sentComments = new ArrayCollection();
         $this->skill = new ArrayCollection();
@@ -407,6 +422,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNotation(float $notation): self
     {
         $this->notation = $notation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Swap[]
+     */
+    public function getAskedSwaps(): Collection
+    {
+        return $this->askedSwaps;
+    }
+
+    public function addAskedSwap(Swap $askedSwap): self
+    {
+        if (!$this->askedSwaps->contains($askedSwap)) {
+            $this->askedSwaps[] = $askedSwap;
+            $askedSwap->setAsker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAskedSwap(Swap $askedSwap): self
+    {
+        if ($this->askedSwaps->removeElement($askedSwap)) {
+            // set the owning side to null (unless already changed)
+            if ($askedSwap->getAsker() === $this) {
+                $askedSwap->setAsker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Swap[]
+     */
+    public function getHelpedSwaps(): Collection
+    {
+        return $this->helpedSwaps;
+    }
+
+    public function addHelpedSwap(Swap $helpedSwap): self
+    {
+        if (!$this->helpedSwaps->contains($helpedSwap)) {
+            $this->helpedSwaps[] = $helpedSwap;
+            $helpedSwap->setHelper($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHelpedSwap(Swap $helpedSwap): self
+    {
+        if ($this->helpedSwaps->removeElement($helpedSwap)) {
+            // set the owning side to null (unless already changed)
+            if ($helpedSwap->getHelper() === $this) {
+                $helpedSwap->setHelper(null);
+            }
+        }
 
         return $this;
     }
