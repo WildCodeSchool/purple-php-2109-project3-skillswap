@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Comment;
 use App\Form\UserSkillType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManager;
@@ -165,5 +166,20 @@ class UserController extends AbstractController
             'Un utilisateur possede deja le Role Admin merci d\'utiliser le formaulaire de contact pour en savoir plus.'
         );
         return $this->redirectToRoute('users_profile');
+    }
+
+    /**
+     * @Route("/comment/{id}/delete", name="comment_delete")
+     */
+    public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (is_string($request->request->get('_token')) && $user instanceof User) {
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($comment);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('users_profile', [], Response::HTTP_SEE_OTHER);
     }
 }
