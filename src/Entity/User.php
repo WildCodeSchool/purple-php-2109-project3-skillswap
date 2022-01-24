@@ -105,15 +105,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private Collection $helpedSwaps;
 
-    public function __construct()
-    {
-        $this->askedSwaps = new ArrayCollection();
-        $this->helpedSwaps = new ArrayCollection();
-        $this->receivedComments = new ArrayCollection();
-        $this->sentComments = new ArrayCollection();
-        $this->skill = new ArrayCollection();
-    }
-
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="recipient", orphanRemoval=true)
      */
@@ -139,6 +130,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * )
      */
     private float $notation = 3;
+
+    public function __construct()
+    {
+        $this->askedSwaps = new ArrayCollection();
+        $this->helpedSwaps = new ArrayCollection();
+        $this->receivedComments = new ArrayCollection();
+        $this->sentComments = new ArrayCollection();
+        $this->skill = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
