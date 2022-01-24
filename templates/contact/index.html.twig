@@ -2,20 +2,51 @@
 
 {% block body %}
 <h1>Formulaire de contact</h1>
-{{ form_start(form) }}
-{{ form_errors(form) }}
-<div class="contact_form">
-    {{ form_label(form.firstname, 'prénom :', {'label_attr': {'class': 'contact_label'}}) }}
-    {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
-</div>
-<div class="contact_form">
-    {{ form_label(form.email, 'email :', {'label_attr': {'class': 'contact_label'}}) }}
-    {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
-</div>
-<div class="contact_form">
-    {{ form_label(form.text, 'texte :', {'label_attr': {'class': 'contact_label'}}) }}
-    {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
-</div>
-<input type="submit" value="Envoyer votre demande" />
-{{ form_end(form) }}
+
+{% set messages = app.flashes("success") %}
+
+{% if messages is empty %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {% if is_granted("ROLE_USER") %}
+
+        <div class="contact_form">
+            {{ form_label(form.firstname, 'prénom :', {'label_attr': {'class': 'contact_label'}}) }}
+            {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget', 'value': app.user.firstname}}) }}
+        </div>
+        <div class="contact_form">
+            {{ form_label(form.email, 'email :', {'label_attr': {'class': 'contact_label'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'contact_widget', 'value': app.user.email}}) }}
+        </div>
+
+    {% else %}
+
+        <div class="contact_form">
+            {{ form_label(form.firstname, 'prénom :', {'label_attr': {'class': 'contact_label'}}) }}
+            {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
+        </div>
+        <div class="contact_form">
+            {{ form_label(form.email, 'email :', {'label_attr': {'class': 'contact_label'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
+        </div>
+
+    {% endif %}
+
+    <div class="contact_form">
+        {{ form_label(form.text, 'texte :', {'label_attr': {'class': 'contact_label'}}) }}
+        {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
+    </div>
+    <input type="submit" value="Envoyer votre demande" />
+    {{ form_end(form) }}
+
+    {% else %}
+
+    <div class="alert alert-success" role="alert">
+        <p>{{ messages.0 }}</p>
+        <a href="/">retour à la page d'accueil</a>
+    </div>
+
+{% endif %}
+
 {% endblock %}
