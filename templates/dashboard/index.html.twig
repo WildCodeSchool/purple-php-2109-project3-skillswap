@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    {% for swap in swaps %}
+        {{ swap.date|date('d/m/Y H:i') }}
+        {{ swap.helper.firstname }}
+        {{ swap.skill.name }}
+        {% if swap.isDone %}
+            terminé
+        {% else %}
+            {% if swap.isAccepted %}
+                accepté
+            {% else %}
+                non accepté
+            {% endif %}
+        {% endif %}
+        <br>
+    {% endfor %}
+{% endblock %}
