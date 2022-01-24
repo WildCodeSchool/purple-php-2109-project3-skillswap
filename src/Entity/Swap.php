@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Skill;
 use DateTimeInterface;
@@ -57,6 +58,14 @@ class Swap
      * @ORM\Column(type="boolean", options={"default" = false})
      */
     private bool $isDone = false;
+
+    public function __construct(User $asker, User $helper, Skill $skill)
+    {
+        $this->asker = $asker;
+        $this->helper = $helper;
+        $this->skill = $skill;
+        $this->date = new DateTime();
+    }
 
     public function getId(): ?int
     {
