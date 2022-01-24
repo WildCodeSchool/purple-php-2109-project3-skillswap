@@ -15,6 +15,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,6 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @Route("/users", name="users_")
@@ -96,14 +98,18 @@ class UserController extends AbstractController
      * @Route("/delete", name="delete")
      * @IsGranted("ROLE_USER")
      */
-    public function delete(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function delete(
+        TokenStorageInterface $tokenStorage,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
         $user = $this->getUser();
         if (is_string($request->request->get('_token')) && $user instanceof User) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+                $session = $request->getSession();
                 $entityManager->remove($user);
                 $entityManager->flush();
-                $session = new Session();
+                $tokenStorage->setToken(null);
                 $session->invalidate();
                 return $this->redirectToRoute('home');
             }
