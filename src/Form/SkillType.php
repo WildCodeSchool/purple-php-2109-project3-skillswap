@@ -18,11 +18,11 @@ class SkillType extends AbstractType
             ->add('name', TextType::class)
             ->add('category', ChoiceType::class, [
                 'choices'  => [
-                    Skill::CATEGORIES[0] => Skill::CATEGORIES[0],
-                    Skill::CATEGORIES[1] => Skill::CATEGORIES[1],
-                    Skill::CATEGORIES[2] => Skill::CATEGORIES[2],
-                    Skill::CATEGORIES[3] => Skill::CATEGORIES[3],
-                    Skill::CATEGORIES[4] => Skill::CATEGORIES[4],
+                    Skill::CATEGORIES['One'] => Skill::CATEGORIES['One'],
+                    Skill::CATEGORIES['Two'] => Skill::CATEGORIES['Two'],
+                    Skill::CATEGORIES['Three'] => Skill::CATEGORIES['Three'],
+                    Skill::CATEGORIES['Four'] => Skill::CATEGORIES['Four'],
+                    Skill::CATEGORIES['Five'] => Skill::CATEGORIES['Five'],
                 ]
             ])
         ;

@@ -15,11 +15,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Skill
 {
     public const CATEGORIES = [
-        'Droit et finance',
-        'Marketing et numérique',
-        'Commerce et logistique',
-        'Administratif',
-        'Autres',
+        'One' => 'Droit et finance',
+        'Two' => 'Marketing et numérique',
+        'Three' => 'Commerce et logistique',
+        'Four' => 'Administratif',
+        'Five' => 'Autres',
     ];
 
     /**
