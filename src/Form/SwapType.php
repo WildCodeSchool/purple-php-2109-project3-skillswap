@@ -15,12 +15,6 @@ class SwapType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('skill', EntityType::class, [
-                'class' => Skill::class,
-                'choice_label' => 'name',
-                'multiple' => false,
-                'expanded' => false,
-            ])
             ->add('message', TextareaType::class)
         ;
     }
