@@ -6,7 +6,7 @@
 <div class="container">
 {% if (skill.user is not empty) %}
     {% for user in skill.user %}
-        {% if (user.available) %}
+        {% if (user.available) and (app.user.id != user.id) %}
             <div class="card" style="width: 18rem;">
                 <div class="swap_picture">
                     <img id="pic" src="/upload/avatars/{{ user.picture }}" class="card-img-top" alt="photo de {{ user.firstname }}">
