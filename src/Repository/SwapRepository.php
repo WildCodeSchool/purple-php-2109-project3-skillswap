@@ -19,32 +19,25 @@ class SwapRepository extends ServiceEntityRepository
         parent::__construct($registry, Swap::class);
     }
 
-    // /**
-    //  * @return Swap[] Returns an array of Swap objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getSwapDashboard(int $skill, int $partner, int $user): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->select('s')
+            ->where('s.skill = :skill AND (
+                (s.asker = :partner AND s.helper = :user)
+                OR
+                (s.asker = :user AND s.helper = :partner)
+                )')
+            ->setParameter('skill', $skill)
+            ->setParameter('partner', $partner)
+            ->setParameter('user', $user)
+            ->orderBy('s.date', 'DESC')
+            ->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Swap
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if (!is_array($queryBuilder->getResult())) {
+            return([]);
+        }
+
+        return $queryBuilder->getResult();
     }
-    */
 }

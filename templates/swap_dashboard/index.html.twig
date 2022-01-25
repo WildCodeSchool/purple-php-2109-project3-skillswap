@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Swap - Tableau de bord{% endblock %}
+
+{% block body %}
+    <h1>
+    {% if swaps|length <= 1 %}
+        Swap
+    {% else %}
+        Swaps
+    {% endif %}
+     de {{ app.user.firstname }} avec {{ helper.firstname }} concernant {{ skill.name }}</h1>
+    {% if swaps is empty %}
+        <p>pas de message !</p>
+        <a href="/">Retour à la page d'accueil</a>
+    {% else %}
+        <table class="swap_dashboard">
+        {% for swap in swaps %}
+            <tr>
+                <td class="swap_dashboard_message">{{ swap.message }}</td>
+                <td class="swap_dashboard_date">{{ swap.date|date("d/m/Y H:i") }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="">Engager une discussion</a>
+        <a href="{{ path("comment", {"id": helper.id}) }}">Envoyer un commentaire</a>
+    {% endif %}
+{% endblock %}
