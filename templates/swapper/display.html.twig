@@ -9,12 +9,8 @@
     <div class="card-body">
       <div id="up">
         <img id="pic2" src="/upload/avatars/{{ user.picture }}" class="card-img-top" alt="photo de {{ user.firstname }}">
-        <div id="text">
-          <h5 class="card-title">A propos de ce swapper...</h5>
-          <p class="card-text"><em>{{ user.description }}</em></p>
-        </div>
         <div id="other_skills">
-          <h5 class="card-title">Voici ses domaines de compétence :</h5>
+          <h5 class="card-title mt-4" >Voici ses domaines de compétence :</h5>
           <ul>
             {% for skill in user.skill %}
               <li>{{ skill.name }}</li>
@@ -25,16 +21,19 @@
     </div>
     <br>
     <ul class="list-group list-group-flush">
-    <li class="list-group-item">Numéro d'identification société : {{ user.company }}</li>
-    <li class="list-group-item">Profil LinkdeIn : {{ user.linkedin }}</li>
-    <li class="list-group-item">Site Web : {{ user.website }}</li>
+    <li class="liswap list-group-item"><b>A propos de ce swapper : </b>{{ user.description }}</li>
+    <li class="list-group-item"><b>Numéro d'identification société : </b>{{ user.company }}</li>
+    <li class="list-group-item"><b>Profil LinkdeIn : </b>{{ user.linkedin }}</li>
+    <li class="list-group-item"><b>Site Web : </b>{{ user.website }}</li>
     </ul>
     <div class="swapper_btn_div card-body">
       <a href="{{ path("swap_research", {"id": skill.id}) }}"class="swapper_btn btn btn-secondary btn-lg">Retour à la liste</a>
       <a href="{{ path("swap_form", {"skill_id": skill.id, "user_id": user.id}) }}"class="swapper_btn btn btn-primary btn-lg">Lancer un SWAP</a>
     </div>
-    <div class="card-footer text-muted">
-      Ce swapper a obtenu une note moyenne de : {{ user.notation }} <b>★</b>
+    <div class="swapperfooter card-footer text-muted">
+      <div class="swapperfooter">
+        <div>Note moyenne de ce swappper : </div>
+        <div class="yellow"><div>{{ user.notation }}</div><div class="star">★</div></div>
     </div>
   </div>
 </div>

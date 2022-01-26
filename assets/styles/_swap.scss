@@ -12,7 +12,7 @@
 
 .card:hover {
     border: 5px solid $bgnav2;
-    box-shadow: 5px 3px 2px #e76f54;
+    
 }
 
 .card-img-top {
@@ -99,12 +99,9 @@ hr {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items:flex-start;
-    flex-wrap: wrap;
-    height: 350px;
-    overflow: auto;
+    justify-content:space-around;
 }
-
+    
 #text, #other_skills {
     width : 350px;
     padding-right: 20px;
@@ -116,9 +113,33 @@ hr {
 
 #pic2 {
     object-fit: cover;
-    width:300px;
-    height: 300px;
+    width:250px;
+    height: 350px;
     margin-left: auto;
     margin-right: auto;
 }
 
+.liswap {
+    height: 100px;
+    overflow: auto;
+}
+
+.swapperfooter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    font-size: 1.2em;
+}
+
+.yellow {
+    font-size: 1em;
+    font-weight: bolder;
+    margin-left: 1.2em;
+    display:flex;
+}
+
+.star {
+    color:rgba(233, 211, 17, 0.74);
+    margin-left: 0.5em;
+}
