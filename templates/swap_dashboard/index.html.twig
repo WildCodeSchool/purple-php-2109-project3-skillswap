@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Swap - Tableau de bord{% endblock %}
+
+{% block body %}
+    <h1>
+    {% if swap.discussions|length <= 1 %}
+        Swap
+    {% else %}
+        Swaps
+    {% endif %}
+    de {{ swap.asker.firstname }} avec {{ swap.helper.firstname }} concernant {{ swap.skill.name }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+        <div class="comment_form">
+            <p>
+            {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
+            {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
+            </p>
+        </div>
+        <input type="submit" value="Envoyer votre message" />
+    {{ form_end(form) }}
+
+    <table class="swap_dashboard">
+    {% for discussion in swap.discussions|reverse %}
+        <tr>
+            <td class="swap_dashboard_message">{{ discussion.message }}</td>
+            <td class="swap_dashboard_date">{{ discussion.date|date("d/m/Y H:i") }}</td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td class="swap_dashboard_message">{{ swap.message }}</td>
+            <td class="swap_dashboard_date">{{ swap.date|date("d/m/Y H:i") }}</td>
+        </tr>
+    </table>
+{% endblock %}
