@@ -1,17 +1,41 @@
-.swap_dashboard {
-    border-collapse: collapse;
+h1 {
+    font-size: 1.5rem;
 }
 
-.swap_dashboard td, .swap_dashboard tr {
+h2 {
+    font-size: 1.25rem;
+}
+.swap_dashboard_discussion {
+    width: 300px;
+    height: 400px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+.swap_dashboard {
     border: 2px solid $bgnav2;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .swap_dashboard_message {
-    width: 300px;
     text-align: left;
+    font-size: 1.25rem;
 }
 
-.swap_dashboard_date {
-    width: 150px;
+.swap_dashboard_infos {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.swap_dashboard_buttton {
+    margin-top: 10px;
+    border: 2px solid $bgnav2;
+    border-radius: 10px;
+    padding: 5px;
+    width: 250px;
     text-align: center;
 }
