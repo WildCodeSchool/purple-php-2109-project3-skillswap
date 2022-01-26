@@ -1,8 +1,18 @@
-.form-control:valid {
+.login {
+    margin: 3em;
+    align-items: center;
+    
+    .form-control:valid {
     background-color:  $light2!important;
-  }
+    }
 
-
-.form-control:user-valid {
+    .form-control:user-valid {
     background-color:  $bgnav1!important;
-  }
+    }
+
+    .form-control {
+        max-width: 300px;
+        border-radius: 1em;
+    }
+
+}       
