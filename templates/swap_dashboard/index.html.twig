@@ -1,48 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Swap - Tableau de bord{% endblock %}
+{% block title %}Fil de discussion{% endblock %}
 
 {% block body %}
-    {% set messages = app.flashes("success") %}
-    <h1>Discussion de {{ swap.asker.firstname }} avec {{ swap.helper.firstname }}</h1>
-    <h2>Skill : {{ swap.skill.name }}</h2>
-    <h2>Débuté le {{ swap.date|date("d/m/Y") }}</h2>
-    {% if swap.isDone %}
-        <h2>Cloturé.</h2>
-        {% if messages is not empty %}
-            <div class="alert alert-success" role="alert">
-                <p>{{ messages.0 }}</p>
-            </div>
+    <section class="swap_dashboard">
+        {% set messages = app.flashes("success") %}
+
+        {% if swap.asker.id == app.user.id %}
+            <h1>Discussion avec {{ swap.helper.firstname }}</h1>
+        {% else %}
+            <h1>Discussion avec {{ swap.asker.firstname }}</h1>
         {% endif %}
-    {% else %}
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-            <div class="comment_form">
-                <p>
-                {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
-                {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
-                </p>
-            </div>
-            <input type="submit" value="Envoyer votre message" />
-        {{ form_end(form) }}
-    {% endif %}
-    <div class="swap_dashboard_discussion">
-        {% for discussion in swap.discussions|reverse %}
-            <div class="swap_dashboard">
-                <p class="swap_dashboard_message">{{ discussion.message }}</p>
-                <p class="swap_dashboard_infos">De {{ discussion.sender.firstname }} - {{ discussion.date|date("d/m/Y H:i") }}</p>
-            </div>
-        {% endfor %}
-            <div class="swap_dashboard">
-                <p class="swap_dashboard_message">{{ swap.message }}</p>
-                <p class="swap_dashboard_infos">de {{ swap.asker.firstname }} - {{ swap.date|date("d/m/Y H:i") }}</p>
+        <h2>Skill : {{ swap.skill.name }}</h2>
+        <h2>Débutée le {{ swap.date|date("d/m/Y") }}</h2>
+        {% if swap.isDone %}
+            <h2>Cloturée.</h2>
+            {% if messages is not empty %}
+                <div class="alert alert-success" role="alert">
+                    <p>{{ messages.0 }}</p>
+                </div>
+            {% endif %}
+        {% else %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+                {{ form_widget(form.message, {'attr': {'class': 'msg_new'}}) }}
+                <input class="btnModifProfile btn btn-outline-danger rounded-pill mt-3" type="submit" value="Envoyer votre message" />
+            {{ form_end(form) }}
+        {% endif %}
+        <div class="discussion mt-4">
+            {% for discussion in swap.discussions|reverse %}
+                <div class="discussion_item">
+                    {% if discussion.sender.id == app.user.id %}
+                        <p class="msg_asker">{{ discussion.message }}</p>
+                    {% else %}
+                        <p class="msg_helper">{{ discussion.message }}</p>
+                    {% endif %}
+                    <p class="infos">de {{ discussion.sender.firstname }} - {{ discussion.date|date("d/m/Y H:i") }}</p>
+                </div>
+            {% endfor %}
+            <div class="discussion_item">
+                {% if swap.asker.id == app.user.id %}
+                    <p class="msg_asker">{{ swap.message }}</p>
+                {% else %}
+                    <p class="msg_helper">{{ swap.message }}</p>
+                {% endif %}
+                <p class="infos">de {{ swap.asker.firstname }} - {{ swap.date|date("d/m/Y H:i") }}</p>
             </div>
         </div>
-    {% if swap.isDone %}
-        {% if swap.asker.id == app.user.id %}
-            <a class="swap_dashboard_buttton" href="{{ path('comment', {id: swap.helper.id}) }}">Envoyer un commentaire</a>
+        {% if swap.isDone %}
+            {% if swap.asker.id == app.user.id %}
+                <a class="btnModifProfile btn btn-outline-danger rounded-pill mt-3" href="{{ path('comment', {id: swap.helper.id}) }}">Envoyer un commentaire</a>
+            {% endif %}
+        {% else %}
+            <a class="btnModifProfile btn btn-outline-danger rounded-pill mt-3" href="{{ path('swap_finish', {id: swap.id}) }}">Terminer le Swap</a>
         {% endif %}
-    {% else %}
-        <a class="swap_dashboard_buttton" href="{{ path('swap_finish', {id: swap.id}) }}">Terminer le Swap</a>
-    {% endif %}
+    </section>
 {% endblock %}
