@@ -22,20 +22,28 @@ class SwapDashboardController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
+        if (
+            ($this->getUser() instanceof User) &&
+            ($swap->getAsker() instanceof User) &&
+            ($swap->getHelper() instanceof User)
+        ) {
+            if (
+                $this->getUser()->getId() === $swap->getAsker()->getId() ||
+                $this->getUser()->getId() === $swap->getHelper()->getId()
+            ) {
+                $discussion = new Discussion($swap, $this->getUser());
+                $form = $this->createForm(DiscussionType::class, $discussion);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager->persist($discussion);
+                    $entityManager->flush();
+                }
 
-        if ($this->getUser() instanceof User) {
-            $discussion = new Discussion($swap, $this->getUser());
-            $form = $this->createForm(DiscussionType::class, $discussion);
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager->persist($discussion);
-                $entityManager->flush();
+                return $this->render('swap_dashboard/index.html.twig', [
+                    'swap' => $swap,
+                    "form" => $form->createView(),
+                ]);
             }
-
-            return $this->render('swap_dashboard/index.html.twig', [
-                'swap' => $swap,
-                "form" => $form->createView(),
-            ]);
         }
         return $this->redirectToRoute("home");
     }
