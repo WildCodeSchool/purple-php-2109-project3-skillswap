@@ -6,6 +6,8 @@ use DateTime;
 use App\Entity\User;
 use App\Entity\Skill;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SwapRepository;
 
@@ -59,12 +61,18 @@ class Swap
      */
     private bool $isDone = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Discussion::class, mappedBy="swap", orphanRemoval=true)
+     */
+    private Collection $discussions;
+
     public function __construct(User $asker, User $helper, Skill $skill)
     {
         $this->asker = $asker;
         $this->helper = $helper;
         $this->skill = $skill;
         $this->date = new DateTime();
+        $this->discussions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +160,36 @@ class Swap
     public function setIsDone(bool $isDone): self
     {
         $this->isDone = $isDone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Discussion[]
+     */
+    public function getDiscussions(): Collection
+    {
+        return $this->discussions;
+    }
+
+    public function addDiscussion(Discussion $discussion): self
+    {
+        if (!$this->discussions->contains($discussion)) {
+            $this->discussions[] = $discussion;
+            $discussion->setSwap($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscussion(Discussion $discussion): self
+    {
+        if ($this->discussions->removeElement($discussion)) {
+            // set the owning side to null (unless already changed)
+            if ($discussion->getSwap() === $this) {
+                $discussion->setSwap(null);
+            }
+        }
 
         return $this;
     }
