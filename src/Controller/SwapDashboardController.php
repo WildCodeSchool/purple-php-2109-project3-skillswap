@@ -2,31 +2,39 @@
 
 namespace App\Controller;
 
+use App\Entity\Swap;
 use App\Entity\User;
-use App\Entity\Skill;
-use App\Repository\SwapRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Discussion;
+use App\Form\DiscussionType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SwapDashboardController extends AbstractController
 {
-   /**
-     * @Route("/swap/dashboard/{skill_id}/{user_id}", name="swap_dashboard", requirements={"id"="\d+"})
-     * @ParamConverter("skill",class="App\Entity\Skill", options = {"mapping": {"skill_id": "id"}})
-     * @ParamConverter("helper",class="App\Entity\User", options = {"mapping": {"user_id": "id"}})
+    /**
+     * @Route("/swap/dashboard/{id}", name="swap_dashboard", requirements={"id"="\d+"})
      */
-    public function index(Skill $skill, User $helper, SwapRepository $swapRepository): Response
-    {
-        if (($skill->getId() !== null) && ($helper->getId() !== null) && ($this->getUser() !== null)) {
-            // @phpstan-ignore-next-line
-            $swaps = $swapRepository->getSwapDashboard($skill->getId(), $helper->getId(), $this->getUser()->getId());
+    public function index(
+        Swap $swap,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+
+        if ($this->getUser() instanceof User) {
+            $discussion = new Discussion($swap, $this->getUser());
+            $form = $this->createForm(DiscussionType::class, $discussion);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($discussion);
+                $entityManager->flush();
+            }
 
             return $this->render('swap_dashboard/index.html.twig', [
-                'helper' => $helper,
-                'skill' => $skill,
-                'swaps' => $swaps,
+                'swap' => $swap,
+                "form" => $form->createView(),
             ]);
         }
         return $this->redirectToRoute("home");

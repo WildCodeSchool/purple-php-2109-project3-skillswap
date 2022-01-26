@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use App\Entity\Swap;
 use App\Entity\User;
 use DateTimeInterface;
@@ -41,6 +42,13 @@ class Discussion
      * @ORM\JoinColumn(nullable=false)
      */
     private ?User $sender;
+
+    public function __construct(Swap $swap, User $sender)
+    {
+        $this->swap = $swap;
+        $this->sender = $sender;
+        $this->date = new DateTime();
+    }
 
     public function getId(): ?int
     {
