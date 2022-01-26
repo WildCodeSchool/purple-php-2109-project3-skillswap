@@ -321,7 +321,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvailable(bool $available): self
     {
         $this->available = $available;
-
         return $this;
     }
 
