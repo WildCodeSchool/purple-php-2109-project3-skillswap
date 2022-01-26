@@ -3,13 +3,13 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-<section>
+<section class="adminUserShow">
 <h1>Utilistateur</h1>
 
 <table class="table">
     <tbody>
         <tr>
-            <img class='userPicture' src="/upload/avatars/{{ user.picture }}" alt="ne s'affiche pas">
+            <img src="/upload/avatars/{{ user.picture }}" alt="ne s'affiche pas">
         </tr>
         <tr>
             <th>Email</th>
@@ -53,6 +53,52 @@
             {% endfor %}
             </ul>
         </tr>
+    </tbody>
+</table>
+<table class="receivedComments">
+    <thead>
+        <tr>
+            <th>Envoyer</th>
+            <th>Destinataire</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for comment in user.receivedComments %}
+        <tr>
+            <td>
+                {{ comment.message }}
+            </td>
+            <td>
+                {{ comment.recipient.firstname }} {{ comment.recipient.lastname }}
+            </td>
+            <td>
+                {{ include('admin/_delete_comment_form.html.twig') }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<table class="sentComments">
+    <thead>
+        <tr>
+            <th>Reçu</th>
+            <th>Expediteur</th>
+        </tr>
+    </thead>
+    <tbody>
+     {% for comment in user.sentComments %}
+        <tr>
+            <td>
+                {{ comment.message }}
+            </td>
+            <td>
+                {{ comment.sender.firstname }} {{ comment.sender.lastname }}
+            </td>
+            <td>
+                {{ include('admin/_delete_comment_form.html.twig') }}
+            </td>
+        </tr>
+    {% endfor %}
     </tbody>
 </table>
 </section>
