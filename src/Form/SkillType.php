@@ -24,8 +24,7 @@ class SkillType extends AbstractType
                     Skill::CATEGORIES['Four'] => Skill::CATEGORIES['Four'],
                     Skill::CATEGORIES['Five'] => Skill::CATEGORIES['Five'],
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

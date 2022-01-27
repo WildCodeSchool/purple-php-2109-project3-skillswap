@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Users{% endblock %}
+{% block title %}Information utilisateur{% endblock %}
 
 {% block body %}
 <section>
-    <h1>Edit Users</h1>
+    <h1>Information utilisateur</h1>
     <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
     {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
     <a href="{{ path('users_profile') }}">Revenir au profil</a>

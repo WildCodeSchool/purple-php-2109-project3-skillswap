@@ -3,21 +3,21 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-<section>
+<section class="adminDashboard">
     <h1>Tableau de bord</h1>
     <hr>
     <main class="dashboard">
-        <a href="{{ path('admin_users') }}" class="card" style="width: 18rem;">
+        <a href="{{ path('admin_users') }}" class="card">
             <img src="{{ asset('build/images/users.jpg') }}" class="card-img-top" alt="photo par défaut">
             <div class="card-body">
                 <h5 class="swap_h5 card-title">Les utilisateurs</h5>
                 <hr>
                 <div class="p_contain">
-                    <p class="swap_p card-text">Liste des utilisateurs, leurs profiles, leurs roles, leurs commenatires...</p>
+                    <p class="swap_p card-text">Liste des utilisateurs, leurs profils, leurs roles, leurs commentaires ...</p>
                 </div>
             </div>
         </a>
-        <a href="{{ path('admin_skill') }}" class="card" style="width: 18rem;">
+        <a href="{{ path('admin_skill') }}" class="card">
             <img src="{{ asset('build/images/skills.jpg') }}" class="card-img-top" alt="photo par défaut">
             <div class="card-body">
                 <h5 class="swap_h5 card-title">Les compétences</h5>

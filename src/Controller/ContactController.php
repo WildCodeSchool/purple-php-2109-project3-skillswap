@@ -31,16 +31,16 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if (is_string($form->get('email')->getData()) && (is_string($this->getParameter('mailer_from')))) {
                 $email = (new Email())
-                ->from($form->get('email')->getData())
-                ->to($this->getParameter('mailer_from'))
-                ->subject("Demande d'informations.")
-                ->html($this->renderView("contact/send.html.twig", [
-                    'user' => $form->getData(),
-                ]));
+                    ->from($form->get('email')->getData())
+                    ->to($this->getParameter('mailer_from'))
+                    ->subject("Demande d'informations.")
+                    ->html($this->renderView("contact/send.html.twig", [
+                        'user' => $form->getData(),
+                    ]));
                 $mailer->send($email);
                 $this->addFlash(
                     "success",
-                    "Votre demande a été bien envoyé"
+                    "Votre demande a été bien envoyée"
                 );
                 return $this->redirectToRoute("contact");
             }
