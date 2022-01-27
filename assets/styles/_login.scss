@@ -1,7 +1,7 @@
 .login {
     margin: 3em;
     align-items: center;
-    
+
     .form-control:valid {
     background-color: $light2!important;
     }
@@ -14,5 +14,4 @@
         max-width: 400px;
         border-radius: 1em;
     }
-
 }       
