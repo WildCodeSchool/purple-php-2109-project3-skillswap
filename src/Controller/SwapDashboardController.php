@@ -30,40 +30,38 @@ class SwapDashboardController extends AbstractController
             ($swap->getAsker() instanceof User) &&
             ($swap->getHelper() instanceof User)
         ) {
-            if (
-                $this->getUser()->getId() === $swap->getAsker()->getId() ||
-                $this->getUser()->getId() === $swap->getHelper()->getId()
-            ) {
-                $discussion = new Discussion($swap, $this->getUser());
-                $form = $this->createForm(DiscussionType::class, $discussion);
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($discussion);
-                    $entityManager->flush();
-                }
-
-                if ($this->getUser()->getId() === $swap->getAsker()->getId()) {
-                    $sender = $swap->getAsker()->getEmail();
-                    $recipient = $swap->getHelper()->getEmail();
-                }
-                else {
-                    $sender = $swap->getHelper()->getEmail();
-                    $recipient = $swap->getAsker()->getEmail();
-                }
-                $email = (new Email())
-                ->from($sender)
-                ->to($recipient)
-                ->subject("Notification concernant votre demande d'aide n°" . $swap->getId())
-                ->html($this->renderView("swap_dashboard/send.html.twig", [
-                    'user' => $swap,
-                ]));
-                $mailer->send($email);
-
-                return $this->render('swap_dashboard/index.html.twig', [
-                    'swap' => $swap,
-                    "form" => $form->createView(),
-                ]);
+            if ($this->getUser()->getId() === $swap->getAsker()->getId()) {
+                $sender = $swap->getAsker()->getEmail();
+                $recipient = $swap->getHelper()->getEmail();
+            } elseif ($this->getUser()->getId() === $swap->getHelper()->getId()) {
+                $sender = $swap->getHelper()->getEmail();
+                $recipient = $swap->getAsker()->getEmail();
+            } else {
+                return $this->redirectToRoute("home");
             }
+
+            $discussion = new Discussion($swap, $this->getUser());
+            $form = $this->createForm(DiscussionType::class, $discussion);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($discussion);
+                $entityManager->flush();
+            }
+
+            if (is_string($sender) && is_string($recipient)) {
+                $email = (new Email())
+                    ->from($sender)
+                    ->to($recipient)
+                    ->subject("Notification concernant votre demande d'aide n°" . $swap->getId())
+                    ->html($this->renderView("swap_dashboard/send.html.twig", [
+                        'swap' => $swap,
+                    ]));
+                $mailer->send($email);
+            }
+            return $this->render('swap_dashboard/index.html.twig', [
+                'swap' => $swap,
+                "form" => $form->createView(),
+            ]);
         }
         return $this->redirectToRoute("home");
     }
