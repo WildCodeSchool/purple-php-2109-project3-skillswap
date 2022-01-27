@@ -3,19 +3,44 @@
 {% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
-    {% for swap in swaps %}
-        {{ swap.date|date('d/m/Y H:i') }}
-        {{ swap.helper.firstname }}
-        {{ swap.skill.name }}
-        {% if swap.isDone %}
-            terminé
-        {% else %}
-            {% if swap.isAccepted %}
-                accepté
-            {% else %}
-                non accepté
-            {% endif %}
-        {% endif %}
-        <br>
-    {% endfor %}
+    <section>
+        <div class="swap_asked">
+            <h1>Swaps reçus</h1>
+            {% for swap_asked in swaps_asked %}
+                {{ swap_asked.skill.name }}
+                {{ swap_asked.helper.firstname }}
+                {{ swap_asked.date|date('d/m/Y H:i') }}
+                {% if swap_asked.isDone %}
+                    terminé
+                {% else %}
+                    {% if swap_asked.isAccepted %}
+                        en cours
+                    {% else %}
+                        non accepté
+                    {% endif %}
+                {% endif %}
+                <a href="{{ path('swap_dashboard', {"id": swap_asked.id}) }}">lien</a>
+                <br>
+            {% endfor %}
+        </div>
+        <div class="swap_helped">
+            <h1>Swaps lancés</h1>
+            {% for swap_helped in swaps_helped %}
+                {{ swap_helped.skill.name }}
+                {{ swap_helped.helper.firstname }}
+                {{ swap_helped.date|date('d/m/Y H:i') }}
+                {% if swap_helped.isDone %}
+                    terminé
+                {% else %}
+                    {% if swap_helped.isAccepted %}
+                        en cours
+                    {% else %}
+                        non accepté
+                    {% endif %}
+                {% endif %}
+                <a href="{{ path('swap_dashboard', {"id": swap_helped.id}) }}">lien</a>
+                <br>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
