@@ -31,15 +31,42 @@
 
 }
 
-.form-control:valid {
-    background-color: $light2!important;
+.skillAdmin{
+
+    margin: 3em;
+
+    .form-control:valid {
+        background-color: $light2!important;
+    }
+
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
+    }
+
+    input, form{
+        max-width: 400px;
+        border-radius: 1em;
+    }
 }
 
-.form-control:user-valid {
-    background-color: $bgnav1!important;
-}
+.editSkilAdmin {
 
-input {
-    max-width: 400px;
-    border-radius: 1em;
+    margin: 3em;
+   
+    .form-control:valid {
+        background-color: $light2!important;
+    }
+
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
+    }
+
+    input, form{
+        max-width: 400px;
+        border-radius: 1em;
+    }
+
+    .delete {
+        width: 100px;
+    }
 }
