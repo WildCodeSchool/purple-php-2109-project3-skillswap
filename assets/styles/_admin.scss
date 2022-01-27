@@ -1,7 +1,22 @@
-.dashboard {
-    display: flex;
-    justify-content: space-around;
+.adminDashboard {
+
+    .dashboard {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    img {
+        width: 290px;
+        height: 150px;
+    }
+
+    .card {
+        width: 18rem;
+    }
 }
+
+
 
 .adminNav {
     width: 100%;
@@ -16,6 +31,14 @@
 .adminUserShow {
 
     img {
-        width: 250px;
+        object-fit: cover;
+        width:250px;
+        height:250px;
     }
+
+    .comment {
+        height: 80px;
+        overflow: auto;
+    }
+
 }
