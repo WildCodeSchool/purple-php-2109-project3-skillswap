@@ -91,6 +91,21 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/user/{id}/delete", name="user_delete")
+     */
+    public function deleteUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $userAdmin = $this->getUser();
+        if (is_string($request->request->get('_token')) && $userAdmin instanceof User) {
+            if ($this->isCsrfTokenValid('delete' . $userAdmin->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($user);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('admin_users', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
      * show, add and modify the list of skills
      * @Route("/skill", name="skill")
      */
