@@ -8,7 +8,8 @@
 .accordion-header button:active, .accordion-header button:hover, .accordion-header button:focus, .accordion-header button:visited {
     color: $bgnav2;
     background-color: $light2;
-    border-color: $bgnav2;
+    border-color: $bgnav2 !important;
+    box-shadow: 0 0 5px $bgnav2 !important;
 }
 
 .accordion-body a {
