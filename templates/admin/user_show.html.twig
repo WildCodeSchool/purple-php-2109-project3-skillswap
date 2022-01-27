@@ -4,110 +4,110 @@
 
 {% block body %}
 <section class="adminUserShow">
-<h1>Utilistateur</h1>
+    <h1>Utilistateur</h1>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <img src="/upload/avatars/{{ user.picture }}" alt="ne s'affiche pas">
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-            <th>Firstname</th>
-            <td>{{ user.firstname }}</td>
-        </tr>
-        <tr>
-            <th>Lastname</th>
-            <td>{{ user.lastname }}</td>
-        </tr>
-        <tr>
-            <th>Linkedin</th>
-            <td>{{ user.linkedin }}</td>
-        </tr>
-        <tr>
-            <th>Website</th>
-            <td>{{ user.website }}</td>
-        </tr>
-        <tr>
-            <th>Company</th>
-            <td>{{ user.company }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ user.description }}</td>
-        </tr>
-        <tr>
-            {% if user.available %}
-               Disponible
-            {% else %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <img src="/upload/avatars/{{ user.picture }}" alt="ne s'affiche pas">
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Linkedin</th>
+                <td>{{ user.linkedin }}</td>
+            </tr>
+            <tr>
+                <th>Site web</th>
+                <td>{{ user.website }}</td>
+            </tr>
+            <tr>
+                <th>Société</th>
+                <td>{{ user.company }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ user.description }}</td>
+            </tr>
+            <tr>
+                {% if user.available %}
+                Disponible
+                {% else %}
                 Indisponible
-            {% endif %}
-        </tr>
-        <tr>
-            <ul>
-            {% for role in user.roles %}
-                <li>{{ role }}</li>
+                {% endif %}
+            </tr>
+            <tr>
+                <ul>
+                    {% for role in user.roles %}
+                    <li>{{ role }}</li>
+                    {% endfor %}
+                </ul>
+                {% if 'ROLE_ADMIN' in user.roles %}
+                <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
+                        class="btn btn-outline-danger rounded-pill">Supprimer le rôle Admin</button></a>
+                {% else %}
+                <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
+                        class="btn btn-outline-success rounded-pill">Ajouter le rôle Admin</button></a>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <table class="receivedComments">
+        <thead>
+            <tr>
+                <th>Envoyé</th>
+                <th>Destinataire</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in user.receivedComments %}
+            <tr>
+                <td>
+                    {{ comment.message }}
+                </td>
+                <td>
+                    {{ comment.recipient.firstname }} {{ comment.recipient.lastname }}
+                </td>
+                <td>
+                    {{ include('admin/_delete_comment_form.html.twig') }}
+                </td>
+            </tr>
             {% endfor %}
-            </ul>
-            {% if 'ROLE_ADMIN' in user.roles %}
-            <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
-                    class="btn btn-outline-danger rounded-pill">Supprimer le role Admin</button></a>
-            {% else %}
-            <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
-                    class="btn btn-outline-success rounded-pill">Ajouté le role Admin</button></a>
-            {% endif %}
-        </tr>
-    </tbody>
-</table>
-<table class="receivedComments">
-    <thead>
-        <tr>
-            <th>Envoyer</th>
-            <th>Destinataire</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for comment in user.receivedComments %}
-        <tr>
-            <td>
-                {{ comment.message }}
-            </td>
-            <td>
-                {{ comment.recipient.firstname }} {{ comment.recipient.lastname }}
-            </td>
-            <td>
-                {{ include('admin/_delete_comment_form.html.twig') }}
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-<table class="sentComments">
-    <thead>
-        <tr>
-            <th>Reçu</th>
-            <th>Expediteur</th>
-        </tr>
-    </thead>
-    <tbody>
-     {% for comment in user.sentComments %}
-        <tr>
-            <td>
-                {{ comment.message }}
-            </td>
-            <td>
-                {{ comment.sender.firstname }} {{ comment.sender.lastname }}
-            </td>
-            <td>
-                {{ include('admin/_delete_comment_form.html.twig') }}
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-{{ include('admin/_delete_user_form.html.twig') }}
+        </tbody>
+    </table>
+    <table class="sentComments">
+        <thead>
+            <tr>
+                <th>Reçu</th>
+                <th>Expéditeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in user.sentComments %}
+            <tr>
+                <td>
+                    {{ comment.message }}
+                </td>
+                <td>
+                    {{ comment.sender.firstname }} {{ comment.sender.lastname }}
+                </td>
+                <td>
+                    {{ include('admin/_delete_comment_form.html.twig') }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ include('admin/_delete_user_form.html.twig') }}
 </section>
 {% endblock %}

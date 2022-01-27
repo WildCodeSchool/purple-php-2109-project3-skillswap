@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 <section class="login">
     {% if error %}
-        <div>{{ error.messageKey }}</div>
+    <div>{{ error.messageKey }}</div>
     {% endif %}
     <form action="{{ path('login') }}" method="post">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email :</label>
-            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}"
+                aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">Votre adresse mail ne sera pas communiquée.</div>
         </div>
         <div class="mb-3">
@@ -20,7 +21,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <button type="submit" class="btn btn-outline-success rounded-pill">Connexion</button>
     </form>
-        <hr>
-        <a href="{{ path('app_register') }}">Pas encore de compte ? Cliquez ici...</a>
+    <hr>
+    <a href="{{ path('app_register') }}">Pas encore de compte ? Cliquez ici ...</a>
 </section>
 {% endblock %}

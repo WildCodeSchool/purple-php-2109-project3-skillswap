@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -48,7 +48,7 @@ class Comment
      * @Assert\Range(
      *      min = 1,
      *      max = 5,
-     *      notInRangeMessage = "The notation must be between {{ min }} and {{ max }}.",
+     *      notInRangeMessage = "La note doit être comprise entre {{ min }} et {{ max }}.",
      * )
      */
     private int $rating;
