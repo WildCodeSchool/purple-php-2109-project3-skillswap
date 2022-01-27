@@ -1,0 +1,17 @@
+.swap_dashboard {
+    border-collapse: collapse;
+}
+
+.swap_dashboard td, .swap_dashboard tr {
+    border: 2px solid $bgnav2;
+}
+
+.swap_dashboard_message {
+    width: 300px;
+    text-align: left;
+}
+
+.swap_dashboard_date {
+    width: 150px;
+    text-align: center;
+}
