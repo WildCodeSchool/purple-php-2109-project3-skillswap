@@ -27,7 +27,7 @@ class UserType extends AbstractType
                 'required' => false,
             ])
             ->add('picture', FileType::class, [
-                'label' => 'Image de profile',
+                'label' => 'Image de profil',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -49,8 +49,7 @@ class UserType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

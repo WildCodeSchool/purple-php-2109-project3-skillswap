@@ -5,69 +5,133 @@
 {% block body %}
 <section class="profile">
     {% for message in app.flashes('notice') %}
-    <div class="flash-notice">
-        {{ message }}
-    </div>
+        <div class="flash-notice">
+            {{ message }}
+        </div>
     {% endfor %}
     <h1>Profil</h1>
-    <main class="mainProfile">
-        <div class="desktopLeft">
-            <div class="desktopProfile">
-                <div class="profilTop">
-                    <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
-                    <div class="profilRight">
-                        <p>{{ app.user.notation }} / 5</p>
-                        {% if app.user.available %}
-                        <a href="{{ path('users_availability') }}"><button type="button"
-                                class="btn btn-outline-success rounded-pill">Disponible</button></a>
-                        {% else %}
-                        <a href="{{ path('users_availability') }}"><button type="button"
-                                class="btn btn-outline-danger rounded-pill">Indisponible</button></a>
-                        {% endif %}
-                        <h5>{{ app.user.firstname }} {{ app.user.lastname }}</h5>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
+            </div>
+            <div class="col">
+                <p>
+                    {% if app.user.notation == 5 %}
+                    <img class="star" src="{{ asset('build/images/star5bgless.png') }}">
+                    {% elseif app.user.notation >= 4.5 %}
+                    <img class="star" src="{{ asset('build/images/star45bgless.png') }}">
+                    {% elseif app.user.notation >= 4 %}
+                    <img class="star" src="{{ asset('build/images/star4bgless.png') }}">
+                    {% elseif app.user.notation >= 3.5 %}
+                    <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                    {% elseif app.user.notation >= 3 %}
+                    <img class="star" src="{{ asset('build/images/star3bgless.png') }}">
+                    {% elseif app.user.notation >= 2.5 %}
+                    <img class="star" src="{{ asset('build/images/star25bgless.png') }}">
+                    {% elseif app.user.notation >= 2 %}
+                    <img class="star" src="{{ asset('build/images/star2bgless.png') }}">
+                    {% elseif app.user.notation >= 1.5 %}
+                    <img class="star" src="{{ asset('build/images/star15bgless.png') }}">
+                    {% else %}
+                    <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                    {% endif %}
+                </p>
+                {% if app.user.available %}
+                <a href="{{ path('users_availability') }}"><button type="button"
+                        class="btn btn-outline-success rounded-pill availability">Disponible</button></a>
+                {% else %}
+                <a href="{{ path('users_availability') }}"><button type="button"
+                        class="btn btn-outline-danger rounded-pill availability">Indisponible</button></a>
+                {% endif %}
+                <h5>{{ app.user.firstname }} {{ app.user.lastname }}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
                 <ul class="profilTable">
-                    <li><b>Email : </b> {{ app.user.email }}</li>
-                    <li><b>Linkedin : </b> {{ app.user.linkedin }}</li>
-                    <li><b>Site Web : </b> {{ app.user.website }}</li>
-                    <li><b>Société : </b> {{ app.user.company }}</li>
+                    <li><b>Email</b> {{ app.user.email }}</li>
+                    <li><b>Linkedin</b> {{ app.user.linkedin }}</li>
+                    <li><b>Site Web</b> {{ app.user.website }}</li>
+                    <li><b>Société</b> {{ app.user.company }}</li>
                 </ul>
             </div>
-            <ul class="description">
-                <li><b>Description : </b>{{ app.user.description }}</li>
-            </ul>
-
-            <a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button"
-                    class="btnModifProfile btn btn-outline-danger rounded-pill">Modifier votre profil</button></a>
         </div>
-        <div class="profilBottom">
-            <h5>Vos Compétences :</h5>
-            <ul class="skillList">
-            {% for skill in app.user.skill|slice(0, 5) %}
-                <li>{{ skill.name }}</li>
-            {% endfor %}
-            </ul>
-            {% include "users/_userSkillForm.html.twig" %}
-        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="description me-4">
+                    <li><b>Description</b>{{ app.user.description }}</li>
+                </ul>
 
-        <div class="comments">
-            <h5>Commentaires :</h5>
-            <div class="comment">
-                {% for comment in app.user.receivedComments %}
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <strong class="me-auto">{{ comment.sender.firstName }}</strong>
-                        <small>{{ comment.rating }} / 5</small>
-                        {{ include('users/_delete_comment_form.html.twig') }}
-                    </div>
-                    <div class="toast-body">
-                        {{ comment.message }}
-                    </div>
-                </div>
-                {% endfor %}
+                <a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button"
+                        class="btnModifProfile btn btn-outline-danger rounded-pill ms-4">Modifier votre profil</button></a>
             </div>
         </div>
-    </main>
+        <div class="row mt-4">
+            <div class="col">
+                <h5>Vos compétences</h5>
+                <ul class="skillList">
+                    {% for skill in app.user.skill|slice(0, 5) %}
+                    <li>{{ skill.name }}</li>
+                    {% endfor %}
+                </ul>
+                <button class="btnModifProfile btn btn-outline-danger rounded-pill" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop"
+                    aria-controls="offcanvasWithBackdrop">Sélectionner vos compétences</button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop"
+                    aria-labelledby="offcanvasWithBackdropLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Sélectionner vos compétences</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        {% include "users/_userSkillForm.html.twig" %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-4 ">
+            <div class="col ms-4">
+                <h5>Commentaires</h5>
+                <div class="comment flex-d justify-content-center">
+                    {% for comment in app.user.receivedComments %}
+                    <div class="toast show ms-2 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">{{ comment.sender.firstName }}</strong>
+                            <small>
+                                {% if comment.rating == 5 %}
+                                <img class="star" src="{{ asset('build/images/star5bgless.png') }}">
+                                {% elseif comment.rating >= 4.5 %}
+                                <img class="star" src="{{ asset('build/images/star45bgless.png') }}">
+                                {% elseif comment.rating >= 4 %}
+                                <img class="star" src="{{ asset('build/images/star4bgless.png') }}">
+                                {% elseif comment.rating >= 3.5 %}
+                                <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                                {% elseif comment.rating >= 3 %}
+                                <img class="star" src="{{ asset('build/images/star3bgless.png') }}">
+                                {% elseif comment.rating >= 2.5 %}
+                                <img class="star" src="{{ asset('build/images/star25bgless.png') }}">
+                                {% elseif comment.rating >= 2 %}
+                                <img class="star" src="{{ asset('build/images/star2bgless.png') }}">
+                                {% elseif comment.rating >= 1.5 %}
+                                <img class="star" src="{{ asset('build/images/star15bgless.png') }}">
+                                {% else %}
+                                <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                                {% endif %}
+                            </small>
+                            {{ include('users/_delete_comment_form.html.twig') }}
+                        </div>
+                        <div class="toast-body">
+                            {{ comment.message }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

@@ -65,4 +65,22 @@ class SwapDashboardController extends AbstractController
         }
         return $this->redirectToRoute("home");
     }
+
+    /**
+     * @Route("/swap/finish/{id}", name="swap_finish", requirements={"id"="\d+"})
+     */
+    public function finish(Swap $swap, EntityManagerInterface $entityManager): Response
+    {
+        $swap->setIsDone(true);
+        $entityManager->persist($swap);
+        $entityManager->flush();
+
+        $this->addFlash(
+            "success",
+            "Votre swap a bien été cloturé."
+        );
+        return $this->redirectToRoute("swap_dashboard", [
+            "id" => $swap->getId(),
+        ]);
+    }
 }

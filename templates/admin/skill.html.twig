@@ -13,12 +13,12 @@
         <thead>
             <tr>
                 <th>Compétence</th>
-                <th>Categorie</th>
+                <th>Catégorie</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-        {% for skill in skills %}
+            {% for skill in skills %}
             <tr>
                 <td>{{ skill.name }}</td>
                 <td>{{ skill.category }}</td>
@@ -26,8 +26,8 @@
                     <a href="{{ path('admin_skill_edit', {'id': skill.id}) }}"><button>Modifier</button></a>
                 </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 </section>
-{% endblock %} 
+{% endblock %}

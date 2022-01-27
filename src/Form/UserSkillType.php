@@ -15,7 +15,7 @@ class UserSkillType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           ->add('skill', EntityType::class, [
+            ->add('skill', EntityType::class, [
                 'row_attr' => ['class' => 'formSkill'],
                 'class' => Skill::class,
                 'choice_label' => 'name',
@@ -24,8 +24,7 @@ class UserSkillType extends AbstractType
                 'query_builder' => function (ServiceEntityRepository $repository) {
                     return $repository->createQueryBuilder('s')->orderBy('s.name', 'ASC');
                 },
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
