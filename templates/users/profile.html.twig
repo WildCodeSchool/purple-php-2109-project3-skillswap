@@ -41,7 +41,7 @@
             <a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button"
                     class="btnModifProfile btn btn-outline-danger rounded-pill">Modifier votre profil</button></a>
         </div>
-        <div class="profilBottom">
+        <div class="profilBottom mt-5">
             <h5>Vos compétences</h5>
             <ul class="skillList">
             {% for skill in app.user.skill|slice(0, 5) %}
@@ -51,7 +51,7 @@
             {% include "users/_userSkillForm.html.twig" %}
         </div>
 
-        <div class="comments">
+        <div class="comments sm-mt-5">
             <h5>Commentaires</h5>
             <div class="comment">
                 {% for comment in app.user.receivedComments %}
