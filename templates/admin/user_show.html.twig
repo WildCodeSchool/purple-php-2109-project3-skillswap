@@ -4,6 +4,11 @@
 
 {% block body %}
 <section class="adminUserShow">
+<a class="profilBtnEdit ms-4" href="{{ path('admin_users') }}">
+    <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">
+        Retour
+    </button>
+</a>
 <h1>Utilistateur</h1>
 
 <table class="table">
@@ -65,10 +70,10 @@
     <tbody>
     {% for comment in user.receivedComments %}
         <tr>
-            <td>
+            <td class="comment">
                 {{ comment.message }}
             </td>
-            <td>
+            <td class="ms-3">
                 {{ comment.recipient.firstname }} {{ comment.recipient.lastname }}
             </td>
             <td>
@@ -78,6 +83,7 @@
     {% endfor %}
     </tbody>
 </table>
+<hr>
 <table class="sentComments">
     <thead>
         <tr>

@@ -16,6 +16,14 @@
 .adminUserShow {
 
     img {
-        width: 250px;
+        object-fit: cover;
+        width:250px;
+        height:250px;
     }
+
+    .comment {
+        height: 80px;
+        overflow: auto;
+    }
+
 }
