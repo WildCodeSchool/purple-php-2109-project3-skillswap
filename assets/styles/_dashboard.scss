@@ -1,0 +1,69 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .dashboard_asked, .dashboard_helped {
+        width: 80vw;
+        background-color: $light2;
+        border-radius: 10px;
+    }
+
+    .swap_asked, .swap_helped {
+        border: 1px solid $bgnav2;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 5px;
+        background-color: $dark;
+    }
+
+    .dashboard_item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0px 10px;
+        font-size: 1.25rem;
+    }
+
+    .infos {
+        font-size: 0.75rem;
+        font-weight: bold;
+        font-style: italic;
+        text-align: right;
+        margin-right: 5px;
+        margin-bottom: 0;
+    }
+
+    .btn {
+        width: 120px;
+    }
+}
+
+@media (min-width: $width-desktop) {
+    .dashboard {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+
+        .dashboard_asked, .dashboard_helped {
+            width: 35vw;
+        }
+        
+        .swap_asked, .swap_helped {
+            margin: 20px 50px;
+        }
+        
+        .dashboard_item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+    }
+}
