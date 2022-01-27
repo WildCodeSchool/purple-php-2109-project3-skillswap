@@ -14,8 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
-* @Route("/swap")
-*/
+ * @Route("/swap")
+ */
 class SwapController extends AbstractController
 {
     /**
@@ -46,7 +46,7 @@ class SwapController extends AbstractController
      * @Route("/ask/{skill_id}/{user_id} ", name="swap_form", methods={"GET", "POST"})
      * @ParamConverter("skill",class="App\Entity\Skill", options = {"mapping": {"skill_id": "id"}})
      * @ParamConverter("helper",class="App\Entity\User", options = {"mapping": {"user_id": "id"}})
-    */
+     */
     public function index(
         User $helper,
         Skill $skill,
@@ -59,22 +59,22 @@ class SwapController extends AbstractController
             $form = $this->createForm(SwapType::class, $swap);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($swap);
-                    $entityManager->flush();
-                    $this->addFlash(
-                        "success",
-                        "Votre demande de swap a bien été envoyé."
-                    );
-                    return $this->redirectToRoute("swap_form", [
-                        "user_id" => $helper->getId(),
-                        "skill_id" => $skill->getId(),
-                    ]);
-            }
-                return $this->render('swap/index.html.twig', [
-                    "skill" => $skill,
-                    "user" => $helper,
-                    "form" => $form->createView(),
+                $entityManager->persist($swap);
+                $entityManager->flush();
+                $this->addFlash(
+                    "success",
+                    "Votre demande de swap a bien été envoyée."
+                );
+                return $this->redirectToRoute("swap_form", [
+                    "user_id" => $helper->getId(),
+                    "skill_id" => $skill->getId(),
                 ]);
+            }
+            return $this->render('swap/index.html.twig', [
+                "skill" => $skill,
+                "user" => $helper,
+                "form" => $form->createView(),
+            ]);
         }
         return $this->redirectToRoute("home");
     }

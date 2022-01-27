@@ -29,7 +29,7 @@ class CommentRepository extends ServiceEntityRepository
             ->getQuery();
 
         if (!is_array($queryBuilder->getResult())) {
-            return([["average" => 3]]);
+            return ([["average" => 3]]);
         }
         return $queryBuilder->getResult();
     }

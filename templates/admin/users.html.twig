@@ -11,33 +11,32 @@
     </a>
     <h1>Les utilisateurs:</h1>
     <hr>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
-                <th>Roles</th>
+                <th>Rôles</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for user in users %}
+            {% for user in users %}
             <tr>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>
                     <ul>
-                    {% for role in user.roles %}
+                        {% for role in user.roles %}
                         <li>{{ role }}</li>
-                    {% endfor %}
+                        {% endfor %}
                     </ul>
                 </td>
                 <td>
                     <a href="{{ path('admin_user_show', {'id': user.id}) }}"><button>Détail</button></a>
                 </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 </section>

@@ -1,30 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Enregistrement{% endblock %}
 
 {% block body %}
 <section>
     {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
     <h1>Inscription</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstname, {
-            label: 'Prénom'
-        }) }}
-        {{ form_row(registrationForm.email, {
-            label: 'Email'
-        }) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'Accepter les CGU'
-        }) }}
+    {{ form_row(registrationForm.firstname, {
+    label: 'Prénom'
+    }) }}
+    {{ form_row(registrationForm.email, {
+    label: 'Email'
+    }) }}
+    {{ form_row(registrationForm.plainPassword, {
+    label: 'Mot de passe'
+    }) }}
+    {{ form_row(registrationForm.agreeTerms, {
+    label: 'Accepter les Conditions Générales d\'Utilisation'
+    }) }}
 
-        <input type="submit"  value="Enregistrer">
+    <input type="submit" value="Enregistrer">
     {{ form_end(registrationForm) }}
 </section>
 {% endblock %}
