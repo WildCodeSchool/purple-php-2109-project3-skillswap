@@ -28,21 +28,21 @@
                     </div>
                 </div>
                 <ul class="profilTable">
-                    <li><b>Email : </b> {{ app.user.email }}</li>
-                    <li><b>Linkedin : </b> {{ app.user.linkedin }}</li>
-                    <li><b>Site Web : </b> {{ app.user.website }}</li>
-                    <li><b>Société : </b> {{ app.user.company }}</li>
+                    <li><b>Email</b> {{ app.user.email }}</li>
+                    <li><b>Linkedin</b> {{ app.user.linkedin }}</li>
+                    <li><b>Site Web</b> {{ app.user.website }}</li>
+                    <li><b>Société</b> {{ app.user.company }}</li>
                 </ul>
             </div>
             <ul class="description">
-                <li><b>Description : </b>{{ app.user.description }}</li>
+                <li><b>Description</b>{{ app.user.description }}</li>
             </ul>
 
             <a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button"
                     class="btnModifProfile btn btn-outline-danger rounded-pill">Modifier votre profil</button></a>
         </div>
         <div class="profilBottom">
-            <h5>Vos Compétences :</h5>
+            <h5>Vos compétences</h5>
             <ul class="skillList">
             {% for skill in app.user.skill|slice(0, 5) %}
                 <li>{{ skill.name }}</li>
@@ -52,10 +52,10 @@
         </div>
 
         <div class="comments">
-            <h5>Commentaires :</h5>
+            <h5>Commentaires</h5>
             <div class="comment">
                 {% for comment in app.user.receivedComments %}
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast show ms-2 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         <strong class="me-auto">{{ comment.sender.firstName }}</strong>
                         <small>{{ comment.rating }} / 5</small>

@@ -7,9 +7,9 @@
     }
 
     .userPicture{
-        width: 200px;
-        height: 200px;
-        border-radius: 30px;
+        object-fit: cover;
+        width:250px;
+        height:250px; 
     }
 
     .profilTop {
@@ -83,12 +83,13 @@
         margin: 10px 40px;
     }
 
-    .toast {
-        margin-bottom: 20px;
+    .imgDeleteCom {
+        width: 20px;
     }
 
-    .toast small {
-        margin-right: 25px;
+    .toast-body {
+        max-height: 120px;
+        overflow: auto;
     }
 
     @media (min-width: $width-tablet) {
@@ -144,20 +145,4 @@
             max-width: 78%;
         }
     }
-}
-
-.imgDeleteCom {
-    width: 20px;
-}
-
-.comments{
-    margin-left: 40px;
-}
-
-.toast {
-    margin-bottom: 10px;
-}
-
-.toast small {
-    margin-right: 10px;
 }
