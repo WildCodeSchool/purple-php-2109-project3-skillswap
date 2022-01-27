@@ -6,11 +6,13 @@ use App\Entity\Swap;
 use App\Entity\User;
 use App\Entity\Discussion;
 use App\Form\DiscussionType;
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 
 class SwapDashboardController extends AbstractController
 {
@@ -20,7 +22,8 @@ class SwapDashboardController extends AbstractController
     public function index(
         Swap $swap,
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer
     ): Response {
         if (
             ($this->getUser() instanceof User) &&
@@ -38,6 +41,23 @@ class SwapDashboardController extends AbstractController
                     $entityManager->persist($discussion);
                     $entityManager->flush();
                 }
+
+                if ($this->getUser()->getId() === $swap->getAsker()->getId()) {
+                    $sender = $swap->getAsker()->getEmail();
+                    $recipient = $swap->getHelper()->getEmail();
+                }
+                else {
+                    $sender = $swap->getHelper()->getEmail();
+                    $recipient = $swap->getAsker()->getEmail();
+                }
+                $email = (new Email())
+                ->from($sender)
+                ->to($recipient)
+                ->subject("Notification concernant votre demande d'aide n°" . $swap->getId())
+                ->html($this->renderView("swap_dashboard/send.html.twig", [
+                    'user' => $swap,
+                ]));
+                $mailer->send($email);
 
                 return $this->render('swap_dashboard/index.html.twig', [
                     'swap' => $swap,

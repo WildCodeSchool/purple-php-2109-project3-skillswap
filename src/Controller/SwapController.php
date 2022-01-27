@@ -6,12 +6,14 @@ use App\Entity\Swap;
 use App\Entity\User;
 use App\Entity\Skill;
 use App\Form\SwapType;
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
 * @Route("/swap")
@@ -51,7 +53,8 @@ class SwapController extends AbstractController
         User $helper,
         Skill $skill,
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer
     ): Response {
         $currentUser = $this->getUser();
         if ($currentUser instanceof User) {
@@ -61,6 +64,16 @@ class SwapController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                     $entityManager->persist($swap);
                     $entityManager->flush();
+
+                    $email = (new Email())
+                    ->from($swap->getAsker()->getEmail())
+                    ->to($swap->getHelper()->getEmail())
+                    ->subject("Demande d'aide concernant " . $swap->getSkill()->getName())
+                    ->html($this->renderView("swap/send.html.twig", [
+                        'user' => $swap,
+                    ]));
+                    $mailer->send($email);
+
                     $this->addFlash(
                         "success",
                         "Votre demande de swap a bien été envoyé."
