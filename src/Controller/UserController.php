@@ -49,7 +49,7 @@ class UserController extends AbstractController
             }
         }
         return $this->renderForm('users/profile.html.twig', [
-              'form' => $form,
+            'form' => $form,
         ]);
     }
 
@@ -157,13 +157,13 @@ class UserController extends AbstractController
             if ($this->getUser() instanceof User) {
                 $this->getUser()->setRoles(['ROLE_ADMIN']);
                 $entityManager->flush();
-                $this->addFlash('notice', 'Vous obtenez le role Admin');
+                $this->addFlash('notice', 'Vous obtenez le rôle Admin');
                 return $this->redirectToRoute('users_profile');
             }
         }
         $this->addFlash(
             'notice',
-            'Un utilisateur possede deja le Role Admin merci d\'utiliser le formaulaire de contact pour en savoir plus.'
+            'Un utilisateur possède déjà le rôle Admin. Merci d\'utiliser le formulaire de contact pour en savoir plus.'
         );
         return $this->redirectToRoute('users_profile');
     }

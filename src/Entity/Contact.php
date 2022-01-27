@@ -11,18 +11,18 @@ class Contact
 {
 
     /**
-     * @Assert\NotBlank(message = "The firstname must be provide !")
+     * @Assert\NotBlank(message = "Le prénom doit être rempli !")
      */
     private string $firstname;
 
     /**
-     * @Assert\Email(message = "The email {{ value }} is not a valid email !")
-     * @Assert\NotBlank(message = "The email must be provide !")
+     * @Assert\Email(message = "L'email {{ value }} n'est pas une adresse valide !")
+     * @Assert\NotBlank(message = "L'email doit être rempli !")
      */
     private string $email;
 
     /**
-     * @Assert\NotBlank(message = "The text must be provide !")
+     * @Assert\NotBlank(message = "Le texte doit être rempli !")
      */
     private string $text;
 

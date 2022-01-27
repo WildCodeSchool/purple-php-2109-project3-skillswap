@@ -5,9 +5,9 @@
 {% block body %}
 <section class="profile">
     {% for message in app.flashes('notice') %}
-    <div class="flash-notice">
-        {{ message }}
-    </div>
+        <div class="flash-notice">
+            {{ message }}
+        </div>
     {% endfor %}
     <h1>Profil</h1>
     <div class="container">
@@ -49,6 +49,7 @@
         </div>
         <div class="row">
             <div class="col">
+
                 <ul class="profilTable">
                     <li><b>Email</b> {{ app.user.email }}</li>
                     <li><b>Linkedin</b> {{ app.user.linkedin }}</li>
