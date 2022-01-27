@@ -13,23 +13,17 @@ class SkillFixtures extends Fixture
 {
     public const SKILLS = [
         [
-            'name' => 'Achat',
+            'name' => 'Achat vente',
             'category' => Skill::CATEGORIES['Three'],
         ],[
-            'name' => 'Import-Export',
+            'name' => 'Import-export',
             'category' => Skill::CATEGORIES['Three'],
         ],[
             'name' => 'Stratégie commerciale',
-            'category' => Skill::CATEGORIES['Two'],
-        ],[
-            'name' => 'Vente',
             'category' => Skill::CATEGORIES['Three'],
         ],[
-            'name' => 'Community Manager',
+            'name' => 'Conception-rédaction',
             'category' => Skill::CATEGORIES['Two'],
-        ],[
-            'name' => 'Conception Rédaction',
-            'category' => Skill::CATEGORIES['Five'],
         ],[
             'name' => 'Evénementiel',
             'category' => Skill::CATEGORIES['Two'],
@@ -38,7 +32,7 @@ class SkillFixtures extends Fixture
             'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Relations publiques',
-            'category' => Skill::CATEGORIES['Five'],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Comptabilité',
             'category' => Skill::CATEGORIES['One'],
@@ -46,14 +40,14 @@ class SkillFixtures extends Fixture
             'name' => 'Architecte d \'intérieur',
             'category' => Skill::CATEGORIES['Five'],
         ],[
-            'name' => 'Designer produit',
-            'category' => Skill::CATEGORIES['Two'],
+            'name' => 'Design produit',
+            'category' => Skill::CATEGORIES['Five'],
         ],[
-            'name' => 'Contrôle des finances',
+            'name' => 'Contrôle financier',
             'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Crowdfunding',
-            'category' => Skill::CATEGORIES['Two'],
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Contrôle de gestion ',
             'category' => Skill::CATEGORIES['Four'],
@@ -73,13 +67,13 @@ class SkillFixtures extends Fixture
             'name' => 'Fiscalité',
             'category' => Skill::CATEGORIES['One'],
         ],[
-            'name' => 'Service d\'avocat',
+            'name' => 'Avocat',
             'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Droit des sociétés',
             'category' => Skill::CATEGORIES['One'],
         ],[
-            'name' => 'Contrat de travail',
+            'name' => 'Droit du travail',
             'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Analyse de data',
@@ -112,11 +106,23 @@ class SkillFixtures extends Fixture
             'name' => 'Photographie',
             'category' => Skill::CATEGORIES['Five'],
         ],[
-            'name' => 'Affrêteur',
+            'name' => 'Affrêtement',
             'category' => Skill::CATEGORIES['Three'],
         ],[
             'name' => 'Conditionnement',
             'category' => Skill::CATEGORIES['Three'],
+        ],[
+            'name' => 'Relation presse',
+            'category' => Skill::CATEGORIES['Two'],
+        ],[
+            'name' => 'Réseaux sociaux',
+            'category' => Skill::CATEGORIES['Two'],
+        ],[
+            'name' => 'Business coaching',
+            'category' => Skill::CATEGORIES['Five'],
+        ],[
+            'name' => 'Psychologie',
+            'category' => Skill::CATEGORIES['Five'],
         ],
     ];
 
