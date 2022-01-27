@@ -16,18 +16,6 @@
     }
 }
 
-
-
-.adminNav {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.adminNav a button {
-    width: 150px;
-}
-
 .adminUserShow {
 
     img {
@@ -37,8 +25,21 @@
     }
 
     .comment {
-        height: 80px;
+        max-height: 120px;
         overflow: auto;
     }
 
+}
+
+.form-control:valid {
+    background-color: $light2!important;
+}
+
+.form-control:user-valid {
+    background-color: $bgnav1!important;
+}
+
+input {
+    max-width: 400px;
+    border-radius: 1em;
 }
