@@ -1,7 +1,22 @@
-.dashboard {
-    display: flex;
-    justify-content: space-around;
+.adminDashboard {
+
+    .dashboard {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    img {
+      width: 290px;
+      height: 150px;
+    }
+
+    .card {
+        width: 18rem;
+    }
 }
+
+
 
 .adminNav {
     width: 100%;
