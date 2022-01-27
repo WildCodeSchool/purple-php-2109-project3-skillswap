@@ -1,66 +1,26 @@
 .profile {
 
-    .mainProfile {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
+    
     .userPicture{
         object-fit: cover;
         width:250px;
         height:250px; 
     }
 
-    .profilTop {
-        display: flex;
-        margin: 20px 30px;
-        align-items: center;
-    }
-
-    .profilRight {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-left: 20px;
-        height: 70%;
-    }
-
-    .profilRight .btn {
-        width: 120px;
-    }
-
-    .profilBottom li, .profilTable li, .description li {
+    li {
         list-style-type: none;
     }
 
-    .description, .profilBottom, .profilTable {
-        margin: 10px 5px 10px 5px;
+    .skillList li {
+        list-style-type: circle;
+    }
+
+    .availability {
+        min-width: 115px;
     }
 
     .description{
         text-align: justify;
-        margin-right: 30px;
-    }
-
-    .profilBtnEdit {
-        text-align: center;
-        margin-left: 30px;
-    }
-
-    .profilBottom form, .profilBottom h5 {
-        margin-left: 30px;
-    }
-
-    .btnModifProfile {
-        color: $bgnav2;
-        border: $bgnav2 solid 1px;
-    }
-
-    .btnModifProfile:hover {
-        color: $dark;
-        background-color: $bgnav2;
-        border: $bgnav2 solid 1px;
     }
 
     .form-check-input{
@@ -79,70 +39,37 @@
         width: 20px;
     }
 
-    .comments{
-        margin: 10px 40px;
-    }
-
-    .imgDeleteCom {
-        width: 20px;
-    }
-
     .toast-body {
         max-height: 120px;
         overflow: auto;
     }
 
+    .comment {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .star{
+        height: 20px;
+    }
+
     @media (min-width: $width-tablet) {
 
-        .desktopProfile {
-            display: flex;
-        }
-
-        .profilTable {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        .desktopLeft {
-            max-width: 75%;
-            max-height: 600px;
-        }
-
-        .comments {
-            max-width: 50%;
-            margin: 10px 10px 40px 0px;
-        }
-
-        .comment {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
+        
     }
 
     @media (min-width: 1028px) {
 
-        .comments {
-            max-width: 70%;
-        }
-
-        .profilBottom {
-            margin-right: 20px;
-        }
+        
     }
 
     @media (min-width: 1218px) {
 
-        .comments {
-            margin: -550px 10px 40px 40px;
-        }  
+        
     }
 
     @media (min-width: $width-max) {
 
-        .comments {
-            max-width: 78%;
-        }
+        
     }
 }
