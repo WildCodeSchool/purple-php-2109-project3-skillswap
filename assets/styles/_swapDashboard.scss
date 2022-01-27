@@ -1,17 +1,71 @@
 .swap_dashboard {
-    border-collapse: collapse;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.swap_dashboard td, .swap_dashboard tr {
-    border: 2px solid $bgnav2;
-}
+    h1 {
+        font-size: 1.5rem;
+    }
 
-.swap_dashboard_message {
-    width: 300px;
-    text-align: left;
-}
+    h2 {
+        font-size: 1.25rem;
+    }
 
-.swap_dashboard_date {
-    width: 150px;
-    text-align: center;
+    .discussion {
+        width: 400px;
+        height: 500px;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        background-color: $light2;
+        border-radius: 10px;
+    }
+
+    .discussion_item {
+        border: 1px solid $bgnav2;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 5px;
+        background-color: $dark;
+    }
+
+    .msg_asker {
+        text-align: right;
+        font-size: 1.25rem;
+    }
+
+    .msg_helper {
+        text-align: left;
+        font-size: 1.25rem;
+    }
+
+    .infos {
+        font-size: 0.75rem;
+        font-weight: bold;
+        font-style: italic;
+        text-align: right;
+        margin-bottom: 0;
+    }
+
+    .msg_new {
+        font-size: 1.25rem;
+        width: 400px;
+        height: 100px;
+        margin-top: 3vh;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    @media (min-width: $width-desktop) {
+        .discussion, .msg_new {
+            width: 65vw;
+        }
+
+        .discussion_item {
+            margin: 20px 50px 20px 50px;
+        }
+    }
 }

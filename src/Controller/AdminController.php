@@ -75,6 +75,22 @@ class AdminController extends AbstractController
     }
 
     /**
+     * displays the details of a user
+     * @Route("/user/{id}/addrole", name="user_add_role", methods={"GET"})
+     */
+    public function addRoleAdmin(User $user, EntityManagerInterface $entityManager): Response
+    {
+        if (in_array("ROLE_ADMIN", $user->getRoles())) {
+            $user->setRoles([]);
+            $entityManager->flush();
+        } else {
+            $user->setRoles(['ROLE_ADMIN']);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('admin_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
      * show, add and modify the list of skills
      * @Route("/skill", name="skill")
      */
