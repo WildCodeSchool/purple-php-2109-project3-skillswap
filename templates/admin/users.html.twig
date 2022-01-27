@@ -4,17 +4,19 @@
 
 {% block body %}
 <section>
+    <a class="profilBtnEdit ms-4" href="{{ path('admin_dashboard') }}">
+        <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">
+            Retour
+        </button>
+    </a>
     <h1>Les utilisateurs:</h1>
     <hr>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Prénom</th>
                 <th>Nom</th>
-                <th>Email</th>
-                <th>Disponibilité</th>
                 <th>Roles</th>
                 <th>Actions</th>
             </tr>
@@ -22,17 +24,8 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                    {% if user.available %}
-                       Disponible
-                    {% else %}
-                        Indisponible
-                    {% endif %}
-                </td>
                 <td>
                     <ul>
                     {% for role in user.roles %}

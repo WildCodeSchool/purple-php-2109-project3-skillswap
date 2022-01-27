@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Skill;
+use App\Entity\Comment;
 use App\Form\SkillType;
 use App\Repository\UserRepository;
 use App\Repository\SkillRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/admin", name="admin_")
@@ -42,13 +44,65 @@ class AdminController extends AbstractController
 
     /**
      * displays the details of a user
-     * @Route("/users{id}", name="user_show", methods={"GET"})
+     * @Route("/user/{id}", name="user_show", methods={"GET"})
      */
     public function showOneUser(User $user): Response
     {
         return $this->render('admin/user_show.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    /**
+     * @Route("/user/{idUser}/delete/{idComment}", name="comment_delete")
+     * @ParamConverter("comment",class="App\Entity\Comment", options = {"mapping": {"idComment": "id"}})
+     */
+    public function deleteComment(
+        int $idUser,
+        Request $request,
+        Comment $comment,
+        EntityManagerInterface $entityManager
+    ): Response {
+
+        $user = $this->getUser();
+        if (is_string($request->request->get('_token')) && $user instanceof User) {
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($comment);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('admin_user_show', ['id' => $idUser], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * displays the details of a user
+     * @Route("/user/{id}/addrole", name="user_add_role", methods={"GET"})
+     */
+    public function addRoleAdmin(User $user, EntityManagerInterface $entityManager): Response
+    {
+        if (in_array("ROLE_ADMIN", $user->getRoles())) {
+            $user->setRoles([]);
+            $entityManager->flush();
+        } else {
+            $user->setRoles(['ROLE_ADMIN']);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('admin_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/user/{id}/delete", name="user_delete")
+     */
+    public function deleteUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $userAdmin = $this->getUser();
+        if (is_string($request->request->get('_token')) && $userAdmin instanceof User) {
+            if ($this->isCsrfTokenValid('delete' . $userAdmin->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($user);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('admin_users', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
@@ -110,7 +164,6 @@ class AdminController extends AbstractController
                 $entityManager->flush();
             }
         }
-
         return $this->redirectToRoute('admin_skill', [], Response::HTTP_SEE_OTHER);
     }
 }
