@@ -52,6 +52,13 @@
                 <li>{{ role }}</li>
             {% endfor %}
             </ul>
+            {% if 'ROLE_ADMIN' in user.roles %}
+            <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
+                    class="btn btn-outline-danger rounded-pill">Supprimer le role Admin</button></a>
+            {% else %}
+            <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
+                    class="btn btn-outline-success rounded-pill">Ajouté le role Admin</button></a>
+            {% endif %}
         </tr>
     </tbody>
 </table>
