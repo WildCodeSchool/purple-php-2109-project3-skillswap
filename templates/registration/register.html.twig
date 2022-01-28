@@ -3,27 +3,27 @@
 {% block title %}Enregistrement{% endblock %}
 
 {% block body %}
-<section>
+<section class="register">
     {% for flash_error in app.flashes('verify_email_error') %}
     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>INSCRIPTION</h1>
+    <h1>Inscription</h1>
     <hr>
-    {{ form_start(registrationForm) }}
-    {{ form_label(registrationForm.firstname, 'Prénom', {'firstname': {'class': 'form-label'}}) }}
-    {{ form_widget(registrationForm.firstname, {'firstname': {'class': 'form-control'}}) }}
+    {{ form_start(form) }}
+    {{ form_label(form.firstname, 'Prénom', {'firstname': {'class': 'form-label'}}) }}
+    {{ form_widget(form.firstname, {'firstname': {'class': 'form-control'}}) }}
     <br>
-    {{ form_label(registrationForm.email, 'Email', {'email': {'class': 'form-label'}}) }}
-    {{ form_widget(registrationForm.email, {'email': {'class': 'form-control'}}) }}
+    {{ form_label(form.email, 'Email', {'email': {'class': 'form-label'}}) }}
+    {{ form_widget(form.email, {'email': {'class': 'form-control'}}) }}
     <br>
-    {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'password': {'class': 'form-label'}}) }}
-    {{ form_widget(registrationForm.plainPassword, {'password': {'class': 'form-control'}}) }}
+    {{ form_label(form.plainPassword, 'Mot de passe', {'password': {'class': 'form-label'}}) }}
+    {{ form_widget(form.plainPassword, {'password': {'class': 'form-control'}}) }}
     <br>
-    {{ form_label(registrationForm.agreeTerms, 'J accepte les CGU', {'agreeTerms': {'class': 'custom-control-label'}}) }}
-    {{ form_widget(registrationForm.agreeTerms, {'agreeTerms': {'class': 'custom-control-input'}}) }}
+    {{ form_label(form.agreeTerms, 'J accepte les CGU', {'agreeTerms': {'class': 'custom-control-label'}}) }}
+    {{ form_widget(form.agreeTerms, {'agreeTerms': {'class': 'form-check-input'}}) }}
     <br>
     <button type="submit" class="btn btn-outline-success rounded-pill">Enregistrer</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(form) }}
 </section>
 {% endblock %}

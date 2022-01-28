@@ -1,11 +1,11 @@
-.contact_form {
-    margin-bottom: 20px;
+.form_contact {
+    padding: 3rem;
 }
-
-.contact_label {
-    margin-right: 10px;
-}
-
-.contact_widget {
-    width: 150px;
-}
+@media (min-width: $width-tablet) {
+    input, h1 {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+    }
+ }

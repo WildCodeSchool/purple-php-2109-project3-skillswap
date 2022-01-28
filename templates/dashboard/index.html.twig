@@ -10,15 +10,17 @@
                 <div class="swap_asked">
                     <div class="dashboard_item mt-1">
                         {{ swap_asked.skill.name }} avec {{ swap_asked.helper.firstname }}
-                        <a class="text-dark" href="{{ path('swap_dashboard', {"id": swap_asked.id}) }}">voir les détails</a>
+                        <a href="{{ path('swap_dashboard', {"id": swap_asked.id}) }}">
+                            <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</button>
+                        </a>
                     </div>
                     {% if swap_asked.isDone %}
-                        <p class="btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
+                        <p class="notbtn btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
                     {% else %}
                         {% if swap_asked.isAccepted %}
-                        <p class="btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
+                            <p class="notbtn btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
                         {% else %}
-                        <p class="btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
+                            <p class="notbtn btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
                         {% endif %}
                     {% endif %}
                     <p class="infos">{{ swap_asked.date|date('d/m/Y H:i') }}</p>
@@ -31,16 +33,17 @@
                 <div class="swap_helped">
                     <div class="dashboard_item mt-1">
                         {{ swap_helped.skill.name }} avec {{ swap_helped.asker.firstname }}
-                        <a class="text-dark" href="{{ path('swap_dashboard', {"id": swap_helped.id}) }}">voir les détails</a>
+                        <a href="{{ path('swap_dashboard', {"id": swap_helped.id}) }}">
+                            <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</button>
+                        </a>
                     </div>
-
                     {% if swap_helped.isDone %}
-                        <p class="btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
+                        <p class="notbtn btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
                     {% else %}
                         {% if swap_helped.isAccepted %}
-                            <p class="btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
+                            <p class="notbtn btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
                         {% else %}
-                            <p class="btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
+                            <p class="notbtn btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
                         {% endif %}
                     {% endif %}
                     <p class="infos">{{ swap_helped.date|date('d/m/Y H:i') }}</p>

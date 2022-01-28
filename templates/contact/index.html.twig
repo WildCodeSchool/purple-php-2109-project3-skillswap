@@ -1,49 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Formulaire de contact</h1>
+
+<h1 class="justify-content-center mx-0 my-4">Formulaire de contact</h1>
 
 {% set messages = app.flashes("success") %}
 
 {% if messages is empty %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
+    <div class="form_contact">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {% if is_granted("ROLE_USER") %}
+        <div class="row">
+            <div class="col">
+                {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form_label'}}) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget', 'value': app.user.firstname}}) }}
+            </div>
+            <div class="col">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form_label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'contact_widget', 'value': app.user.email}}) }}
+            </div>
 
-    {% if is_granted("ROLE_USER") %}
+        {% else %}
+            <div class="col">
+                {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form_label'}}) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
+            </div>
+            <div class="col">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form_label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
+            </div>
 
-        <div class="contact_form">
-            {{ form_label(form.firstname, 'prénom :', {'label_attr': {'class': 'contact_label'}}) }}
-            {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget', 'value': app.user.firstname}}) }}
+        {% endif %}
+            <div class="col">
+                {{ form_label(form.text, 'Texte', {'label_attr': {'class': 'form_label'}}) }}
+                {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
+            </div>
+            <input class="btnModifProfile btn btn-outline-danger rounded-pill mx-5 mt-4" type="submit" value="Envoyer votre demande" />
         </div>
-        <div class="contact_form">
-            {{ form_label(form.email, 'email :', {'label_attr': {'class': 'contact_label'}}) }}
-            {{ form_widget(form.email, {'attr': {'class': 'contact_widget', 'value': app.user.email}}) }}
-        </div>
-
+        {{ form_end(form) }}
+    </div>
     {% else %}
 
-        <div class="contact_form">
-            {{ form_label(form.firstname, 'prénom :', {'label_attr': {'class': 'contact_label'}}) }}
-            {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
-        </div>
-        <div class="contact_form">
-            {{ form_label(form.email, 'email :', {'label_attr': {'class': 'contact_label'}}) }}
-            {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
-        </div>
-
-    {% endif %}
-
-    <div class="contact_form">
-        {{ form_label(form.text, 'texte :', {'label_attr': {'class': 'contact_label'}}) }}
-        {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
-    </div>
-    <input type="submit" value="Envoyer votre demande" />
-    {{ form_end(form) }}
-
-{% else %}
-
     <div class="alert alert-success" role="alert">
-        <p>{{ messages }}</p>
+        <p>{{ messages.0 }}</p>
         <a href="/">retour à la page d'accueil</a>
     </div>
 
