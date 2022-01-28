@@ -39,6 +39,11 @@ a {
     border: $bgnav2 solid 1px;
 }
 
+.form-control:focus {
+    border-color: $bgnav2 !important;
+    box-shadow: 0 0 5px $bgnav2 !important;
+}
+
 @media (min-width: $width-desktop) {
 
     body {
