@@ -3,11 +3,11 @@
 {% block title %}Information utilisateur{% endblock %}
 
 {% block body %}
-<section>
-    <h1>Information utilisateur</h1>
-    <img class='userPicture' src="/upload/avatars/{{ app.user.picture }}" alt="ne s'affiche pas">
-    {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
-    <a href="{{ path('users_profile') }}">Revenir au profil</a>
+<section class="edit">
+    <a href="{{ path('users_profile') }}"><button class="btnModifProfile btn btn-outline-danger rounded-pill ms-4">Revenir au profil</button></a>
+    <h1 class="mt-3">Information utilisateur</h1>
+    <img class='userPicture ms-4' src="/upload/avatars/{{ app.user.picture }}" alt="photo de profil">
+    {{ include('users/_form.html.twig') }}
     {{ include('users/_delete_form.html.twig') }}
 </section>
 {% endblock %}

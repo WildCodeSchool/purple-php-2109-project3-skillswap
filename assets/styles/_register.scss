@@ -1,4 +1,4 @@
-.login {
+.register {
     margin: 3em;
     align-items: center;
 
@@ -10,8 +10,8 @@
         background-color: $bgnav1!important;
     }
 
-    input {
-        max-width: 400px;
+    input, form {
+        width: 400px;
         border-radius: 1em;
     }
-}  
+}

@@ -3,7 +3,12 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-<section>
+<section class="skillAdmin">
+    <a class="profilBtnEdit ms-4" href="{{ path('admin_dashboard') }}">
+        <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">
+            Retour
+        </button>
+    </a>
     <h1>Les compétences :</h1>
     <hr>
 
@@ -23,11 +28,12 @@
                 <td>{{ skill.name }}</td>
                 <td>{{ skill.category }}</td>
                 <td>
-                    <a href="{{ path('admin_skill_edit', {'id': skill.id}) }}"><button>Modifier</button></a>
+                    <a href="{{ path('admin_skill_edit', {'id': skill.id}) }}"><button class="btnModifProfile btn btn-outline-danger rounded-pill">Modifier</button></a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
 </section>
 {% endblock %}

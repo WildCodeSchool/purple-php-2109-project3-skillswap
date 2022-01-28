@@ -1,6 +1,5 @@
 .profile {
 
-    
     .userPicture{
         object-fit: cover;
         width:250px;
@@ -52,24 +51,36 @@
     .star{
         height: 20px;
     }
+}
 
-    @media (min-width: $width-tablet) {
+.edit {
 
-        
+    .userPicture{
+        object-fit: cover;
+        width:250px;
+        height:250px; 
     }
 
-    @media (min-width: 1028px) {
-
-        
+    .form-control:valid {
+        background-color: $light2!important;
     }
 
-    @media (min-width: 1218px) {
-
-        
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
     }
 
-    @media (min-width: $width-max) {
-
-        
+    input {
+        max-width: 400px;
+        border-radius: 1em;
     }
+
+    .form_description {
+        width: 400px;
+        height: 150px;
+    }
+
+    .save {
+        width: 120px;
+    }
+
 }

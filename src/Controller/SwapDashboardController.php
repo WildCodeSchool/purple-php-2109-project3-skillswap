@@ -27,7 +27,6 @@ class SwapDashboardController extends AbstractController
         MailerInterface $mailer,
         SortUserAskerHelper $sorter
     ): Response {
-
         $users = $sorter->sort([
             "user" => $this->getUser(),
             "asker" => $swap->getAsker(),
