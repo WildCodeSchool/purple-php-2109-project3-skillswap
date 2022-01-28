@@ -32,8 +32,8 @@ class UserType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Image([
-                        'maxSize' => '4000k',
-                        'maxSizeMessage' => 'Votre image ne doit pas depasser 4Mo.',
+                        'maxSize' => '150k',
+                        'maxSizeMessage' => 'Votre image ne doit pas depasser 150Ko.',
                     ])
                 ],
             ])
