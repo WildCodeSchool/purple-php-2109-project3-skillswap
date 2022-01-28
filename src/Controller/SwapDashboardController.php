@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Swap;
 use App\Entity\User;
 use App\Entity\Discussion;
+use App\Service\SortUserAskerHelper;
 use App\Form\DiscussionType;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,24 +24,22 @@ class SwapDashboardController extends AbstractController
         Swap $swap,
         Request $request,
         EntityManagerInterface $entityManager,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        SortUserAskerHelper $sorter
     ): Response {
-        if (
-            ($this->getUser() instanceof User) &&
-            ($swap->getAsker() instanceof User) &&
-            ($swap->getHelper() instanceof User)
-        ) {
-            if ($this->getUser()->getId() === $swap->getAsker()->getId()) {
-                $sender = $swap->getAsker()->getEmail();
-                $recipient = $swap->getHelper()->getEmail();
-            } elseif ($this->getUser()->getId() === $swap->getHelper()->getId()) {
-                $sender = $swap->getHelper()->getEmail();
-                $recipient = $swap->getAsker()->getEmail();
-            } else {
-                return $this->redirectToRoute("home");
-            }
 
-            $discussion = new Discussion($swap, $this->getUser());
+        $users = $sorter->sort([
+            "user" => $this->getUser(),
+            "asker" => $swap->getAsker(),
+            "helper" => $swap->getHelper()
+        ]);
+
+        if ($users !== [false]) {
+            $mainUser = $users["mainUser"];
+            $sender = $users["mainUser"]->getEmail();
+            $recipient = $users["secondUser"]->getEmail();
+
+            $discussion = new Discussion($swap, $mainUser);
             $form = $this->createForm(DiscussionType::class, $discussion);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
