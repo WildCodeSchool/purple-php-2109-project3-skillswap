@@ -486,8 +486,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     //solve proxy error message at user connexion
-    public function __sleep()
+    /*public function __sleep()
     {
         return ['email', 'id', 'password'];
-    }
+    }*/
 }
