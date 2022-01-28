@@ -15,12 +15,12 @@
                         </a>
                     </div>
                     {% if swap_asked.isDone %}
-                        <p class="not_button btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
+                        <p class="notBtn btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
                     {% else %}
                         {% if swap_asked.isAccepted %}
-                            <p class="not_button btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
+                            <p class="notBtn btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
                         {% else %}
-                            <p class="not_button btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
+                            <p class="notBtn btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
                         {% endif %}
                     {% endif %}
                     <p class="infos">{{ swap_asked.date|date('d/m/Y H:i') }}</p>
@@ -38,12 +38,12 @@
                         </a>
                     </div>
                     {% if swap_helped.isDone %}
-                        <p class="not_button btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
+                        <p class="notBtn btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
                     {% else %}
                         {% if swap_helped.isAccepted %}
-                            <p class="not_button btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
+                            <p class="notBtn btn btn-outline-success rounded-pill ms-5 mt-4">en cours</p>
                         {% else %}
-                            <p class="not_button btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
+                            <p class="notBtn btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
                         {% endif %}
                     {% endif %}
                     <p class="infos">{{ swap_helped.date|date('d/m/Y H:i') }}</p>
