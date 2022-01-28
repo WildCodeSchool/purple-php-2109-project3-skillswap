@@ -25,6 +25,9 @@
             {{ form_errors(form) }}
                 {{ form_widget(form.message, {'attr': {'class': 'msg_new'}}) }}
                 <input class="btnModifProfile btn btn-outline-danger rounded-pill mt-3" type="submit" value="Envoyer votre message" />
+                {% if swap.discussions is empty %}
+                    <p class="ms-3 mt-2"><i>Pour refuser un Swap, merci d'envoyer un message et cliquer sur "terminer le Swap" en bas de cette page.</i></p>
+                {% endif %}
             {{ form_end(form) }}
         {% endif %}
         <div class="discussion mt-4">
