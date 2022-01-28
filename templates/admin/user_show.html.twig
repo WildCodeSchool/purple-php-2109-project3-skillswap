@@ -66,39 +66,7 @@
             </tr>
         </tbody>
     </table>
-    <table class="receivedComments">
-        <thead>
-            <tr>
-                <th>Envoyé</th>
-                <th>Destinataire</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for comment in user.receivedComments %}
-            <tr>
-                <td>
-                    {{ comment.message }}
-                </td>
-                <td>
-                    {{ comment.recipient.firstname }} {{ comment.recipient.lastname }}
-                </td>
-                <td>
-                    {{ include('admin/_delete_comment_form.html.twig') }}
-                </td>
-            </tr>
-            {% endfor %}
-            </ul>
-            {% if 'ROLE_ADMIN' in user.roles %}
-            <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
-                    class="btn btn-outline-danger rounded-pill">Supprimer le role Admin</button></a>
-            {% else %}
-            <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"><button type="button"
-                    class="btn btn-outline-success rounded-pill">Ajouté le role Admin</button></a>
-            {% endif %}
-        </tr>
-    </tbody>
-</table>
-<table class="receivedComments">
+<table class="receivedComments ms-3">
     <thead>
         <tr>
             <th>Envoyer</th>
@@ -111,7 +79,7 @@
             <td class="comment">
                 {{ comment.message }}
             </td>
-            <td class="ms-3">
+            <td>
                 {{ comment.recipient.firstname }} {{ comment.recipient.lastname }}
             </td>
             <td>
@@ -122,11 +90,11 @@
     </tbody>
 </table>
 <hr>
-<table class="sentComments">
+<table class="sentComments ms-3">
     <thead>
         <tr>
             <th>Reçu</th>
-            <th>Expediteur</th>
+            <th>Expéditeur</th>
         </tr>
     </thead>
     <tbody>

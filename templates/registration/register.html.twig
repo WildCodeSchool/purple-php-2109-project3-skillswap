@@ -8,23 +8,22 @@
     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Inscription</h1>
-
+    <h1>INSCRIPTION</h1>
+    <hr>
     {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstname, {
-    label: 'Prénom'
-    }) }}
-    {{ form_row(registrationForm.email, {
-    label: 'Email'
-    }) }}
-    {{ form_row(registrationForm.plainPassword, {
-    label: 'Mot de passe'
-    }) }}
-    {{ form_row(registrationForm.agreeTerms, {
-    label: 'Accepter les Conditions Générales d\'Utilisation'
-    }) }}
-
-    <input type="submit" value="Enregistrer">
+    {{ form_label(registrationForm.firstname, 'Prénom', {'firstname': {'class': 'form-label'}}) }}
+    {{ form_widget(registrationForm.firstname, {'firstname': {'class': 'form-control'}}) }}
+    <br>
+    {{ form_label(registrationForm.email, 'Email', {'email': {'class': 'form-label'}}) }}
+    {{ form_widget(registrationForm.email, {'email': {'class': 'form-control'}}) }}
+    <br>
+    {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'password': {'class': 'form-label'}}) }}
+    {{ form_widget(registrationForm.plainPassword, {'password': {'class': 'form-control'}}) }}
+    <br>
+    {{ form_label(registrationForm.agreeTerms, 'J accepte les CGU', {'agreeTerms': {'class': 'custom-control-label'}}) }}
+    {{ form_widget(registrationForm.agreeTerms, {'agreeTerms': {'class': 'custom-control-input'}}) }}
+    <br>
+    <button type="submit" class="btn btn-outline-success rounded-pill">Enregistrer</button>
     {{ form_end(registrationForm) }}
 </section>
 {% endblock %}

@@ -3,7 +3,12 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-<section>
+<section class="editSkilAdmin">
+    <a class="profilBtnEdit ms-4" href="{{ path('admin_skill') }}">
+        <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">
+            Retour
+        </button>
+    </a>
     <h1>Les compétences :</h1>
     <hr>
 

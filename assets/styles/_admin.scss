@@ -16,18 +16,6 @@
     }
 }
 
-
-
-.adminNav {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.adminNav a button {
-    width: 150px;
-}
-
 .adminUserShow {
 
     img {
@@ -37,8 +25,48 @@
     }
 
     .comment {
-        height: 80px;
+        max-height: 120px;
         overflow: auto;
     }
 
+}
+
+.skillAdmin{
+
+    margin: 3em;
+
+    .form-control:valid {
+        background-color: $light2!important;
+    }
+
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
+    }
+
+    input, form{
+        max-width: 400px;
+        border-radius: 1em;
+    }
+}
+
+.editSkilAdmin {
+
+    margin: 3em;
+
+    .form-control:valid {
+        background-color: $light2!important;
+    }
+
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
+    }
+
+    input, form{
+        max-width: 400px;
+        border-radius: 1em;
+    }
+
+    .delete {
+        width: 100px;
+    }
 }
