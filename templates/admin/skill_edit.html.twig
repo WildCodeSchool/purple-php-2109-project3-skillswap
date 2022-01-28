@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+<section class="editSkilAdmin">
+    <a class="profilBtnEdit ms-4" href="{{ path('admin_skill') }}">
+        <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">
+            Retour
+        </button>
+    </a>
+    <h1>Les compétences :</h1>
+    <hr>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ skill.name }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ skill.category }}</td>
+            </tr>
+            <tr>
+                {{ include('admin/_delete_skill.html.twig') }}
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('admin/_formSkill.html.twig', {'button_label': 'Modifier'}) }}
+</section>
+{% endblock %}

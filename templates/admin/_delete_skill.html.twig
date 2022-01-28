@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_skill_delete', {'id': skill.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet compétence ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+    <button class="btn btn-outline-danger rounded-pill delete">Supprimer</button>
+</form>

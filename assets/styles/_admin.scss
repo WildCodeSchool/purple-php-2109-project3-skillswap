@@ -1,0 +1,72 @@
+.adminDashboard {
+
+    .dashboard {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    img {
+        width: 290px;
+        height: 150px;
+    }
+
+    .card {
+        width: 18rem;
+    }
+}
+
+.adminUserShow {
+
+    img {
+        object-fit: cover;
+        width:250px;
+        height:250px;
+    }
+
+    .comment {
+        max-height: 120px;
+        overflow: auto;
+    }
+
+}
+
+.skillAdmin{
+
+    margin: 3em;
+
+    .form-control:valid {
+        background-color: $light2!important;
+    }
+
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
+    }
+
+    input, form{
+        max-width: 400px;
+        border-radius: 1em;
+    }
+}
+
+.editSkilAdmin {
+
+    margin: 3em;
+
+    .form-control:valid {
+        background-color: $light2!important;
+    }
+
+    .form-control:user-valid {
+        background-color: $bgnav1!important;
+    }
+
+    input, form{
+        max-width: 400px;
+        border-radius: 1em;
+    }
+
+    .delete {
+        width: 100px;
+    }
+}

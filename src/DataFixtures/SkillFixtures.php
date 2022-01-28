@@ -13,110 +13,116 @@ class SkillFixtures extends Fixture
 {
     public const SKILLS = [
         [
-            'name' => 'Achat',
-            'category' => Skill::CATEGORIES[2],
+            'name' => 'Achat vente',
+            'category' => Skill::CATEGORIES['Three'],
         ],[
-            'name' => 'Import-Export',
-            'category' => Skill::CATEGORIES[2],
+            'name' => 'Import-export',
+            'category' => Skill::CATEGORIES['Three'],
         ],[
             'name' => 'Stratégie commerciale',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Three'],
         ],[
-            'name' => 'Vente',
-            'category' => Skill::CATEGORIES[2],
-        ],[
-            'name' => 'Community Manager',
-            'category' => Skill::CATEGORIES[1],
-        ],[
-            'name' => 'Conception Rédaction',
-            'category' => Skill::CATEGORIES[4],
+            'name' => 'Conception-rédaction',
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Evénementiel',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Graphisme',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Relations publiques',
-            'category' => Skill::CATEGORIES[4],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Comptabilité',
-            'category' => Skill::CATEGORIES[0],
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Architecte d \'intérieur',
-            'category' => Skill::CATEGORIES[4],
+            'category' => Skill::CATEGORIES['Five'],
         ],[
-            'name' => 'Designer produit',
-            'category' => Skill::CATEGORIES[1],
+            'name' => 'Design produit',
+            'category' => Skill::CATEGORIES['Five'],
         ],[
-            'name' => 'Contrôle des finances',
-            'category' => Skill::CATEGORIES[0],
+            'name' => 'Contrôle financier',
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Crowdfunding',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Contrôle de gestion ',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'R&D',
-            'category' => Skill::CATEGORIES[4],
+            'category' => Skill::CATEGORIES['Five'],
         ],[
             'name' => 'Développement web',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Gestion de projet informatique',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'Conseil jurudique',
-            'category' => Skill::CATEGORIES[0],
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Fiscalité',
-            'category' => Skill::CATEGORIES[0],
+            'category' => Skill::CATEGORIES['One'],
         ],[
-            'name' => 'Service d\'avocat',
-            'category' => Skill::CATEGORIES[0],
+            'name' => 'Avocat',
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Droit des sociétés',
-            'category' => Skill::CATEGORIES[0],
+            'category' => Skill::CATEGORIES['One'],
         ],[
-            'name' => 'Contrat de travail',
-            'category' => Skill::CATEGORIES[0],
+            'name' => 'Droit du travail',
+            'category' => Skill::CATEGORIES['One'],
         ],[
             'name' => 'Analyse de data',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Pricing',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Marketing digital',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Marketing produit',
-            'category' => Skill::CATEGORIES[1],
+            'category' => Skill::CATEGORIES['Two'],
         ],[
             'name' => 'Paie',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'Formation',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'Recrutement',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'Stratégie RH',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'Secrétariat',
-            'category' => Skill::CATEGORIES[3],
+            'category' => Skill::CATEGORIES['Four'],
         ],[
             'name' => 'Photographie',
-            'category' => Skill::CATEGORIES[4],
+            'category' => Skill::CATEGORIES['Five'],
         ],[
-            'name' => 'Affrêteur',
-            'category' => Skill::CATEGORIES[2],
+            'name' => 'Affrêtement',
+            'category' => Skill::CATEGORIES['Three'],
         ],[
             'name' => 'Conditionnement',
-            'category' => Skill::CATEGORIES[2],
+            'category' => Skill::CATEGORIES['Three'],
+        ],[
+            'name' => 'Relation presse',
+            'category' => Skill::CATEGORIES['Two'],
+        ],[
+            'name' => 'Réseaux sociaux',
+            'category' => Skill::CATEGORIES['Two'],
+        ],[
+            'name' => 'Business coaching',
+            'category' => Skill::CATEGORIES['Five'],
+        ],[
+            'name' => 'Psychologie',
+            'category' => Skill::CATEGORIES['Five'],
         ],
     ];
 

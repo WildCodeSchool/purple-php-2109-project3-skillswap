@@ -15,8 +15,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * entity for creating a user
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
-*/
+ * @UniqueEntity(fields={"email"}, message="Il y a déjà un compte avec cet email !")
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -28,8 +31,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email(message = "The email {{ value }} is not a valid email." )
-     * @Assert\NotBlank(message = "You must provide an email.")
+     * @Assert\Email(message = "L'email {{ value }} n'est pas une adresse valide." )
+     * @Assert\NotBlank(message = "Vous devez renseigner un email !.")
      */
     private string $email;
 
@@ -76,6 +79,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      max = 1000,
+     *      maxMessage = "Votre description ne doit pas depasser {{ limit }} caractères")
      */
     private ?string $description;
 
@@ -90,23 +96,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Recipient", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Swap::class, mappedBy="asker", orphanRemoval=true)
+     */
+    private Collection $askedSwaps;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Swap::class, mappedBy="helper", orphanRemoval=true)
+     */
+    private Collection $helpedSwaps;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="recipient", orphanRemoval=true)
      */
     private Collection $receivedComments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Sender", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="sender", orphanRemoval=true)
      */
     private Collection $sentComments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user")
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="user", orphanRemoval=false)
      * @Assert\Count(min = 0, max = 5)
      */
     private Collection $skill;
 
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "La note doit être comprise entre {{ min }} et {{ max }}.",
+     * )
+     */
+    private float $notation = 3;
+
     public function __construct()
     {
+        $this->askedSwaps = new ArrayCollection();
+        $this->helpedSwaps = new ArrayCollection();
         $this->receivedComments = new ArrayCollection();
         $this->sentComments = new ArrayCollection();
         $this->skill = new ArrayCollection();
@@ -293,7 +321,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvailable(bool $available): self
     {
         $this->available = $available;
-
         return $this;
     }
 
@@ -383,6 +410,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSkill(Skill $skill): self
     {
         $this->skill->removeElement($skill);
+        return $this;
+    }
+
+    public function getNotation(): ?float
+    {
+        return $this->notation;
+    }
+
+    public function setNotation(float $notation): self
+    {
+        $this->notation = $notation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Swap[]
+     */
+    public function getAskedSwaps(): Collection
+    {
+        return $this->askedSwaps;
+    }
+
+    public function addAskedSwap(Swap $askedSwap): self
+    {
+        if (!$this->askedSwaps->contains($askedSwap)) {
+            $this->askedSwaps[] = $askedSwap;
+            $askedSwap->setAsker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAskedSwap(Swap $askedSwap): self
+    {
+        if ($this->askedSwaps->removeElement($askedSwap)) {
+            // set the owning side to null (unless already changed)
+            if ($askedSwap->getAsker() === $this) {
+                $askedSwap->setAsker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Swap[]
+     */
+    public function getHelpedSwaps(): Collection
+    {
+        return $this->helpedSwaps;
+    }
+
+    public function addHelpedSwap(Swap $helpedSwap): self
+    {
+        if (!$this->helpedSwaps->contains($helpedSwap)) {
+            $this->helpedSwaps[] = $helpedSwap;
+            $helpedSwap->setHelper($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHelpedSwap(Swap $helpedSwap): self
+    {
+        if ($this->helpedSwaps->removeElement($helpedSwap)) {
+            // set the owning side to null (unless already changed)
+            if ($helpedSwap->getHelper() === $this) {
+                $helpedSwap->setHelper(null);
+            }
+        }
+
         return $this;
     }
 }

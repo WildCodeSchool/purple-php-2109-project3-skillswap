@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -42,6 +42,16 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private \DateTimeInterface $date;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "La note doit être comprise entre {{ min }} et {{ max }}.",
+     * )
+     */
+    private int $rating;
 
     public function getId(): ?int
     {
@@ -94,5 +104,23 @@ class Comment
         $this->date = $date;
 
         return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    //solve proxy error message at user connexion
+    public function __sleep()
+    {
+        return ['id', 'message'];
     }
 }

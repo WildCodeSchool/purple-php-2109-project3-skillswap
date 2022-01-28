@@ -1,4 +1,35 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="d-flex justify-content-around flex-wrap">
+    <div class="ms-2">
+        {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(form.lastname, 'Nom', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(form.picture, 'Image de Profil', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.picture, {'attr': {'class': 'form-control'}}) }}
+        <p>
+            <i>Attention votre image ne dois pas depasser 150Ko.</i><br>
+            <i>Pour un rendu optimum votre photo dois etre carré</i>
+        </p>
+    </div>
+    <div class="ms-2">
+        {{ form_label(form.linkedin, 'LinkedIn', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.linkedin, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(form.website, 'Site web', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(form.company, 'Société', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.company, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="ms-2">
+        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label mt-3'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control form_description'}}) }}
+    </div>
+</div>
+<button class="btnModifProfile save btn btn-outline-danger rounded-pill ms-4 mt-2">
+    {{ button_label|default('Sauvegarder') }}
+</button>
 {{ form_end(form) }}

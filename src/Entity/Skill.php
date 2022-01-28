@@ -9,17 +9,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
-* entity to create a skill
-* @ORM\Entity(repositoryClass=SkillRepository::class)
-*/
+ * entity to create a skill
+ * @ORM\Entity(repositoryClass=SkillRepository::class)
+ */
 class Skill
 {
     public const CATEGORIES = [
-        'Droit et finance',
-        'Marketing et numérique',
-        'Commerce et logistique',
-        'Administratif',
-        'Autres',
+        'One' => 'Droit et finance',
+        'Two' => 'Marketing et numérique',
+        'Three' => 'Commerce et logistique',
+        'Four' => 'Administratif',
+        'Five' => 'Autres',
     ];
 
     /**
@@ -103,5 +103,11 @@ class Skill
         }
 
         return $this;
+    }
+
+    //solve proxy error message at user connexion
+    public function __sleep()
+    {
+        return ['name', 'id'];
     }
 }

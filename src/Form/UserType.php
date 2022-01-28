@@ -27,13 +27,13 @@ class UserType extends AbstractType
                 'required' => false,
             ])
             ->add('picture', FileType::class, [
-                'label' => 'Image de profile',
+                'label' => 'Image de profil',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new Image([
-                        'maxSize' => '4000k',
-                        'maxSizeMessage' => 'Votre image ne doit pas depasser 4Mo.',
+                        'maxSize' => '150k',
+                        'maxSizeMessage' => 'Votre image ne doit pas depasser 150Ko.',
                     ])
                 ],
             ])
@@ -49,8 +49,7 @@ class UserType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

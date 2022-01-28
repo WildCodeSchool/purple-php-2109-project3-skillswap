@@ -6,7 +6,7 @@ body {
     margin: 0;
     min-width: $width-min;
     min-height: 100vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     background-color: $dark;
 }
@@ -20,13 +20,28 @@ section {
 
 h1{
     color: $light;
-    margin-left: 40px;
+    margin-left: 30px;
     font-size: 1.75rem;
 }
 
 a {
     text-decoration: none;
-    color: $light;
+}
+
+.btnModifProfile {
+    color: $bgnav2;
+    border: $bgnav2 solid 1px;
+}
+
+.btnModifProfile:hover {
+    color: $dark;
+    background-color: $bgnav2;
+    border: $bgnav2 solid 1px;
+}
+
+.form-control:focus {
+    border-color: $bgnav2 !important;
+    box-shadow: 0 0 5px $bgnav2 !important;
 }
 
 @media (min-width: $width-desktop) {
