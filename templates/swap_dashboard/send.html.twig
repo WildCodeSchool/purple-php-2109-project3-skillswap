@@ -1,0 +1,9 @@
+<p>Bonjour</p>
+<p>Vous avez reçu une notification concernant votre demande.<br>
+Rendez-vous sur le site pour prendre connaissance de celle-ci.</p>
+<p>Bonne réception.</p>
+{% if swap.asker.id == app.user.id %}
+    <p>{{ swap.asker.firstname }}</p>
+{% else %}
+    <p>{{ swap.helper.firstname }}</p>
+{% endif %}
