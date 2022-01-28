@@ -65,6 +65,13 @@ class SwapController extends AbstractController
                     $entityManager->persist($swap);
                     $entityManager->flush();
 
+                if (
+                        ($swap->getSkill() instanceof Skill) &&
+                        ($swap->getAsker() instanceof User) &&
+                        ($swap->getHelper() instanceof User) &&
+                        (is_string($swap->getAsker()->getEmail())) &&
+                        (is_string($swap->getHelper()->getEmail()))
+                ) {
                     $email = (new Email())
                     ->from($swap->getAsker()->getEmail())
                     ->to($swap->getHelper()->getEmail())
@@ -78,16 +85,11 @@ class SwapController extends AbstractController
                         "success",
                         "Votre demande de swap a bien été envoyé."
                     );
+                }
                     return $this->redirectToRoute("swap_form", [
                         "user_id" => $helper->getId(),
                         "skill_id" => $skill->getId(),
                     ]);
-            }
-                return $this->render('swap/index.html.twig', [
-                    "skill" => $skill,
-                    "user" => $helper,
-                    "form" => $form->createView(),
-                ]);
             }
             return $this->render('swap/index.html.twig', [
                 "skill" => $skill,
