@@ -13,6 +13,7 @@
         width: 80vw;
         background-color: $light2;
         border-radius: 10px;
+        margin-bottom: 20px;
     }
 
     .swap_asked, .swap_helped {
@@ -41,7 +42,11 @@
     }
 
     .btn {
-        width: 120px;
+        min-width: 120px;
+    }
+    
+    .not_button {
+        cursor: none !important;
     }
 }
 

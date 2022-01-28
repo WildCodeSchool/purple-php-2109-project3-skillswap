@@ -37,6 +37,12 @@ class SwapDashboardController extends AbstractController
                 if ($form->isSubmitted() && $form->isValid()) {
                     $entityManager->persist($discussion);
                     $entityManager->flush();
+
+                    if (!$swap->getIsAccepted()) {
+                        $swap->setIsAccepted(true);
+                        $entityManager->persist($swap);
+                        $entityManager->flush();
+                    }
                 }
 
                 return $this->render('swap_dashboard/index.html.twig', [
