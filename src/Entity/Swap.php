@@ -193,4 +193,10 @@ class Swap
 
         return $this;
     }
+
+    //solve proxy error message at user connexion
+    public function __sleep()
+    {
+        return ['id'];
+    }
 }
