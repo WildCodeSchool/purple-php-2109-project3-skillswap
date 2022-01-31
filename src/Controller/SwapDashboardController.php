@@ -15,10 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
 
+/**
+ * @Route("/swap", name="swap_")
+ * @IsGranted("ROLE_USER")
+ */
 class SwapDashboardController extends AbstractController
 {
     /**
-     * @Route("/swap/dashboard/{id}", name="swap_dashboard", requirements={"id"="\d+"})
+     * @Route("/dashboard/{id}", name="dashboard", requirements={"id"="\d+"})
      */
     public function index(
         Swap $swap,
@@ -65,7 +69,7 @@ class SwapDashboardController extends AbstractController
     }
 
     /**
-     * @Route("/swap/finish/{id}", name="swap_finish", requirements={"id"="\d+"})
+     * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
      */
     public function finish(Swap $swap, EntityManagerInterface $entityManager): Response
     {

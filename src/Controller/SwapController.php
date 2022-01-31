@@ -17,6 +17,7 @@ use Symfony\Component\Mailer\MailerInterface;
 
 /**
  * @Route("/swap")
+ * @IsGranted("ROLE_USER")
  */
 class SwapController extends AbstractController
 {

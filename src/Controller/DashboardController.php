@@ -8,11 +8,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DashboardController extends AbstractController
-{
     /**
      * @Route("/dashboard", name="dashboard")
      * @IsGranted("ROLE_USER")
+     */
+class DashboardController extends AbstractController
+{
+    /**
+     * @Route("/", name="")
      */
     public function index(): Response
     {
