@@ -23,6 +23,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class SwapDashboardController extends AbstractController
 {
     /**
+     * Shows the messages in the current swap and shows / handles the form for sending a message
+     * An email is sent when a message is sent
      * @Route("/dashboard/{id}", name="dashboard", requirements={"id"="\d+"})
      */
     public function index(
@@ -70,6 +72,8 @@ class SwapDashboardController extends AbstractController
     }
 
     /**
+     * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
+     * Lets any of the two users involved in a swap to finish it
      * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
      */
     public function finish(Swap $swap, EntityManagerInterface $entityManager): Response

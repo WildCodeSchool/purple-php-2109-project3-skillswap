@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
     /**
+     * Displays the swaps the current user has, and their status.
+     * Currently they are being sorted by id (so by the latest created first)
      * @Route("/dashboard", name="dashboard")
      * @IsGranted("ROLE_USER")
      */

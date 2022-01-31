@@ -33,6 +33,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class UserController extends AbstractController
 {
     /**
+     * Displays the current user's profile
+     * the user can check the comments sent to their profile here and displays an icon to delete them
+     * Also displays and deals with the form letting a user setting up to five skills
      * @Route("/profile", name="profile")
      * @IsGranted("ROLE_USER")
      */
@@ -54,6 +57,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * Displays and deals with the form letting an user edit their profile
      * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
@@ -96,6 +100,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * lets the user delete their profile
      * @Route("/delete", name="delete")
      * @IsGranted("ROLE_USER")
      */
@@ -119,6 +124,8 @@ class UserController extends AbstractController
     }
 
     /**
+     * Lets the user set their availability
+     * If that value is false they don't appear in the list of users when a user search for a skill
      * @Route("/availability", name="availability")
      * @IsGranted("ROLE_USER")
      */
@@ -169,6 +176,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * Deals with the form that lets a user delete a comment from their profile
      * @Route("/comment/{id}/delete", name="comment_delete")
      */
     public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
