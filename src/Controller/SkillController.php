@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SkillController extends AbstractController
 {
      /**
-     * Sends to the view the list of skills currently in the database in alphabetical
+     * Show the list of skills currently in the database in alphabetical
      * order and the categories in the class skill.
      * @Route("/research", name="research", methods={"GET"})
      */
