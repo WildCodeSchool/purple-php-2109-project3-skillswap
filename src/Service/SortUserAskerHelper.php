@@ -21,7 +21,7 @@ class SortUserAskerHelper
         }
         return true;
     }
-  
+
     /**
      * Service that helps sorting who is who in a swap, and also reduces the cyclomatic complexity of a controller
      *
