@@ -91,6 +91,7 @@ class AdminController extends AbstractController
     }
 
     /**
+     * deletes an user's profile
      * @Route("/user/{id}/delete", name="user_delete")
      */
     public function deleteUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
@@ -132,6 +133,7 @@ class AdminController extends AbstractController
     }
 
     /**
+     * show the name and category of a skill and lets the admin edit those
      * @Route("/skill/{id}/edit", name="skill_edit")
      */
     public function edit(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
@@ -153,6 +155,7 @@ class AdminController extends AbstractController
     }
 
     /**
+     * deletes a skill (after being shown a warning message)
      * @Route("/skill/{id}/delete", name="skill_delete")
      */
     public function delete(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
