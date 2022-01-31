@@ -18,6 +18,8 @@ use Symfony\Component\Mailer\MailerInterface;
 class SwapDashboardController extends AbstractController
 {
     /**
+     * Shows the messages in the current swap and shows / handles the form for sending a message
+     * An email is sent when a message is sent
      * @Route("/swap/dashboard/{id}", name="swap_dashboard", requirements={"id"="\d+"})
      */
     public function index(
@@ -65,6 +67,7 @@ class SwapDashboardController extends AbstractController
     }
 
     /**
+     * Lets any of the two users involved in a swap to finish it
      * @Route("/swap/finish/{id}", name="swap_finish", requirements={"id"="\d+"})
      */
     public function finish(Swap $swap, EntityManagerInterface $entityManager): Response
