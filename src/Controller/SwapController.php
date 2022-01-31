@@ -38,9 +38,20 @@ class SwapController extends AbstractController
      */
     public function display(Skill $skill, User $user): Response
     {
-        return $this->render('swapper/display.html.twig', [
-            'user' => $user,
-            'skill' => $skill,
+        if ($this->getUser() instanceof User) {
+            if ($this->getUser()->getId() === $user->getId()) {
+                return $this->render('swap/research.html.twig', [
+                    'skill' => $skill
+                ]);
+            }
+            return $this->render('swapper/display.html.twig', [
+                'user' => $user,
+                'skill' => $skill,
+            ]);
+        }
+
+        return $this->render('swap/research.html.twig', [
+            'skill' => $skill
         ]);
     }
 
@@ -58,6 +69,12 @@ class SwapController extends AbstractController
     ): Response {
         $currentUser = $this->getUser();
         if ($currentUser instanceof User) {
+            if ($currentUser->getId() === $helper->getId()) {
+                return $this->render('swap/research.html.twig', [
+                    'skill' => $skill
+                ]);
+            }
+
             $swap = new Swap($currentUser, $helper, $skill);
             $form = $this->createForm(SwapType::class, $swap);
             $form->handleRequest($request);
@@ -67,7 +84,6 @@ class SwapController extends AbstractController
 
                 if (
                         ($swap->getSkill() instanceof Skill) &&
-                        ($swap->getAsker() instanceof User) &&
                         ($swap->getHelper() instanceof User) &&
                         (is_string($swap->getAsker()->getEmail())) &&
                         (is_string($swap->getHelper()->getEmail()))
