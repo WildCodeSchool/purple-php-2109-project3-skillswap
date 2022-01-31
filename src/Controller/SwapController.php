@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Swap;
 use App\Entity\User;
 use App\Entity\Skill;
+use App\Service\SortUserAskerHelper;
 use App\Form\SwapType;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,7 +66,8 @@ class SwapController extends AbstractController
         Skill $skill,
         Request $request,
         EntityManagerInterface $entityManager,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        SortUserAskerHelper $sorter
     ): Response {
         $currentUser = $this->getUser();
         if ($currentUser instanceof User) {
@@ -84,13 +86,12 @@ class SwapController extends AbstractController
 
                 if (
                         ($swap->getSkill() instanceof Skill) &&
-                        ($swap->getHelper() instanceof User) &&
-                        (is_string($swap->getAsker()->getEmail())) &&
-                        (is_string($swap->getHelper()->getEmail()))
+                        is_string($currentUser->getEmail()) &&
+                        is_string($helper->getEmail())
                 ) {
                     $email = (new Email())
-                    ->from($swap->getAsker()->getEmail())
-                    ->to($swap->getHelper()->getEmail())
+                    ->from($currentUser->getEmail())
+                    ->to($helper->getEmail())
                     ->subject("Demande d'aide concernant " . $swap->getSkill()->getName())
                     ->html($this->renderView("swap/send.html.twig", [
                         'user' => $swap,
