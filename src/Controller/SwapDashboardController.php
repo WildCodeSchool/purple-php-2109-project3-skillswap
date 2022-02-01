@@ -14,13 +14,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @Route("/swap", name="swap_")
+ * @IsGranted("ROLE_USER")
+ */
 class SwapDashboardController extends AbstractController
 {
     /**
      * Shows the messages in the current swap and shows / handles the form for sending a message
      * An email is sent when a message is sent
-     * @Route("/swap/dashboard/{id}", name="swap_dashboard", requirements={"id"="\d+"})
+     * @Route("/dashboard/{id}", name="dashboard", requirements={"id"="\d+"})
      */
     public function index(
         Swap $swap,
@@ -67,8 +72,9 @@ class SwapDashboardController extends AbstractController
     }
 
     /**
+     * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
      * Lets any of the two users involved in a swap to finish it
-     * @Route("/swap/finish/{id}", name="swap_finish", requirements={"id"="\d+"})
+     * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
      */
     public function finish(Swap $swap, EntityManagerInterface $entityManager): Response
     {
