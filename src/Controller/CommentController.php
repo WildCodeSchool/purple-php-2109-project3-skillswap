@@ -16,6 +16,7 @@ use App\Repository\CommentRepository;
 
 /**
  * @Route("/comment", name="comment")
+ * @IsGranted("ROLE_USER")
  */
 class CommentController extends AbstractController
 {
@@ -24,7 +25,6 @@ class CommentController extends AbstractController
      * The user who gets the comment is fetched from the url.
      * After a comment is sent, the average star rating is recalculated.
      * @Route("/{id} ", name="", methods={"GET", "POST"}, requirements={"id"="\d+"})
-     * @IsGranted("ROLE_USER")
      */
     public function index(
         User $recipient,
