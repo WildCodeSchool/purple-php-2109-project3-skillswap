@@ -56,7 +56,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/user/{idUser}/delete/{idComment}",
      *      name="comment_delete",
-     *      requirements={"idUser"="\d+", "idComment"="\d+}
+     *      requirements={"idUser"="\d+", "idComment"="\d+"}
      *      )
      * @ParamConverter("comment",class="App\Entity\Comment", options = {"mapping": {"idComment": "id"}})
      */
