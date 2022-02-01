@@ -10,8 +10,12 @@
         background-color: $bgnav1!important;
     }
 
-    input, form {
-        width: 400px;
+    form {
+        width: 350px;
+        border-radius: 1em;
+    }
+
+    input {
         border-radius: 1em;
     }
 }
