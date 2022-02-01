@@ -169,7 +169,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/comment/{id}/delete", name="comment_delete")
+     * @Route("/comment/{id}/delete", name="comment_delete", requirements={"id"="\d+"})
      */
     public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
