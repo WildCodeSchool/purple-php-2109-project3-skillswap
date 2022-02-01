@@ -5,57 +5,74 @@ namespace App\Controller;
 use App\Entity\Swap;
 use App\Entity\User;
 use App\Entity\Discussion;
+use App\Service\SortUserAskerHelper;
 use App\Form\DiscussionType;
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @Route("/swap", name="swap_")
+ * @IsGranted("ROLE_USER")
+ */
 class SwapDashboardController extends AbstractController
 {
     /**
-     * @Route("/swap/dashboard/{id}", name="swap_dashboard", requirements={"id"="\d+"})
+     * Shows the messages in the current swap and shows / handles the form for sending a message
+     * An email is sent when a message is sent
+     * @Route("/dashboard/{id}", name="dashboard", requirements={"id"="\d+"})
      */
     public function index(
         Swap $swap,
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer,
+        SortUserAskerHelper $sorter
     ): Response {
-        if (
-            ($this->getUser() instanceof User) &&
-            ($swap->getAsker() instanceof User) &&
-            ($swap->getHelper() instanceof User)
-        ) {
-            if (
-                $this->getUser()->getId() === $swap->getAsker()->getId() ||
-                $this->getUser()->getId() === $swap->getHelper()->getId()
-            ) {
-                $discussion = new Discussion($swap, $this->getUser());
-                $form = $this->createForm(DiscussionType::class, $discussion);
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($discussion);
-                    $entityManager->flush();
+        $users = $sorter->sort([
+            "user" => $this->getUser(),
+            "asker" => $swap->getAsker(),
+            "helper" => $swap->getHelper()
+        ]);
 
-                    if (!$swap->getIsAccepted()) {
-                        $swap->setIsAccepted(true);
-                        $entityManager->persist($swap);
-                        $entityManager->flush();
-                    }
-                }
+        if ($users !== [false]) {
+            $mainUser = $users["mainUser"];
+            $sender = $users["mainUser"]->getEmail();
+            $recipient = $users["secondUser"]->getEmail();
 
-                return $this->render('swap_dashboard/index.html.twig', [
-                    'swap' => $swap,
-                    "form" => $form->createView(),
-                ]);
+            $discussion = new Discussion($swap, $mainUser);
+            $form = $this->createForm(DiscussionType::class, $discussion);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($discussion);
+                $entityManager->flush();
+
+                $email = (new Email())
+                    ->from($sender)
+                    ->to($recipient)
+                    ->subject("Notification concernant votre demande d'aide n°" . $swap->getId())
+                    ->html($this->renderView("swap_dashboard/send.html.twig", [
+                        'swap' => $swap,
+                    ]));
+                $mailer->send($email);
             }
+            return $this->render('swap_dashboard/index.html.twig', [
+                'swap' => $swap,
+                "form" => $form->createView(),
+            ]);
         }
         return $this->redirectToRoute("home");
     }
 
     /**
-     * @Route("/swap/finish/{id}", name="swap_finish", requirements={"id"="\d+"})
+     * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
+     * Lets any of the two users involved in a swap to finish it
+     * @Route("/finish/{id}", name="finish", requirements={"id"="\d+"})
      */
     public function finish(Swap $swap, EntityManagerInterface $entityManager): Response
     {

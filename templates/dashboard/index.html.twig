@@ -5,7 +5,7 @@
 {% block body %}
     <section class="dashboard">
         <div class="dashboard_asked">
-            <h1>Swaps reçus</h1>
+            <h1>Swaps lancés</h1>
             {% for swap_asked in swaps_asked|reverse %}
                 <div class="swap_asked">
                     <div class="dashboard_item mt-1">
@@ -23,16 +23,16 @@
                             <p class="notbtn btn btn-outline-warning rounded-pill ms-5 mt-4">non accepté</p>
                         {% endif %}
                     {% endif %}
-                    <p class="infos">{{ swap_asked.date|date('d/m/Y H:i') }}</p>
+                    <p class="infos">{{ swap_asked.date|date('d/m/Y H:i T') }}</p>
                 </div>
             {% endfor %}
         </div>
         <div class="dashboard_helped">
-            <h1>Swaps lancés</h1>
+            <h1>Swaps reçus</h1>
             {% for swap_helped in swaps_helped|reverse %}
                 <div class="swap_helped">
                     <div class="dashboard_item mt-1">
-                        {{ swap_helped.skill.name }} avec {{ swap_helped.helper.firstname }}
+                        {{ swap_helped.skill.name }} avec {{ swap_helped.asker.firstname }}
                         <a href="{{ path('swap_dashboard', {"id": swap_helped.id}) }}">
                             <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</button>
                         </a>
