@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Swap;
 use App\Entity\User;
 use App\Entity\Skill;
+use App\Service\SortUserAskerHelper;
 use App\Form\SwapType;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,9 +42,20 @@ class SwapController extends AbstractController
      */
     public function display(Skill $skill, User $user): Response
     {
-        return $this->render('swapper/display.html.twig', [
-            'user' => $user,
-            'skill' => $skill,
+        if ($this->getUser() instanceof User) {
+            if ($this->getUser()->getId() === $user->getId()) {
+                return $this->render('swap/research.html.twig', [
+                    'skill' => $skill
+                ]);
+            }
+            return $this->render('swapper/display.html.twig', [
+                'user' => $user,
+                'skill' => $skill,
+            ]);
+        }
+
+        return $this->render('swap/research.html.twig', [
+            'skill' => $skill
         ]);
     }
 
@@ -59,10 +71,17 @@ class SwapController extends AbstractController
         Skill $skill,
         Request $request,
         EntityManagerInterface $entityManager,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        SortUserAskerHelper $sorter
     ): Response {
         $currentUser = $this->getUser();
         if ($currentUser instanceof User) {
+            if ($currentUser->getId() === $helper->getId()) {
+                return $this->render('swap/research.html.twig', [
+                    'skill' => $skill
+                ]);
+            }
+
             $swap = new Swap($currentUser, $helper, $skill);
             $form = $this->createForm(SwapType::class, $swap);
             $form->handleRequest($request);
@@ -72,14 +91,12 @@ class SwapController extends AbstractController
 
                 if (
                         ($swap->getSkill() instanceof Skill) &&
-                        ($swap->getAsker() instanceof User) &&
-                        ($swap->getHelper() instanceof User) &&
-                        (is_string($swap->getAsker()->getEmail())) &&
-                        (is_string($swap->getHelper()->getEmail()))
+                        is_string($currentUser->getEmail()) &&
+                        is_string($helper->getEmail())
                 ) {
                     $email = (new Email())
-                    ->from($swap->getAsker()->getEmail())
-                    ->to($swap->getHelper()->getEmail())
+                    ->from($currentUser->getEmail())
+                    ->to($helper->getEmail())
                     ->subject("Demande d'aide concernant " . $swap->getSkill()->getName())
                     ->html($this->renderView("swap/send.html.twig", [
                         'user' => $swap,
