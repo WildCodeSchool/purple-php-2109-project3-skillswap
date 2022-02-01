@@ -8,9 +8,10 @@
     <h3 class="card-header">{{ user.firstname }} {{ user.lastname }}</h3>
     <div class="card-body">
       <div id="up">
-        <img id="pic2" src="/upload/avatars/{{ user.picture }}" class="card-img-top" alt="photo de {{ user.firstname }}">
+        <img id="pic2" src="/upload/avatars/{{ user.picture }}" class="card-img-top"
+          alt="photo de {{ user.firstname }}">
         <div id="other_skills">
-          <h5 class="card-title mt-4" >Ses compétences</h5>
+          <h5 class="card-title mt-4">Ses compétences</h5>
           <ul>
             {% for skill in user.skill %}
               <li>{{ skill.name }}</li>
@@ -21,10 +22,10 @@
     </div>
     <br>
     <ul class="list-group list-group-flush">
-    <li class="liswap list-group-item"><b>A propos :</b>{{ user.description }}</li>
-    <li class="list-group-item"><b>Société :</b>{{ user.company }}</li>
-    <li class="list-group-item"><b>Profil LinkdeIn :</b>{{ user.linkedin }}</li>
-    <li class="list-group-item"><b>Site Web :</b>{{ user.website }}</li>
+      <li class="liswap list-group-item"><b>A propos :</b>{{ user.description }}</li>
+      <li class="list-group-item"><b>Société :</b>{{ user.company }}</li>
+      <li class="list-group-item"><b>Profil LinkedIn :</b>{{ user.linkedin }}</li>
+      <li class="list-group-item"><b>Site Web :</b>{{ user.website }}</li>
     </ul>
     <div class="swapper_btn_div card-body">
       <a href="{{ path("swap_research", {"id": skill.id}) }}"class="btn btn-outline-dark rounded-pill">Retour à la liste</a>

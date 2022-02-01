@@ -1,0 +1,9 @@
+<p>Bonjour,</p>
+<p>Vous avez reçu une notification concernant votre demande d'aide sur le thème "{{ swap.skill.name }}"
+    avec {% if swap.asker.id == app.user.id %}
+            {{ swap.asker.firstname }}
+         {% else %}
+            {{ swap.helper.firstname }}
+         {% endif %}.</p>
+<p>Rendez-vous sur le site pour prendre connaissance de celle-ci.</p>
+<p>L'équipe Skill Swap vous remercie.</p>

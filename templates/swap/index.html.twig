@@ -12,11 +12,11 @@
     {{ form_errors(form) }}
     <div class="comment_form">
         <p>
-        Skill : {{ skill.name }}
+            Skill : {{ skill.name }}
         </p>
         <p>
-        {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
-        {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
+            {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
+            {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
         </p>
     </div>
     <input type="submit" value="Envoyer votre demande" />
