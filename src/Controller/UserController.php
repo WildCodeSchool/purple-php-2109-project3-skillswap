@@ -177,7 +177,7 @@ class UserController extends AbstractController
 
     /**
      * Deals with the form that lets a user delete a comment from their profile
-     * @Route("/comment/{id}/delete", name="comment_delete")
+     * @Route("/comment/{id}/delete", name="comment_delete", requirements={"id"="\d+"})
      */
     public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
