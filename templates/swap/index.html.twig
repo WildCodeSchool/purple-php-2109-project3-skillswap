@@ -15,7 +15,7 @@
         Skill : {{ skill.name }}
         </p>
         <p>
-        {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
+        {{ form_label(form.message, 'Message à l\'intention de : ', {'label_attr': {'class': 'contact_label'}}) }} <b>{{ user.firstname }}</b>
         {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
         </p>
     </div>
