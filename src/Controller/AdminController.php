@@ -44,7 +44,7 @@ class AdminController extends AbstractController
 
     /**
      * displays the details of a user
-     * @Route("/user/{id}", name="user_show", methods={"GET"})
+     * @Route("/user/{id}", name="user_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function showOneUser(User $user): Response
     {
@@ -54,7 +54,10 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/{idUser}/delete/{idComment}", name="comment_delete")
+     * @Route("/user/{idUser}/delete/{idComment}",
+     *      name="comment_delete",
+     *      requirements={"idUser"="\d+", "idComment"="\d+"}
+     *      )
      * @ParamConverter("comment",class="App\Entity\Comment", options = {"mapping": {"idComment": "id"}})
      */
     public function deleteComment(
@@ -76,7 +79,7 @@ class AdminController extends AbstractController
 
     /**
      * displays the details of a user
-     * @Route("/user/{id}/addrole", name="user_add_role", methods={"GET"})
+     * @Route("/user/{id}/addrole", name="user_add_role", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function addRoleAdmin(User $user, EntityManagerInterface $entityManager): Response
     {
@@ -92,7 +95,7 @@ class AdminController extends AbstractController
 
     /**
      * deletes an user's profile
-     * @Route("/user/{id}/delete", name="user_delete")
+     * @Route("/user/{id}/delete", name="user_delete", requirements={"id"="\d+"})
      */
     public function deleteUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -134,7 +137,7 @@ class AdminController extends AbstractController
 
     /**
      * show the name and category of a skill and lets the admin edit those
-     * @Route("/skill/{id}/edit", name="skill_edit")
+     * @Route("/skill/{id}/edit", name="skill_edit", requirements={"id"="\d+"})
      */
     public function edit(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
     {
@@ -156,7 +159,7 @@ class AdminController extends AbstractController
 
     /**
      * deletes a skill (after being shown a warning message)
-     * @Route("/skill/{id}/delete", name="skill_delete")
+     * @Route("/skill/{id}/delete", name="skill_delete", requirements={"id"="\d+"})
      */
     public function delete(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
     {
