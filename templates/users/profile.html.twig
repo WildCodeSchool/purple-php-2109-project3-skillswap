@@ -18,23 +18,23 @@
             <div class="col">
                 <p>
                     {% if app.user.notation == 5 %}
-                    <img class="star" src="{{ asset('build/images/star5bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star5bgless.png') }}" alt="5 étoiles">
                     {% elseif app.user.notation >= 4.5 %}
-                    <img class="star" src="{{ asset('build/images/star45bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star45bgless.png') }}" alt="4 étoiles et demie">
                     {% elseif app.user.notation >= 4 %}
-                    <img class="star" src="{{ asset('build/images/star4bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star4bgless.png') }}" alt="4 étoiles">
                     {% elseif app.user.notation >= 3.5 %}
-                    <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star35bgless.png') }}" alt="3 étoiles et demie">
                     {% elseif app.user.notation >= 3 %}
-                    <img class="star" src="{{ asset('build/images/star3bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star3bgless.png') }}" alt="3 étoiles">
                     {% elseif app.user.notation >= 2.5 %}
-                    <img class="star" src="{{ asset('build/images/star25bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star25bgless.png') }}" alt="2 étoiles et demie">
                     {% elseif app.user.notation >= 2 %}
-                    <img class="star" src="{{ asset('build/images/star2bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star2bgless.png') }}" alt="2 étoiles">
                     {% elseif app.user.notation >= 1.5 %}
-                    <img class="star" src="{{ asset('build/images/star15bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star15bgless.png') }}" alt="1 étoile et demie">
                     {% else %}
-                    <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                    <img class="star" src="{{ asset('build/images/star35bgless.png') }}" alt="1 étoile">
                     {% endif %}
                 </p>
                 {% if app.user.available %}
@@ -103,23 +103,23 @@
                             <strong class="me-auto">{{ comment.sender.firstName }}</strong>
                             <small>
                                 {% if comment.rating == 5 %}
-                                <img class="star" src="{{ asset('build/images/star5bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star5bgless.png') }}" alt="5 étoiles">
                                 {% elseif comment.rating >= 4.5 %}
-                                <img class="star" src="{{ asset('build/images/star45bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star45bgless.png') }}" alt="4 étoiles et demie">
                                 {% elseif comment.rating >= 4 %}
-                                <img class="star" src="{{ asset('build/images/star4bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star4bgless.png') }}" alt="4 étoiles">
                                 {% elseif comment.rating >= 3.5 %}
-                                <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star35bgless.png') }}" alt="3 étoiles et demie">
                                 {% elseif comment.rating >= 3 %}
-                                <img class="star" src="{{ asset('build/images/star3bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star3bgless.png') }}" alt="3 étoiles">
                                 {% elseif comment.rating >= 2.5 %}
-                                <img class="star" src="{{ asset('build/images/star25bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star25bgless.png') }}" alt="2 étoiles et demie">
                                 {% elseif comment.rating >= 2 %}
-                                <img class="star" src="{{ asset('build/images/star2bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star2bgless.png') }}" alt="2 étoiles">
                                 {% elseif comment.rating >= 1.5 %}
-                                <img class="star" src="{{ asset('build/images/star15bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star15bgless.png') }}" alt="1 étoile et demie">
                                 {% else %}
-                                <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+                                <img class="star" src="{{ asset('build/images/star35bgless.png') }}" alt="1 étoile">
                                 {% endif %}
                             </small>
                             {{ include('users/_delete_comment_form.html.twig') }}

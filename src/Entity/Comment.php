@@ -23,6 +23,10 @@ class Comment
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message = "Le commentaire ne doit pas être vide !")
+     * @Assert\Length(
+     *      max = 300,
+     *      maxMessage = "Votre description ne doit pas depasser {{ limit }} caractères."
+     * )
      */
     private string $message;
 
