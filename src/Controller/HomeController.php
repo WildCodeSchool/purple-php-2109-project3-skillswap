@@ -20,7 +20,7 @@ class HomeController extends AbstractController
 
     /**
      * The view of our terms and condition.
-     * @Route("/cgu", name="cgu")
+     * @Route("/", name="cgu")
      */
     public function cgu(): Response
     {
