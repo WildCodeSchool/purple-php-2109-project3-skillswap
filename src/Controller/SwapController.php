@@ -36,7 +36,7 @@ class SwapController extends AbstractController
 
     /**
      * Show the profile of the selected user
-     * @Route("/display/{skill_id}/{user_id}", name="swapper_display")
+     * @Route("/display/{skill_id}/{user_id}", name="swapper_display", requirements={"skill_id"="\d+", "user_id"="\d+"})
      * @ParamConverter("skill",class="App\Entity\Skill", options = {"mapping": {"skill_id": "id"}})
      * @ParamConverter("user",class="App\Entity\User", options = {"mapping": {"user_id": "id"}})
      */
@@ -62,7 +62,7 @@ class SwapController extends AbstractController
     /**
      * Shows and handles the form that lets the user start a swap
      * When a swap is started, an email is sent to the other user
-     * @Route("/ask/{skill_id}/{user_id} ", name="swap_form", methods={"GET", "POST"})
+     * @Route("/ask/{skill_id}/{user_id} ", name="swap_form", requirements={"skill_id"="\d+", "user_id"="\d+"})
      * @ParamConverter("skill",class="App\Entity\Skill", options = {"mapping": {"skill_id": "id"}})
      * @ParamConverter("helper",class="App\Entity\User", options = {"mapping": {"user_id": "id"}})
      */
