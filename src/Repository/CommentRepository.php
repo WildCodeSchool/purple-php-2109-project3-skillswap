@@ -32,7 +32,6 @@ class CommentRepository extends ServiceEntityRepository
             return ([["average" => 3]]);
         }
 
-        dd($queryBuilder->getResult());
         return $queryBuilder->getResult();
     }
 }

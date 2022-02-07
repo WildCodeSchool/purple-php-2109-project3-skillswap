@@ -43,7 +43,7 @@ class CommentController extends AbstractController
                 $comment->setDate(new DateTime());
                 $entityManager->persist($comment);
                 $entityManager->flush();
-                
+
                 $averageRating = $commentRepository->averageRating($recipient->getId())[0]["average"];
                 $recipient->setNotation(floatval($averageRating));
                 $entityManager->flush();
