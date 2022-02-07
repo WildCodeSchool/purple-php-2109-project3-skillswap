@@ -10,9 +10,7 @@
                 <div class="swap_asked">
                     <div class="dashboard_item mt-1">
                         {{ swap_asked.skill.name }} avec {{ swap_asked.helper.firstname }}
-                        <a href="{{ path('swap_dashboard', {"id": swap_asked.id}) }}">
-                            <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</button>
-                        </a>
+                        <a href="{{ path('swap_dashboard', {"id": swap_asked.id}) }}" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</a>
                     </div>
                     {% if swap_asked.isDone %}
                         <p class="notbtn btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
@@ -33,9 +31,7 @@
                 <div class="swap_helped">
                     <div class="dashboard_item mt-1">
                         {{ swap_helped.skill.name }} avec {{ swap_helped.asker.firstname }}
-                        <a href="{{ path('swap_dashboard', {"id": swap_helped.id}) }}">
-                            <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</button>
-                        </a>
+                        <a href="{{ path('swap_dashboard', {"id": swap_helped.id}) }}" class="btnModifProfile btn btn-outline-danger rounded-pill">voir les détails</a>
                     </div>
                     {% if swap_helped.isDone %}
                         <p class="notbtn btn btn-outline-danger rounded-pill ms-5 mt-4">terminé</p>
