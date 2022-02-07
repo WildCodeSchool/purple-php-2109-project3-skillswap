@@ -28,9 +28,11 @@ class CommentRepository extends ServiceEntityRepository
             ->groupBy('c.recipient')
             ->getQuery();
 
-        if (!is_array($queryBuilder->getResult())) {
+        if (!is_array($queryBuilder->getResult()) || empty($queryBuilder->getResult())) {
             return ([["average" => 3]]);
         }
+
+        dd($queryBuilder->getResult());
         return $queryBuilder->getResult();
     }
 }

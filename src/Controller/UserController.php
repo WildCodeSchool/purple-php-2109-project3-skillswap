@@ -187,14 +187,14 @@ class UserController extends AbstractController
         CommentRepository $commentRepository
         ): Response {
         $user = $this->getUser();
-        if (is_string($request->request->get('_token')) && $user instanceof User) {
+        if (is_string($request->request->get('_token')) && $user instanceof User && is_int($user->getId())) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $entityManager->remove($comment);
                 $entityManager->flush();
 
                 $averageRating = $commentRepository->averageRating($user->getId())[0]["average"];
                 $user->setNotation(floatval($averageRating));
-                $entityManager->flush();
+                $entityManager->flush(); 
             }
         }
         return $this->redirectToRoute('users_profile', [], Response::HTTP_SEE_OTHER);
