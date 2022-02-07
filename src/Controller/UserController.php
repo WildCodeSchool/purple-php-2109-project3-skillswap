@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -179,12 +180,20 @@ class UserController extends AbstractController
      * Deals with the form that lets a user delete a comment from their profile
      * @Route("/comment/{id}/delete", name="comment_delete", requirements={"id"="\d+"})
      */
-    public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
-    {
+    public function deleteComment(
+        Request $request,
+        Comment $comment,
+        EntityManagerInterface $entityManager,
+        CommentRepository $commentRepository
+        ): Response {
         $user = $this->getUser();
         if (is_string($request->request->get('_token')) && $user instanceof User) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $entityManager->remove($comment);
+                $entityManager->flush();
+
+                $averageRating = $commentRepository->averageRating($user->getId())[0]["average"];
+                $user->setNotation(floatval($averageRating));
                 $entityManager->flush();
             }
         }
