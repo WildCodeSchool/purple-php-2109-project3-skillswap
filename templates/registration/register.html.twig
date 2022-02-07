@@ -23,7 +23,10 @@
     {{ form_label(form.agreeTerms, 'J accepte les CGU', {'agreeTerms': {'class': 'custom-control-label'}}) }}
     {{ form_widget(form.agreeTerms, {'agreeTerms': {'class': 'form-check-input'}}) }}
     <br>
-    <button type="submit" class="btn btn-outline-success rounded-pill">Enregistrer</button>
+    <div>
+        <button type="submit" class="btn btn-outline-success rounded-pill">Enregistrer</button>
+    </div>
     {{ form_end(form) }}
+    </div>
 </section>
 {% endblock %}
