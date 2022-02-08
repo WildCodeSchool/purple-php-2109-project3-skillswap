@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+<section class="error404">
+    <h1>Désolé...</h1>
+    <br>
+    <p>Cette page ne vous mènera nulle part !</p>
+    <br><br>
+     <img src="{{ asset('build/images/error404picture.png') }}" alt="image de page erreur 404">
+</section>
+{% endblock %}
