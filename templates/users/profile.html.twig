@@ -5,9 +5,9 @@
 {% block body %}
 <section class="profile">
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
+    <div class="flash-notice">
+        {{ message }}
+    </div>
     {% endfor %}
     <h1>Profil de {{ app.user.firstname }}</h1>
     <div class="container">
@@ -38,11 +38,11 @@
                     {% endif %}
                 </p>
                 {% if app.user.available %}
-                <a href="{{ path('users_availability') }}"><button type="button"
-                        class="btn btn-outline-success rounded-pill availability">Disponible</button></a>
+                <a href="{{ path('users_availability') }}"
+                    class="btn btn-outline-success rounded-pill availability">Disponible</a>
                 {% else %}
-                <a href="{{ path('users_availability') }}"><button type="button"
-                        class="btn btn-outline-danger rounded-pill availability">Indisponible</button></a>
+                <a href="{{ path('users_availability') }}"
+                    class="btn btn-outline-danger rounded-pill availability">Indisponible</a>
                 {% endif %}
             </div>
         </div>
@@ -62,9 +62,9 @@
                 <ul class="description me-4">
                     <li><b>Description</b>{{ app.user.description }}</li>
                 </ul>
-
-                <a class="profilBtnEdit" href="{{ path('users_edit_profile') }}"><button type="button"
-                        class="btnModifProfile btn btn-outline-danger rounded-pill ms-4">Modifier votre profil</button></a>
+                <a href="{{ path('users_edit_profile') }}"
+                    class="profilBtnEdit btnModifProfile btn btn-outline-danger rounded-pill ms-4">Modifier votre
+                    profil</a>
             </div>
         </div>
         <div class="row mt-4">
@@ -89,7 +89,6 @@
                         {% include "users/_userSkillForm.html.twig" %}
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="row mt-4 ">
