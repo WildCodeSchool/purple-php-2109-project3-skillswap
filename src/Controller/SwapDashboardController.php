@@ -50,6 +50,12 @@ class SwapDashboardController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->persist($discussion);
+
+                if (!$swap->getIsAccepted() && $mainUser === $swap->getHelper()) {
+                    $swap->setIsAccepted(true);
+                    $entityManager->persist($swap);
+                }
+
                 $entityManager->flush();
 
                 $email = (new Email())
