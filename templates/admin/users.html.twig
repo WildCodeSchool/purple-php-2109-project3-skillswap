@@ -4,12 +4,9 @@
 
 {% block body %}
 <section>
-    <a class="profilBtnEdit ms-4" href="{{ path('admin_dashboard') }}">
-        <button type="button" class="btnModifProfile btn btn-outline-danger rounded-pill">
-            Retour
-        </button>
-    </a>
-    <h1>Les utilisateurs:</h1>
+    <a href="{{ path('admin_dashboard') }}"
+        class="profilBtnEdit ms-4 btnModifProfile btn btn-outline-danger rounded-pill">Retour</a>
+    <h1>Les utilisateurs :</h1>
     <hr>
     <table class="table">
         <thead>
@@ -33,7 +30,8 @@
                     </ul>
                 </td>
                 <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}"><button class="btnModifProfile btn btn-outline-danger rounded-pill">Détail</button></a>
+                    <a href="{{ path('admin_user_show', {'id': user.id}) }}"
+                        class="btnModifProfile btn btn-outline-danger rounded-pill">Détail</a>
                 </td>
             </tr>
             {% endfor %}
