@@ -12,7 +12,7 @@
             <h1>Discussion avec {{ swap.asker.firstname }}</h1>
         {% endif %}
         <h2>Skill : {{ swap.skill.name }}</h2>
-        <h2>Débutée le {{ swap.date|date("d/m/Y") }}</h2>
+        <h2>Débutée le : {{ swap.date|date("d/m/Y") }}</h2>
         {% if swap.isDone %}
             <h2>Clôturée.</h2>
             {% if messages is not empty %}
@@ -21,6 +21,8 @@
                 </div>
             {% endif %}
         {% else %}
+        <hr>
+        <h2> Répondez :</h2>
             {{ form_start(form) }}
             {{ form_errors(form) }}
                 {{ form_widget(form.message, {'attr': {'class': 'msg_new'}}) }}

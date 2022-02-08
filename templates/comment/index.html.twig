@@ -3,29 +3,46 @@
 {% block title %}Formulaire de commentaire{% endblock %}
 
 {% block body %}
+<section>
+
+<h1 class="d-flex justify-content-center mt-5">Formulaire de commentaire</h1>
 
 {% set messages = app.flashes("success") %}
 
 {% if messages is empty %}
-<h1>Formulaire de commentaire</h1>
-{{ form_start(form) }}
-{{ form_errors(form) }}
-    <div class="comment_form">
-        <p>
-            {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
-            {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
-        </p>
-        <p>
-            {{ form_label(form.rating, 'rating :', {'label_attr': {'class': 'rating_label'}}) }}
-            {{ form_widget(form.rating, {'attr': {'class': 'rating_widget'}}) }}
-        </p>
+    <div class="d-flex mx-auto">
+        {% if is_granted("ROLE_USER") %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+                <div class="mt-3">
+                    {{ form_label(form.message, 'Message') }}
+                    {{ form_widget(form.message) }}
+                </div>
+                <div class="mt-2">
+                <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" />
+    <label for="star5">5 stars</label>
+    <input type="radio" id="star4" name="rating" value="4" />
+    <label for="star4">4 stars</label>
+    <input type="radio" id="star3" name="rating" value="3" />
+    <label for="star3">3 stars</label>
+    <input type="radio" id="star2" name="rating" value="2" />
+    <label for="star2">2 stars</label>
+    <input type="radio" id="star1" name="rating" value="1" />
+    <label for="star1">1 star</label>
+</fieldset>
+                    {#{{ form_label(form.rating, 'Votre note') }}
+                    {{ form_widget(form.rating, {'attr': {'class': 'rating_widget'}}) }}#}
+                </div>
+                <input class="btnModifProfile btn btn-outline-danger rounded-pill mx-5 mt-4" type="submit" value="Envoyez votre commentaire" />
+            {{ form_end(form) }}
+        {% endif %}
     </div>
-    <input type="submit" value="Envoyez votre commentaire" />
-{{ form_end(form) }}
 {% else %}
     <div class="alert alert-success" role="alert">
         <p>{{ messages.0 }}</p>
         <a href="/">Retour à la page d'accueil</a>
     </div>
 {% endif %}
+</section>
 {% endblock %}
