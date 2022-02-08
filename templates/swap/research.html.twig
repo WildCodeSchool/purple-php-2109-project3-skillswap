@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="container">
-    {% if (skill.user is not empty and not (skill.user|length == 1 and skill.user.0.id == app.user.id)) %}
-        {% for user in skill.user|sort((a, b) => a.notation <=> b.notation)|reverse %}
+    {% if usersAvailable is not empty %}
+        {% for user in usersAvailable|sort((a, b) => a.notation <=> b.notation)|reverse %}
             {% if (user.available) and (app.user.id != user.id) %}
                 <div class="card" style="width: 18rem;">
                     <div class="swap_picture">
@@ -33,7 +33,7 @@
                 <h5 class="swap_h5 card-title">Désolé !</h5>
                 <hr>
                 <div class="p_contain">
-                    <p class="swap_p card-text">Il n'y a encore aucun swapper compétent en :</p>
+                    <p class="swap_p card-text">Il n'y a encore aucun swapper compétent et disponible en :</p>
                     <h5 class="swap_h5 card-title">{{ skill.name }}</h5>
                 </div>
             </div>
