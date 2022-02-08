@@ -48,7 +48,7 @@ class SwapController extends AbstractController
                     'skill' => $skill
                 ]);
             }
-            return $this->render('swapper/display.html.twig', [
+            return $this->render('swap/display.html.twig', [
                 'user' => $user,
                 'skill' => $skill,
             ]);
@@ -86,32 +86,32 @@ class SwapController extends AbstractController
             $form = $this->createForm(SwapType::class, $swap);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($swap);
-                    $entityManager->flush();
+                $entityManager->persist($swap);
+                $entityManager->flush();
 
                 if (
-                        ($swap->getSkill() instanceof Skill) &&
-                        is_string($currentUser->getEmail()) &&
-                        is_string($helper->getEmail())
+                    ($swap->getSkill() instanceof Skill) &&
+                    is_string($currentUser->getEmail()) &&
+                    is_string($helper->getEmail())
                 ) {
                     $email = (new Email())
-                    ->from($currentUser->getEmail())
-                    ->to($helper->getEmail())
-                    ->subject("Demande d'aide concernant " . $swap->getSkill()->getName())
-                    ->html($this->renderView("swap/send.html.twig", [
-                        'user' => $swap,
-                    ]));
+                        ->from($currentUser->getEmail())
+                        ->to($helper->getEmail())
+                        ->subject("Demande d'aide concernant " . $swap->getSkill()->getName())
+                        ->html($this->renderView("swap/request_send.html.twig", [
+                            'user' => $swap,
+                        ]));
                     $mailer->send($email);
 
                     $this->addFlash(
                         "success",
-                        "Votre demande de swap a bien été envoyé."
+                        "Votre demande de swap a bien été envoyée."
                     );
                 }
-                    return $this->redirectToRoute("swap_form", [
-                        "user_id" => $helper->getId(),
-                        "skill_id" => $skill->getId(),
-                    ]);
+                return $this->redirectToRoute("swap_form", [
+                    "user_id" => $helper->getId(),
+                    "skill_id" => $skill->getId(),
+                ]);
             }
             return $this->render('swap/index.html.twig', [
                 "skill" => $skill,

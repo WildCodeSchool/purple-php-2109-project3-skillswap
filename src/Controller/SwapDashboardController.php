@@ -55,13 +55,13 @@ class SwapDashboardController extends AbstractController
                 $email = (new Email())
                     ->from($sender)
                     ->to($recipient)
-                    ->subject("Notification concernant votre demande d'aide n°" . $swap->getId())
-                    ->html($this->renderView("swap_dashboard/send.html.twig", [
+                    ->subject("Notification concernant votre demande d'aide")
+                    ->html($this->renderView("swap/notification_send.html.twig", [
                         'swap' => $swap,
                     ]));
                 $mailer->send($email);
             }
-            return $this->render('swap_dashboard/index.html.twig', [
+            return $this->render('swap/dashboard.html.twig', [
                 'swap' => $swap,
                 "form" => $form->createView(),
             ]);
