@@ -19,6 +19,7 @@ final class Version20220125153242 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $this->addSql("TRUNCATE TABLE skill");
         $this->addSql("INSERT INTO `skill` (`id`, `name`, `category`) VALUES
             (1, 'Achat vente', 'Commerce et logistique'),
             (2, 'Import-export', 'Commerce et logistique'),
