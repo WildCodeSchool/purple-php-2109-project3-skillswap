@@ -15,11 +15,12 @@
         <h2>Débutée le : {{ swap.date|date("d/m/Y") }}</h2>
         {% if swap.isDone %}
             <h2>Clôturée.</h2>
-            {% if messages is not empty %}
-                <div class="alert alert-success" role="alert">
-                    <p>{{ messages.0 }}</p>
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show mt-5 text-center rounded-3 shadow" role="alert">
+                    <p>{{ message }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
                 </div>
-            {% endif %}
+            {% endfor %}
         {% else %}
         <hr>
         <h2> Répondez :</h2>

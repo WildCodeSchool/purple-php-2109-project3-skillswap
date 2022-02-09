@@ -27,10 +27,13 @@
         {% endif %}
     </div>
 {% else %}
-    <div class="alert alert-success" role="alert">
-        <p>{{ messages.0 }}</p>
-        <a href="/">Retour à la page d'accueil</a>
-    </div>
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show mt-5 text-center rounded-3 shadow" role="alert">
+            <p>{{ message }}</p>
+            <a href="/">Retour à la page d'accueil</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+    {% endfor %}
 {% endif %}
 </section>
 {% endblock %}
