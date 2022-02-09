@@ -24,13 +24,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class SwapController extends AbstractController
 {
     /**
-     * Shows the list of swappers who declared themselves competent on the skill in parameter
+     * Shows the list of swappers who declared themselves competent on the skill in parameter and are available
      * @Route("/research/{id}", name="swap_research", requirements={"id"="\d+"})
      */
     public function research(Skill $skill): Response
     {
+        $usersAvailable = [];
+        foreach ($skill->getUser() as $user) {
+            if ($user->getAvailable() && $user !== $this->getUser()) {
+                $usersAvailable[] = $user;
+            }
+        }
         return $this->render('swap/research.html.twig', [
-            'skill' => $skill
+            'skill' => $skill,
+            'usersAvailable' => $usersAvailable
         ]);
     }
 
