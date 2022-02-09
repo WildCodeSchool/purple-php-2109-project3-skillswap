@@ -8,9 +8,10 @@
     <h3 class="card-header">{{ user.firstname }} {{ user.lastname }}</h3>
     <div class="card-body">
       <div id="up">
-        <img id="pic2" src="/upload/avatars/{{ user.picture }}" class="card-img-top" alt="photo de {{ user.firstname }}">
+        <img id="pic2" src="/upload/avatars/{{ user.picture }}" class="card-img-top"
+          alt="photo de {{ user.firstname }}">
         <div id="other_skills">
-          <h5 class="card-title mt-4" >Ses compétences</h5>
+          <h5 class="card-title mt-4">Ses compétences</h5>
           <ul>
             {% for skill in user.skill %}
               <li>{{ skill.name }}</li>
@@ -21,10 +22,10 @@
     </div>
     <br>
     <ul class="list-group list-group-flush">
-    <li class="liswap list-group-item"><b>A propos :</b>{{ user.description }}</li>
-    <li class="list-group-item"><b>Société :</b>{{ user.company }}</li>
-    <li class="list-group-item"><b>Profil LinkdeIn :</b>{{ user.linkedin }}</li>
-    <li class="list-group-item"><b>Site Web :</b>{{ user.website }}</li>
+      <li class="liswap list-group-item"><b>A propos :</b>{{ user.description }}</li>
+      <li class="list-group-item"><b>Société :</b>{{ user.company }}</li>
+      <li class="list-group-item"><b>Profil LinkedIn :</b>{{ user.linkedin }}</li>
+      <li class="list-group-item"><b>Site Web :</b>{{ user.website }}</li>
     </ul>
     <div class="swapper_btn_div card-body">
       <a href="{{ path("swap_research", {"id": skill.id}) }}"class="btn btn-outline-dark rounded-pill">Retour à la liste</a>
@@ -34,23 +35,23 @@
       <div class="swapperfooter">
         <p>Note moyenne de ce swappper &nbsp; &nbsp; </p>
         {% if user.notation == 5 %}
-          <img class="star" src="{{ asset('build/images/star5bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star5bgless.png') }}" alt="5 étoiles">
         {% elseif user.notation >= 4.5 %}
-          <img class="star" src="{{ asset('build/images/star45bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star45bgless.png') }}" alt="4 étoiles et demie">
         {% elseif user.notation >= 4 %}
-          <img class="star" src="{{ asset('build/images/star4bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star4bgless.png') }}" alt="4 étoiles">
         {% elseif user.notation >= 3.5 %}
-          <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star35bgless.png') }}" alt="3 étoiles et demie">
         {% elseif user.notation >= 3 %}
-          <img class="star" src="{{ asset('build/images/star3bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star3bgless.png') }}" alt="3 étoiles">
         {% elseif user.notation >= 2.5 %}
-          <img class="star" src="{{ asset('build/images/star25bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star25bgless.png') }}" alt="2 étoiles et demie">
         {% elseif user.notation >= 2 %}
-          <img class="star" src="{{ asset('build/images/star2bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star2bgless.png') }}" alt="2 étoiles">
         {% elseif user.notation >= 1.5 %}
-          <img class="star" src="{{ asset('build/images/star15bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star15bgless.png') }}" alt="1 étoile et demie">
         {% else %}
-          <img class="star" src="{{ asset('build/images/star35bgless.png') }}">
+          <img class="star" src="{{ asset('build/images/star35bgless.png') }}" alt="1 étoile">
         {% endif %}
       </div>
     </div>

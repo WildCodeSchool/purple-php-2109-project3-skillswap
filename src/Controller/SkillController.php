@@ -17,14 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class SkillController extends AbstractController
 {
      /**
-     * Sends to the view the list of skills currently in the database in alphabetical
+     * Show the list of skills currently in the database in alphabetical
      * order and the categories in the class skill.
      * @Route("/research", name="research", methods={"GET"})
      */
     public function research(SkillRepository $skillRepository): Response
     {
         return $this->render('skills/research.html.twig', [
-            'skills' => $skillRepository->findBy([], ['category' => 'ASC']),
+            'skills' => $skillRepository->findBy([], ['name' => 'ASC']),
             'categories' => Skill::CATEGORIES,
         ]);
     }

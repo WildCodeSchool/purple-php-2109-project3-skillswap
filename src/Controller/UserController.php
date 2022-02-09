@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class UserController extends AbstractController
 {
     /**
+     * Displays the current user's profile
+     * the user can check the comments sent to their profile here and displays an icon to delete them
+     * Also displays and deals with the form letting a user setting up to five skills
      * @Route("/profile", name="profile")
      * @IsGranted("ROLE_USER")
      */
@@ -54,6 +58,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * Displays and deals with the form letting an user edit their profile
      * @Route("/edit", name="edit_profile")
      * @IsGranted("ROLE_USER")
      */
@@ -96,6 +101,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * lets the user delete their profile
      * @Route("/delete", name="delete")
      * @IsGranted("ROLE_USER")
      */
@@ -119,6 +125,8 @@ class UserController extends AbstractController
     }
 
     /**
+     * Lets the user set their availability
+     * If that value is false they don't appear in the list of users when a user search for a skill
      * @Route("/availability", name="availability")
      * @IsGranted("ROLE_USER")
      */
@@ -169,14 +177,23 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/comment/{id}/delete", name="comment_delete")
+     * Deals with the form that lets a user delete a comment from their profile
+     * @Route("/comment/{id}/delete", name="comment_delete", requirements={"id"="\d+"})
      */
-    public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
-    {
+    public function deleteComment(
+        Request $request,
+        Comment $comment,
+        EntityManagerInterface $entityManager,
+        CommentRepository $commentRepository
+    ): Response {
         $user = $this->getUser();
-        if (is_string($request->request->get('_token')) && $user instanceof User) {
+        if (is_string($request->request->get('_token')) && $user instanceof User && is_int($user->getId())) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $entityManager->remove($comment);
+                $entityManager->flush();
+
+                $averageRating = $commentRepository->averageRating($user->getId())[0]["average"];
+                $user->setNotation(floatval($averageRating));
                 $entityManager->flush();
             }
         }

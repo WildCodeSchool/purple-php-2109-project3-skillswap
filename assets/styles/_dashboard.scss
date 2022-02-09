@@ -7,6 +7,7 @@
         font-size: 1.5rem;
         text-align: center;
         margin-top: 10px;
+        margin-left: -10px;
     }
 
     .dashboard_asked, .dashboard_helped {
@@ -24,12 +25,21 @@
         background-color: $dark;
     }
 
+    .swap_empty {
+        border: 1px solid $bgnav2;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 5px;
+        background-color: rgb(255, 230, 230);
+    }
+
     .dashboard_item {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         margin: 0px 10px;
         font-size: 1.25rem;
+        text-align: center;
     }
 
     .infos {
@@ -61,7 +71,7 @@
             width: 35vw;
         }
 
-        .swap_asked, .swap_helped {
+        .swap_asked, .swap_helped, .swap_empty {
             margin: 20px 50px;
         }
 
