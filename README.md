@@ -41,6 +41,8 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 3. Run `symfony server:start` to launch your local php web server
 4. Run `yarn run dev --watch` to launch your local server for assets
 
+==> " A special user with an administrator role can be created. Ask us how to get this role. "
+
 ### Testing
 
 1. Run `php ./vendor/bin/phpcs` to launch PHP code sniffer
