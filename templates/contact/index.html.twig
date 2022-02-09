@@ -1,51 +1,55 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Formulaire de contact{% endblock %}
+
 {% block body %}
+<section>
+    <h1>Formulaire de contact</h1>
 
-<h1 class="justify-content-center mx-0 my-4">Formulaire de contact</h1>
+    {% set messages = app.flashes("success") %}
 
-{% set messages = app.flashes("success") %}
+    {% if messages is empty %}
+        <div class="form_contact">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {% if is_granted("ROLE_USER") %}
+            <div class="row">
+                <div class="col">
+                    {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form_label'}}) }}
+                    {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget', 'value': app.user.firstname}}) }}
+                </div>
+                <div class="col mt-3">
+                    {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form_label'}}) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'contact_widget', 'value': app.user.email}}) }}
+                </div>
 
-{% if messages is empty %}
-    <div class="form_contact">
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {% if is_granted("ROLE_USER") %}
-        <div class="row">
-            <div class="col">
-                {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form_label'}}) }}
-                {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget', 'value': app.user.firstname}}) }}
-            </div>
-            <div class="col">
-                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form_label'}}) }}
-                {{ form_widget(form.email, {'attr': {'class': 'contact_widget', 'value': app.user.email}}) }}
-            </div>
+            {% else %}
+                <div class="col">
+                    {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form_label'}}) }}
+                    {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
+                </div>
+                <div class="col mt-3">
+                    {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form_label'}}) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
+                </div>
 
-        {% else %}
-            <div class="col">
-                {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form_label'}}) }}
-                {{ form_widget(form.firstname, {'attr': {'class': 'contact_widget'}}) }}
+            {% endif %}
+                <div class="col mt-3">
+                    {{ form_label(form.text, 'Texte', {'label_attr': {'class': 'form_label'}}) }}
+                    {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
+                </div>
+                <input class="btnModifProfile btn btn-outline-danger rounded-pill mt-4" type="submit" value="Envoyer votre demande" />
             </div>
-            <div class="col">
-                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form_label'}}) }}
-                {{ form_widget(form.email, {'attr': {'class': 'contact_widget'}}) }}
-            </div>
-
-        {% endif %}
-            <div class="col">
-                {{ form_label(form.text, 'Texte', {'label_attr': {'class': 'form_label'}}) }}
-                {{ form_widget(form.text, {'attr': {'class': 'contact_widget'}}) }}
-            </div>
-            <input class="btnModifProfile btn btn-outline-danger rounded-pill mx-5 mt-4" type="submit" value="Envoyer votre demande" />
+            {{ form_end(form) }}
         </div>
-        {{ form_end(form) }}
-    </div>
-    {% else %}
-
-    <div class="alert alert-success" role="alert">
-        <p>{{ messages.0 }}</p>
-        <a href="/">Retour à la page d'accueil</a>
-    </div>
-
-{% endif %}
+        {% else %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show mt-5 text-center rounded-3 shadow" role="alert">
+                    <p>{{ message }}</p>
+                    <a href="/">Retour à la page d'accueil</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                </div>
+            {% endfor %}
+    {% endif %}
+</section>
 {% endblock %}
