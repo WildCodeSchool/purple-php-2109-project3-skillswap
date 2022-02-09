@@ -29,16 +29,17 @@ If the tests fail, the commit is cancelled and a warning message is displayed to
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev` to build assets
-5. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
-6. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env` file.
-7. Change the environment variable `DATABASE_URL` in the `.env` file.
-8. Run the command `symfony console d:m:m`
-9. Run the command `symfony console d:f:l`
+5. Create a file `.env.local` in root (copy of `.env` file)
+6. Configure your database in `.env.local`
+7. Configuring an SMTP server
+8. Create an environment variable `MAILER_FROM_ADDRESS` with the address of the site administrator in the `.env.local` file.
+9. Check that the upload/avatars folder is in the public directory. If not, create this folder to store the photos of registered users.
 
 ### Working
 
-1. Run `symfony server:start` to launch your local php web server
-2. Run `yarn run dev --watch` to launch your local server for assets
+1. Run the command `symfony console d:m:m`
+3. Run `symfony server:start` to launch your local php web server
+4. Run `yarn run dev --watch` to launch your local server for assets
 
 ### Testing
 
