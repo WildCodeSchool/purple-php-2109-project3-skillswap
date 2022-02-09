@@ -47,20 +47,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-
-                <ul class="profilTable">
+                <ul class="profilTable col mt-4">
                     <li><b>Email</b> {{ app.user.email }}</li>
                     <li><b>Linkedin</b> {{ app.user.linkedin }}</li>
                     <li><b>Site Web</b> {{ app.user.website }}</li>
                     <li><b>Société</b> {{ app.user.company }}</li>
                 </ul>
-            </div>
         </div>
         <div class="row">
             <div class="col">
-                <ul class="description me-4">
-                    <li><b>Description</b>{{ app.user.description }}</li>
+                <ul class="description mt-4 me-4">
+                    <li><b>Description </b> {{ app.user.description }}</li>
                 </ul>
                 <a href="{{ path('users_edit_profile') }}"
                     class="profilBtnEdit btnModifProfile btn btn-outline-danger rounded-pill ms-4">Modifier votre
