@@ -24,7 +24,7 @@ class SkillController extends AbstractController
     public function research(SkillRepository $skillRepository): Response
     {
         return $this->render('skills/research.html.twig', [
-            'skills' => $skillRepository->findBy([], ['category' => 'ASC']),
+            'skills' => $skillRepository->findBy([], ['name' => 'ASC']),
             'categories' => Skill::CATEGORIES,
         ]);
     }
