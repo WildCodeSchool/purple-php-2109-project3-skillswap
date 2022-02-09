@@ -3,25 +3,29 @@
 {% block title %}Formulaire de commentaire{% endblock %}
 
 {% block body %}
+<section>
+
+<h1 class="d-flex justify-content-center mt-5">Formulaire de commentaire</h1>
 
 {% set messages = app.flashes("success") %}
 
 {% if messages is empty %}
-<h1>Formulaire de commentaire</h1>
-{{ form_start(form) }}
-{{ form_errors(form) }}
-    <div class="comment_form">
-        <p>
-            {{ form_label(form.message, 'message :', {'label_attr': {'class': 'contact_label'}}) }}
-            {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
-        </p>
-        <p>
-            {{ form_label(form.rating, 'rating :', {'label_attr': {'class': 'rating_label'}}) }}
-            {{ form_widget(form.rating, {'attr': {'class': 'rating_widget'}}) }}
-        </p>
+    <div class="d-flex mx-auto">
+        {% if is_granted("ROLE_USER") %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+                <div class="mt-3">
+                    {{ form_label(form.message, 'Message') }}
+                    {{ form_widget(form.message) }}
+                </div>
+                <div class="mt-2">
+                    {{ form_label(form.rating, 'Veuillez sélectionner une note ci-dessous', {'label_attr': {'class': 'rating_label'}}) }}
+                    {{ form_widget(form.rating, {'attr': {'class': 'rating_widget'}}) }}
+                </div>
+                <input class="btnModifProfile btn btn-outline-danger rounded-pill mx-5 mt-4" type="submit" value="Envoyez votre commentaire" />
+            {{ form_end(form) }}
+        {% endif %}
     </div>
-    <input type="submit" value="Envoyez votre commentaire" />
-{{ form_end(form) }}
 {% else %}
     {% for message in messages %}
         <div class="alert alert-success alert-dismissible fade show mt-5 text-center rounded-3 shadow" role="alert">
@@ -31,4 +35,5 @@
         </div>
     {% endfor %}
 {% endif %}
+</section>
 {% endblock %}

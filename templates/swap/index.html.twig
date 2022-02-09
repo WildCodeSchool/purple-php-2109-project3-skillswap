@@ -4,31 +4,35 @@
 
 {% block body %}
 <section>
-    {% set messages = app.flashes("success") %}
 
-    {% if messages is empty %}
-        <h1>Formulaire de demande de Swap</h1>
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        <div class="comment_form">
-            <p>
+<h1 class="d-flex justify-content-center mt-5">Formulaire de demande de Swap</h1>
+
+{% set messages = app.flashes("success") %}
+
+{% if messages is empty %}
+    <div class="d-flex mx-auto">
+        {% if is_granted("ROLE_USER") %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="mt-4">
                 Skill : {{ skill.name }}
-            </p>
-            <p>
-            {{ form_label(form.message, 'Message à l\'intention de : ', {'label_attr': {'class': 'contact_label'}}) }} <b>{{ user.firstname }}</b>
-            {{ form_widget(form.message, {'attr': {'class': 'contact_widget'}}) }}
-            </p>
-        </div>
-        <input type="submit" value="Envoyer votre demande" />
-        {{ form_end(form) }}
-    {% else %}
-        {% for message in messages %}
+            </div>
+            <div class="mt-4">
+                {{ form_label(form.message, 'Message à l\'intention de : ', {'label_attr': {'class': 'ask_label'}}) }} <b>{{ user.firstname }}</b>
+                {{ form_widget(form.message) }}
+            </div>
+            <input class="btnModifProfile btn btn-outline-danger rounded-pill mx-5 mt-4" type="submit" value="Envoyer votre demande" />
+            {{ form_end(form) }}
+        {% endif %}
+    </div>
+{% else %}
+    {% for message in messages %}
             <div class="alert alert-success alert-dismissible fade show mt-5 text-center rounded-3 shadow" role="alert">
                 <p>{{ message }}</p>
                 <a href="{{ path('dashboard') }}">Voir votre tableau de bord</a>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
             </div>
         {% endfor %}
-    {% endif %}
+{% endif %}
 </section>
 {% endblock %}
