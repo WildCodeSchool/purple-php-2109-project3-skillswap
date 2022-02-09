@@ -19,20 +19,8 @@
                     {{ form_widget(form.message) }}
                 </div>
                 <div class="mt-2">
-                <fieldset class="rating">
-    <input type="radio" id="star5" name="rating" value="5" />
-    <label for="star5">5 stars</label>
-    <input type="radio" id="star4" name="rating" value="4" />
-    <label for="star4">4 stars</label>
-    <input type="radio" id="star3" name="rating" value="3" />
-    <label for="star3">3 stars</label>
-    <input type="radio" id="star2" name="rating" value="2" />
-    <label for="star2">2 stars</label>
-    <input type="radio" id="star1" name="rating" value="1" />
-    <label for="star1">1 star</label>
-</fieldset>
-                    {#{{ form_label(form.rating, 'Votre note') }}
-                    {{ form_widget(form.rating, {'attr': {'class': 'rating_widget'}}) }}#}
+                    {{ form_label(form.rating, 'Veuillez sélectionner une note ci-dessous', {'label_attr': {'class': 'rating_label'}}) }}
+                    {{ form_widget(form.rating, {'attr': {'class': 'rating_widget'}}) }}
                 </div>
                 <input class="btnModifProfile btn btn-outline-danger rounded-pill mx-5 mt-4" type="submit" value="Envoyez votre commentaire" />
             {{ form_end(form) }}
