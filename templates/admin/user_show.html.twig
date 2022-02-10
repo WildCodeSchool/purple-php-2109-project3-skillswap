@@ -5,7 +5,7 @@
 {% block body %}
 <section class="adminUserShow">
     <a href="{{ path('admin_users') }}"
-        class="profilBtnEdit ms-4 btnModifProfile btn btn-outline-danger rounded-pill">Retour</a>
+        class="profilBtnEdit adminBack ms-4 btnModifProfile btn btn-outline-danger rounded-pill">Retour</a>
     <h1>Utilistateur</h1>
     <table class="table">
         <tbody>
@@ -55,10 +55,10 @@
                 </ul>
                 {% if 'ROLE_ADMIN' in user.roles %}
                 <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"
-                    class="btn btn-outline-danger rounded-pill">Supprimer le rôle Admin</a>
+                    class="btn adminRole btn-outline-danger rounded-pill">Supprimer le rôle Admin</a>
                 {% else %}
                 <a href="{{ path('admin_user_add_role', {'id': user.id}) }}"
-                    class="btn btn-outline-success rounded-pill">Ajouter le rôle Admin</a>
+                    class="btn adminRole btn-outline-success rounded-pill">Ajouter le rôle Admin</a>
                 {% endif %}
             </tr>
         </tbody>
